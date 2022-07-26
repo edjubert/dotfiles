@@ -1,0 +1,33 @@
+#!/bin/bash
+
+if type "xrandr"; then
+  QUERY=$(xrandr --query | grep " connected" | cut -d " " -f1)
+  LEN=$(xrandr --query | grep " connected" | wc -l)
+  if [[ $LEN -eq 1 ]]; then
+    bspc monitor $QUERY -d 1 2 3 4 5 6 7 8 9 10
+  elif [[ $LEN -eq 2 ]]; then
+    x=0
+    for m in $QUERY; do
+      i=$(expr 1 + $x)
+      ii=$(expr 2 + $x)
+      iii=$(expr 3 + $x)
+      iv=$(expr 4 + $x)
+      v=$(expr 5 + $x)
+
+      echo $i
+      echo $ii
+      echo $iii
+      echo $iv
+      echo $v
+      bspc monitor $m -d $i $ii $iii $iv $v
+      x+=5
+
+    done
+  else
+    bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+  fi
+fi
+
+xrandr --output eDP-1 --primary --mode 2560x1440 --output HDMI-1-0 --mode 1680x1050 --above eDP-1
+sh ~/.config/polybar/launch.sh &
+feh --bg-scale /usr/share/endeavouros/backgrounds/eos_wallpapers_community/APOLLO-ROCKET-FLAT.png
