@@ -50,12 +50,12 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 #include "tatami.c"
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "|M|",      centeredmaster },
-	{ "><>",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
-	{ "[+]",      tatami },
-	{ "[]=",      tile },    /* first entry is default */
-	{ ">M>",      centeredfloatingmaster },
+	{ "Centered",      centeredmaster },
+	{ "Floating",      NULL },    /* no layout function means floating behavior */
+	{ "Monocle",      monocle },
+	{ "Tatami",      tatami },
+	{ "Tile",      tile },    /* first entry is default */
+	{ "Centered Floating",      centeredfloatingmaster },
 };
 
 /* key definitions */
