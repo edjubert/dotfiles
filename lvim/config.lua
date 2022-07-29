@@ -169,6 +169,7 @@ lvim.plugins = {
   { "frazrepo/vim-rainbow" },
   { "camspiers/animate.vim" },
   { "fatih/vim-go" },
+  { "norcalli/nvim-colorizer.lua" },
   {
     "thibthib18/mongo-nvim",
     rocks = { 'lua-mongo' },
@@ -190,6 +191,8 @@ require 'mongo-nvim'.setup {
   list_document_key = "_id",
   delete_document_mapping = nil
 }
+
+require 'colorizer'.setup()
 
 -- vim.keymap.set(
 --   "nnoremap",
