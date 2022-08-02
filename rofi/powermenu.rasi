@@ -4,7 +4,7 @@
  *******************************************************/
 
 configuration {
-    font:                           "Sourcecode Pro Regular 10";
+    font:				                    "Iosevka Term 12";
     show-icons:                     false;
     icon-theme: 		    "Arc-X-D";
     scroll-method:                  0;
@@ -17,13 +17,13 @@ configuration {
 window {
     background-color:               @background;
     border:                         1;
+    border-radius:                  5px;
     padding:                        15;
     transparency:                   "real";
     width:                          600px;
     location:                       center;
     y-offset:                       30;
     /* x-offset:	                    850; */
-    transparency:                   "real";
 }
 listview {
     lines:                          1;
