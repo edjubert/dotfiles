@@ -1,0 +1,69 @@
+#!/bin/bash
+
+ADDRESS=http://localhost:3001
+
+BLUE="\e[34m"
+RED="\e[31m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
+RESET="\e[0m"
+
+echo -e "$RED Deleting all collections$BLUE"
+curl \
+  -X DELETE \
+  "$ADDRESS/hydratation/all"
+
+echo
+echo
+echo -e "$GREEN Creating basic sheet with 1 column and 1 row$BLUE "
+SHEET_ID=`curl \
+  -X POST \
+  "$ADDRESS/hydratation/1/1/1" \
+  -H "Content-Type: application/json" \
+  -d '{}' \
+  | jq -r '.data[0]._id'`
+
+echo
+echo
+echo -e "$GREEN New sheet created with id $GREEN  $SHEET_ID \e[0m"
+echo -e "$GREEN Printing the only cell id, cell value, historyId and history value$BLUE "
+echo
+SHEET_DATA1=`curl \
+  -X GET \
+  "$ADDRESS/sheet/print/$SHEET_ID"`
+
+CELL_ID1=`echo "$SHEET_DATA1" | jq -r '.data.rows[0].cells[0]._id'`
+CELL_VALUE1=`echo "$SHEET_DATA1" | jq -r '.data.rows[0].cells[0].value'`
+HISTORY_ID1=`echo "$SHEET_DATA1" | jq -r '.data.rows[0].cells[0].historyId._id'`
+HISTORY_VALUE1=`echo "$SHEET_DATA1" | jq -r '.data.rows[0].cells[0].historyId.value'`
+
+echo -e "$GREEN CELL_ID: $YELLOW $CELL_ID1$RESET"
+echo -e "$GREEN CELL_VALUE: $YELLOW \"$CELL_VALUE1\"$RESET"
+echo -e "$GREEN HISTORY_ID: $YELLOW $HISTORY_ID1$RESET"
+echo -e "$GREEN HISTORY_VALUE: $YELLOW \"$HISTORY_VALUE1\"$RESET"
+
+echo
+echo
+echo -e "$GREEN Changing cell value (in fact it is adding a new cell history)$BLUE"
+curl \
+  -X POST \
+  $ADDRESS/cellHistory/$CELL_ID1 \
+  -H "Content-Type: application/json" \
+  -d '{"value": "pouet"}'
+
+echo
+echo -e "$GREEN Printing the only cell id, cell value, historyId and history value $YELLOW ANOTHER TIME$RESET"
+echo -e $BLUE
+SHEET_DATA2=`curl \
+  -X GET \
+  "$ADDRESS/sheet/print/$SHEET_ID"`
+
+CELL_ID2=`echo "$SHEET_DATA2" | jq -r '.data.rows[0].cells[0]._id'`
+CELL_VALUE2=`echo "$SHEET_DATA2" | jq -r '.data.rows[0].cells[0].value'`
+HISTORY_ID2=`echo "$SHEET_DATA2" | jq -r '.data.rows[0].cells[0].historyId._id'`
+HISTORY_VALUE2=`echo "$SHEET_DATA2" | jq -r '.data.rows[0].cells[0].historyId.value'`
+
+echo -e "$GREEN CELL_ID: $YELLOW $CELL_ID2$RESET"
+echo -e "$GREEN CELL_VALUE: $YELLOW \"$CELL_VALUE2\"$RESET"
+echo -e "$GREEN HISTORY_ID: $YELLOW $HISTORY_ID2$RESET"
+echo -e "$GREEN HISTORY_VALUE: $YELLOW \"$HISTORY_VALUE2\"$RESET"

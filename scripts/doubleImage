@@ -1,0 +1,6 @@
+#!/bin/bash
+
+convert ~/Pictures/i3background.jpg -resize 2560x1440\! ~/Pictures/resized.jpg
+convert -append ~/Pictures/resized.jpg ~/Pictures/resized.jpg ~/Pictures/appened.png
+
+# rm ~/Pictures/resized.jpg

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+PROG=/usr/bin/vlc
+STATUS=`/usr/bin/optimus-manager --print-mode | cut -d " " -f5`
+
+if [[ "$STATUS" = "integrated" ]]; then
+  echo $STATUS
+  echo "playing integrated"
+  $PROG $@
+else
+  echo "playing nvidia"
+  __NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia $PROG $@
+fi
