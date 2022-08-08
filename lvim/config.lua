@@ -16,6 +16,7 @@ lvim.transparent_window = true
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
+vim.o.scrolloff = 999
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
@@ -48,6 +49,9 @@ lvim.builtin.which_key.mappings["m"] = {
   "<cmd>lua require('mongo-nvim.telescope.pickers').database_picker()<cr>",
   "MongoDB Database Picker",
 }
+lvim.builtin.which_key.mappings["n"] = {
+  n = { "<cmd>bn<cr>", "Buffer next" },
+}
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",
@@ -67,7 +71,6 @@ lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
-
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
@@ -166,10 +169,13 @@ lvim.plugins = {
   { "danilamihailov/beacon.nvim" },
   { "psliwka/vim-smoothie" },
   { "airblade/vim-gitgutter" },
-  { "frazrepo/vim-rainbow" },
   { "camspiers/animate.vim" },
   { "fatih/vim-go" },
   { "norcalli/nvim-colorizer.lua" },
+  { "ray-x/lsp_signature.nvim" },
+  { "lukas-reineke/indent-blankline.nvim" },
+  { "p00f/nvim-ts-rainbow" },
+  { "ggandor/leap.nvim" },
   {
     "thibthib18/mongo-nvim",
     rocks = { 'lua-mongo' },
@@ -193,6 +199,27 @@ require 'mongo-nvim'.setup {
 }
 
 require 'colorizer'.setup()
+
+require 'lsp_signature'.setup({
+  bind = true,
+  handler_opts = {
+    border = "rounded"
+  }
+})
+
+require 'indent_blankline'.setup({
+  show_current_context = true,
+  show_current_context_start = true,
+})
+
+require 'leap'.set_default_keymaps()
+require 'nvim-treesitter.configs'.setup({
+  rainbow = {
+    enable = true,
+    extended_mode = true,
+    max_file_lines = 1000
+  }
+})
 
 -- vim.keymap.set(
 --   "nnoremap",
