@@ -16,7 +16,6 @@ lvim.transparent_window = true
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
-vim.o.scrolloff = 999
 -- keymappings [view all the defaults by pressing <leader>Lk]
 lvim.leader = "space"
 -- add your own keymapping
@@ -175,7 +174,6 @@ lvim.plugins = {
   { "ray-x/lsp_signature.nvim" },
   { "lukas-reineke/indent-blankline.nvim" },
   { "p00f/nvim-ts-rainbow" },
-  { "ggandor/leap.nvim" },
   {
     "thibthib18/mongo-nvim",
     rocks = { 'lua-mongo' },
@@ -212,7 +210,6 @@ require 'indent_blankline'.setup({
   show_current_context_start = true,
 })
 
-require 'leap'.set_default_keymaps()
 require 'nvim-treesitter.configs'.setup({
   rainbow = {
     enable = true,
