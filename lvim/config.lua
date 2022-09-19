@@ -44,10 +44,6 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- }
 
 -- Use which-key to add extra bindings with the leader-key prefix
-lvim.builtin.which_key.mappings["m"] = {
-  "<cmd>lua require('mongo-nvim.telescope.pickers').database_picker()<cr>",
-  "MongoDB Database Picker",
-}
 lvim.builtin.which_key.mappings["n"] = {
   n = { "<cmd>bn<cr>", "Buffer next" },
 }
@@ -175,25 +171,12 @@ lvim.plugins = {
   { "lukas-reineke/indent-blankline.nvim" },
   { "p00f/nvim-ts-rainbow" },
   {
-    "thibthib18/mongo-nvim",
-    rocks = { 'lua-mongo' },
-    config = function()
-      require 'mongo-nvim'.setup({})
-    end
-  },
-  {
     "folke/trouble.nvim",
     require = "kyazdani24/nvim-web-devicons",
     config = function()
       require("trouble").setup {}
     end
   }
-}
-
-require 'mongo-nvim'.setup {
-  connection_string = "mongodb://127.0.0.1:27017",
-  list_document_key = "_id",
-  delete_document_mapping = nil
 }
 
 require 'colorizer'.setup()
