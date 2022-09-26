@@ -11,7 +11,8 @@ an executable
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "onedarker"
+lvim.colorscheme = "onedarkpro"
+-- lvim.colorscheme = "onedarker"
 lvim.transparent_window = true
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
@@ -159,17 +160,19 @@ lvim.plugins = {
   { "tpope/vim-surround" },
   { "easymotion/vim-easymotion" },
   { "f-person/git-blame.nvim" },
-  { "github/copilot.vim" },
   { "folke/zen-mode.nvim" },
   { "danilamihailov/beacon.nvim" },
   { "psliwka/vim-smoothie" },
   { "airblade/vim-gitgutter" },
   { "camspiers/animate.vim" },
-  { "fatih/vim-go" },
-  { "norcalli/nvim-colorizer.lua" },
+  -- { "fatih/vim-go" },
   { "ray-x/lsp_signature.nvim" },
+  { "olimorris/onedarkpro.nvim" },
   { "lukas-reineke/indent-blankline.nvim" },
+  { "rafamadriz/neon" },
+  { "sainnhe/edge" },
   { "p00f/nvim-ts-rainbow" },
+  { "tree-sitter/tree-sitter-go" },
   {
     "folke/trouble.nvim",
     require = "kyazdani24/nvim-web-devicons",
@@ -178,8 +181,6 @@ lvim.plugins = {
     end
   }
 }
-
-require 'colorizer'.setup()
 
 require 'lsp_signature'.setup({
   bind = true,
