@@ -8,12 +8,65 @@ an executable
 ]]
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
+local black      = '#011627'
+local white      = '#c3ccdc'
+-- Variations of blue-grey
+local black_blue = '#081e2f'
+local dark_blue  = '#092236'
+local deep_blue  = '#0e293f'
+local slate_blue = '#2c3043'
+local regal_blue = '#1d3b53'
+local steel_blue = '#4b6479'
+local grey_blue  = '#7c8f8f'
+local cadet_blue = '#a1aab8'
+local ash_blue   = '#acb4c2'
+local white_blue = '#d6deeb'
+-- Core theme colors
+local yellow     = '#e3d18a'
+local peach      = '#ffcb8b'
+local tan        = '#ecc48d'
+local orange     = '#f78c6c'
+local red        = '#fc514e'
+local watermelon = '#ff5874'
+local violet     = '#c792ea'
+local purple     = '#ae81ff'
+local indigo     = '#5e97ec'
+local blue       = '#82aaff'
+local turquoise  = '#7fdbca'
+local emerald    = '#21c7a8'
+local green      = '#a1cd5e'
+-- Extra colors
+local cyan_blue  = '#296596'
+
+-- Specify the colors used by the inbuilt terminal of Neovim and Vim
+vim.g.terminal_color_0  = regal_blue
+vim.g.terminal_color_1  = red
+vim.g.terminal_color_2  = green
+vim.g.terminal_color_3  = yellow
+vim.g.terminal_color_4  = blue
+vim.g.terminal_color_5  = violet
+vim.g.terminal_color_6  = turquoise
+vim.g.terminal_color_7  = white
+vim.g.terminal_color_8  = grey_blue
+vim.g.terminal_color_9  = watermelon
+vim.g.terminal_color_10 = emerald
+vim.g.terminal_color_11 = tan
+vim.g.terminal_color_12 = blue
+vim.g.terminal_color_13 = purple
+vim.g.terminal_color_14 = turquoise
+vim.g.terminal_color_15 = white_blue
+
+-- Neovide Special config
+vim.o.guifont = "Iosevka Nerd Font"
+vim.g.neovide_transparency = 0.6
+vim.g.guibg = "#292c3e"
+
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
 lvim.colorscheme = "onedarkpro"
 -- lvim.colorscheme = "onedarker"
-lvim.transparent_window = true
+lvim.transparent_window = false
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -173,6 +226,7 @@ lvim.plugins = {
   { "sainnhe/edge" },
   { "p00f/nvim-ts-rainbow" },
   { "tree-sitter/tree-sitter-go" },
+  { "mitchellh/tree-sitter-proto" },
   {
     "folke/trouble.nvim",
     require = "kyazdani24/nvim-web-devicons",

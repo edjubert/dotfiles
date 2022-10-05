@@ -50,3 +50,7 @@ colors:
     cyan:    '0x73FBF1'
     white:   '0xFEFEF8'
 
+window:
+  padding:
+    x: 0
+    y: 0
