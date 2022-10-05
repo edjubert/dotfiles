@@ -8,8 +8,14 @@ import (
 )
 
 const (
+	src  = "/home/edjubert/Workspace/dotfiles"
+	dest = "/home/edjubert/.config"
+)
+
+const (
 	INFO    string = "\033[1;34m"
-	NOTICE         = "\033[1;36m"
+	WHITE          = "\033[1;37m"
+	NOTICE         = "\033[0;36m"
 	WARNING        = "\033[1;33m"
 	RED            = "\033[1;31m"
 	DEBUG          = "\033[0;36m"
@@ -20,97 +26,156 @@ func setColor(color string) {
 	fmt.Printf("%s", color)
 }
 
-func main() {
-	folders := []string{
-		"alacritty",
-		"bspwm",
-		"deadd",
-		"dwm",
-		"fish",
-		"fontconfig",
-		"gtk-2.0",
-		"gtk-3.0",
-		"gtk-4.0",
-		"i3",
-		"Kvantum",
-		"lvim",
-		"mpv",
-		"omf",
-		"picom",
-		"polybar",
-		"rofi",
-		"st",
-		"sxhkd",
-		"systemd",
-		"tilda",
-		"xfce4",
+func contains(s []string, str string) bool {
+	for _, v := range s {
+		if v == str {
+			return true
+		}
 	}
-	files := []string{
-		"breezerc",
-		"dolphinrc",
-		"gtkrc",
-		"gtkrc-2.0",
-	}
-	srcPath := "/home/edjubert/Workspace/dotfiles"
-	destPath := "/home/edjubert/.config"
 
-	for _, folder := range folders {
-		srcFullPath := filepath.Join(srcPath, folder)
-		destFullPath := filepath.Join(destPath, folder)
+	return false
+}
 
-		if _, err := ioutil.ReadDir(srcFullPath); err != nil {
-			continue
-		}
+func askUserPermission() (bool, error) {
+	var reply string
+	fmt.Scanln(&reply)
 
-		if _, err := ioutil.ReadDir(destFullPath); err == nil {
-			if err := os.RemoveAll(destFullPath); err != nil {
-				panic(err)
-			}
-			setColor(RED)
-			fmt.Printf("Deleted ")
-			setColor(NOTICE)
-			fmt.Printf("%s ", folder)
-			setColor(RESET)
-			fmt.Printf("(%s)\n", destFullPath)
-		}
-
-		if err := os.Symlink(srcFullPath, destFullPath); err != nil {
-			panic(err)
-		}
-
-		setColor(INFO)
-		fmt.Printf("New symlink: ")
+	acceptedValues := []string{"y", "yes", "n", "no", ""}
+	if !contains(acceptedValues, reply) {
+		setColor(NOTICE)
+		fmt.Printf("Please enter 'y', 'yes', 'n' or 'no': ")
 		setColor(RESET)
-		fmt.Printf("%s -> %s\n\n", srcFullPath, destFullPath)
+		return askUserPermission()
+	}
+
+	return reply == "y" || reply == "yes", nil
+}
+
+func selectSrcPath() (string, error) {
+	var reply string
+	fmt.Scanln(&reply)
+
+	return src, nil
+}
+
+func selectDestPath() (string, error) {
+	var reply string
+	fmt.Scanln(&reply)
+
+	return dest, nil
+}
+
+func createFileSymlink(srcPath string, destPath string, file os.DirEntry) error {
+	srcFullPath := filepath.Join(srcPath, file.Name())
+	destFullPath := filepath.Join(destPath, file.Name())
+
+	if _, err := ioutil.ReadFile(destFullPath); err == nil {
+		if err := os.Remove(destFullPath); err != nil {
+			return err
+		}
+		setColor(RED)
+		fmt.Printf("Deleted ")
+		setColor(NOTICE)
+		fmt.Printf("%s ", file.Name())
+		setColor(RESET)
+		fmt.Printf("(%s)\n", destFullPath)
+	}
+
+	if err := os.Symlink(srcFullPath, destFullPath); err != nil {
+		return err
+	}
+
+	setColor(INFO)
+	fmt.Printf("New symlink: ")
+	setColor(RESET)
+	fmt.Printf("%s -> %s\n\n", srcFullPath, destFullPath)
+
+	return nil
+}
+
+func createDirSymlink(srcPath string, destPath string, folder os.DirEntry) error {
+	srcFullPath := filepath.Join(srcPath, folder.Name())
+	destFullPath := filepath.Join(destPath, folder.Name())
+
+	if _, err := ioutil.ReadDir(destFullPath); err == nil {
+		if err := os.RemoveAll(destFullPath); err != nil {
+			return err
+		}
+
+		setColor(RED)
+		fmt.Printf("Deleted ")
+		setColor(NOTICE)
+		fmt.Printf("%s ", folder.Name())
+		setColor(RESET)
+		fmt.Printf("(%s)\n", destFullPath)
+	}
+
+	if err := os.Symlink(srcFullPath, destFullPath); err != nil {
+		return err
+	}
+
+	setColor(INFO)
+	fmt.Printf("New symlink: ")
+	setColor(RESET)
+	fmt.Printf("%s -> %s\n\n", srcFullPath, destFullPath)
+
+	return nil
+}
+
+func createSymlinkAuto(srcPath string, destPath string) error {
+	excluded := []string{".git", ".gitignore", "go_scripts", "scripts"}
+	files, err := os.ReadDir(srcPath)
+	if err != nil {
+		return err
 	}
 
 	for _, file := range files {
-		srcFullPath := filepath.Join(srcPath, file)
-		destFullPath := filepath.Join(destPath, file)
-
-		if _, err := ioutil.ReadFile(srcFullPath); err != nil {
+		if contains(excluded, file.Name()) {
 			continue
 		}
 
-		if _, err := ioutil.ReadFile(destFullPath); err == nil {
-			if err := os.Remove(destFullPath); err != nil {
-				panic(err)
-			}
-			setColor(RED)
-			fmt.Printf("Deleted ")
-			setColor(NOTICE)
-			fmt.Printf("%s ", file)
-			setColor(RESET)
-			fmt.Printf("(%s)\n", destFullPath)
+		if file.IsDir() {
+			createDirSymlink(srcPath, destPath, file)
+		} else {
+			createFileSymlink(srcPath, destPath, file)
 		}
-
-		if err := os.Symlink(srcFullPath, destFullPath); err != nil {
-			panic(err)
-		}
-
-		setColor(INFO)
-		fmt.Printf("New symlink: ")
-		setColor(RESET)
-		fmt.Printf("%s -> %s\n\n", srcFullPath, destFullPath)
 	}
+
+	return nil
+}
+
+func main() {
+	setColor(WARNING)
+	fmt.Printf("[WARNING]: ")
+	setColor(WHITE)
+	fmt.Printf("This script will replace all content of your destination folder (default %s) by the source directory (default %s)\n", dest, src)
+	setColor(INFO)
+	fmt.Printf("Continue ? ")
+	setColor(WHITE)
+	fmt.Printf("y/N: ")
+
+	granted, err := askUserPermission()
+	if err != nil {
+		panic(err)
+	}
+	setColor(RESET)
+
+	if !granted {
+		setColor(INFO)
+		fmt.Println("It is wise to surrender")
+		setColor(RESET)
+		os.Exit(1)
+	}
+
+	setColor(NOTICE)
+	fmt.Printf("Choose a source folder (default: %s): ", src)
+	srcPath, err := selectSrcPath()
+	setColor(RESET)
+
+	setColor(NOTICE)
+	fmt.Printf("Choose a destination folder (default: %s): ", dest)
+	destPath, err := selectDestPath()
+	setColor(RESET)
+
+	createSymlinkAuto(srcPath, destPath)
 }
