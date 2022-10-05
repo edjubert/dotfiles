@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 const (
@@ -41,28 +42,73 @@ func askUserPermission() (bool, error) {
 	fmt.Scanln(&reply)
 
 	acceptedValues := []string{"y", "yes", "n", "no", ""}
-	if !contains(acceptedValues, reply) {
+	if !contains(acceptedValues, strings.ToLower(reply)) {
 		setColor(NOTICE)
 		fmt.Printf("Please enter 'y', 'yes', 'n' or 'no': ")
 		setColor(RESET)
 		return askUserPermission()
 	}
 
-	return reply == "y" || reply == "yes", nil
+	return strings.ToLower(reply) == "y" || strings.ToLower(reply) == "yes", nil
 }
 
 func selectSrcPath() (string, error) {
+	setColor(NOTICE)
+	fmt.Printf("Choose a source folder (default: %s): ", src)
+	setColor(RESET)
 	var reply string
 	fmt.Scanln(&reply)
 
-	return src, nil
+	if reply == "" {
+		return src, nil
+	}
+
+	if _, err := os.ReadDir(reply); err != nil {
+		setColor(RED)
+		fmt.Printf("[ERROR] ")
+		setColor(RESET)
+		fmt.Printf("Specified path does not exists\n")
+
+		return selectSrcPath()
+	}
+
+	return reply, nil
 }
 
 func selectDestPath() (string, error) {
+	setColor(NOTICE)
+	fmt.Printf("Choose a destination folder (default: %s): ", dest)
+	setColor(RESET)
 	var reply string
 	fmt.Scanln(&reply)
 
-	return dest, nil
+	if reply == "" {
+		return dest, nil
+	}
+
+	if _, err := os.ReadDir(reply); err != nil {
+		var create string
+
+		fmt.Println("Directory does not exists, create it now ?")
+		fmt.Println("y/N")
+		fmt.Scanln(&create)
+
+		if strings.ToLower(create) == "y" || strings.ToLower(create) == "yes" {
+			if err := os.MkdirAll(reply, 0755); err != nil {
+				setColor(RED)
+				fmt.Println("[ERROR]")
+				setColor(RESET)
+				fmt.Println(err)
+				return selectDestPath()
+			}
+
+			return create, nil
+		} else {
+			return selectDestPath()
+		}
+	}
+
+	return reply, nil
 }
 
 func createFileSymlink(srcPath string, destPath string, file os.DirEntry) error {
@@ -167,13 +213,9 @@ func main() {
 		os.Exit(1)
 	}
 
-	setColor(NOTICE)
-	fmt.Printf("Choose a source folder (default: %s): ", src)
 	srcPath, err := selectSrcPath()
 	setColor(RESET)
 
-	setColor(NOTICE)
-	fmt.Printf("Choose a destination folder (default: %s): ", dest)
 	destPath, err := selectDestPath()
 	setColor(RESET)
 
