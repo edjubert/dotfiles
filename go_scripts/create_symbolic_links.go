@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -9,8 +10,9 @@ import (
 )
 
 const (
-	src  = "/home/edjubert/Workspace/dotfiles"
-	dest = "/home/edjubert/.config"
+	src     = "/home/edjubert/Workspace/dotfiles"
+	dest    = "/home/edjubert/.config"
+	binDest = "/home/edjubert/.local/bin"
 )
 
 const (
@@ -49,7 +51,7 @@ func askUserPermission() (bool, error) {
 		return askUserPermission()
 	}
 
-	return strings.ToLower(reply) == "y" || strings.ToLower(reply) == "yes", nil
+	return isAgree(reply), nil
 }
 
 func selectSrcPath() (string, error) {
@@ -75,9 +77,101 @@ func selectSrcPath() (string, error) {
 	return reply, nil
 }
 
+func isAgree(response string) bool {
+	agreement := []string{"y", "yes"}
+	return contains(agreement, strings.ToLower(response))
+}
+
+func doCopyBin(srcPath, destPath string) error {
+	files, err := os.ReadDir(srcPath)
+	if err != nil {
+		return err
+	}
+
+	for _, file := range files {
+		srcFullPath := filepath.Join(srcPath, file.Name())
+		destFullPath := filepath.Join(destPath, file.Name())
+		srcFileStat, err := os.Stat(srcFullPath)
+		if err != nil {
+			return err
+		}
+
+		if !srcFileStat.Mode().IsRegular() {
+			return fmt.Errorf("%s is not a regular file", srcFullPath)
+		}
+
+		source, err := os.Open(srcFullPath)
+		if err != nil {
+			return err
+		}
+
+		defer source.Close()
+
+		destination, err := os.Create(destFullPath)
+		if err != nil {
+			return err
+		}
+		defer destination.Close()
+
+		_, err = io.Copy(destination, source)
+		if err != nil {
+			return err
+		}
+
+		setColor(INFO)
+		fmt.Printf("Copied ")
+		setColor(RESET)
+		fmt.Printf("%s -> %s\n", srcFullPath, destFullPath)
+	}
+
+	return nil
+}
+
+func copyBin(srcPath, destPath string) error {
+	setColor(NOTICE)
+	fmt.Printf("Do you want to copy binaries (from %s%s/bin%s) to local directory ? ", WHITE, srcPath, NOTICE)
+	setColor(WHITE)
+	fmt.Printf("y/N")
+	var copy string
+	fmt.Scanln(&copy)
+
+	defaultSrc := filepath.Join(srcPath, "bin")
+
+	if isAgree(copy) {
+		setColor(NOTICE)
+		fmt.Printf("Choose a destination folder (%sdefault %s%s): ", WHITE, binDest, NOTICE)
+		setColor(RESET)
+		var reply string
+		fmt.Scanln(&reply)
+
+		if reply == "" {
+			return doCopyBin(defaultSrc, destPath)
+		}
+
+		if _, err := os.ReadDir(reply); err != nil {
+			fmt.Printf("Destination folder does not exists, do you want to create it? y/N ")
+			setColor(WHITE)
+			var create_folder string
+			fmt.Scanln(&create_folder)
+
+			if isAgree(create_folder) {
+				if err := os.MkdirAll(create_folder, 0755); err != nil {
+					return err
+				}
+				return doCopyBin(defaultSrc, reply)
+			}
+			return copyBin(srcPath, destPath)
+		}
+
+		return doCopyBin(defaultSrc, reply)
+	}
+
+	return nil
+}
+
 func selectDestPath() (string, error) {
 	setColor(NOTICE)
-	fmt.Printf("Choose a destination folder (default: %s): ", dest)
+	fmt.Printf("Choose a destination folder (%sdefault: %s%s): ", WHITE, dest, NOTICE)
 	setColor(RESET)
 	var reply string
 	fmt.Scanln(&reply)
@@ -93,7 +187,7 @@ func selectDestPath() (string, error) {
 		fmt.Println("y/N")
 		fmt.Scanln(&create)
 
-		if strings.ToLower(create) == "y" || strings.ToLower(create) == "yes" {
+		if isAgree(create) {
 			if err := os.MkdirAll(reply, 0755); err != nil {
 				setColor(RED)
 				fmt.Println("[ERROR]")
@@ -168,7 +262,7 @@ func createDirSymlink(srcPath string, destPath string, folder os.DirEntry) error
 	return nil
 }
 
-func createSymlinkAuto(srcPath string, destPath string) error {
+func createSymlink(srcPath string, destPath string) error {
 	excluded := []string{".git", ".gitignore", "go_scripts", "scripts"}
 	files, err := os.ReadDir(srcPath)
 	if err != nil {
@@ -210,14 +304,26 @@ func main() {
 		setColor(INFO)
 		fmt.Println("It is wise to surrender")
 		setColor(RESET)
-		os.Exit(1)
+		return
 	}
 
 	srcPath, err := selectSrcPath()
 	setColor(RESET)
+	if err != nil {
+		panic(err)
+	}
 
 	destPath, err := selectDestPath()
 	setColor(RESET)
+	if err != nil {
+		panic(err)
+	}
 
-	createSymlinkAuto(srcPath, destPath)
+	// if err := createSymlink(srcPath, destPath); err != nil {
+	// 	panic(err)
+	// }
+
+	if err := copyBin(srcPath, destPath); err != nil {
+		panic(err)
+	}
 }
