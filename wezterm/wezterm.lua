@@ -1,14 +1,18 @@
 local wezterm = require 'wezterm'
 
 return {
-  color_scheme = 'Banana Blueberry',
-  window_background_opacity = 0.7,
+  color_scheme = 'Argonaut',
+  colors = {
+    cursor_bg = '#E06100',
+    cursor_fg = '#111111',
+  },
+  window_background_opacity = 0.4,
   inactive_pane_hsb = {
     saturation = 0.9,
     brightness = 0.8
   },
   font = wezterm.font_with_fallback {
-    { family = 'Iosevka Term' },
+    { family = 'Iosevka Term', weight = 'Bold' },
     {
       family = 'JetBrains Mono',
       weight = 'Medium',
