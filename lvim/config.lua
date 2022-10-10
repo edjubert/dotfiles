@@ -50,7 +50,21 @@ vim.g.terminal_color_15 = white_blue
 vim.o.guifont = "Iosevka Nerd Font"
 vim.g.neovide_transparency = 0.6
 vim.api.nvim_command([[
-  autocmd colorscheme * :hi CursorLine ctermbg=NONE cterm=bold,italic guibg=NONE gui=bold,italic
+  augroup transparentBackground
+    autocmd colorscheme * :hi CursorLine ctermbg=NONE cterm=bold,italic guibg=NONE gui=bold,italic
+    autocmd colorscheme * :hi TelescopeNormal ctermbg=NONE guibg=NONE
+    autocmd colorscheme * :hi TelescopeBorder ctermbg=NONE guibg=NONE
+    autocmd colorscheme * :hi FloatBorder ctermbg=NONE guibg=NONE
+    autocmd colorscheme * :hi NormalFloat ctermbg=NONE guibg=NONE
+    autocmd colorscheme * :hi NvimTreeNormal ctermbg=NONE guibg=NONE
+    autocmd colorscheme * :hi NvimTreeRootFolder ctermbg=NONE guibg=NONE
+    autocmd colorscheme * :hi WhichKey ctermbg=NONE guibg=NONE
+    autocmd colorscheme * :hi WhichKeyGroup ctermbg=NONE guibg=NONE
+    autocmd colorscheme * :hi WhichKeyFloat ctermbg=NONE guibg=NONE
+    autocmd colorscheme * :hi BufferLineFill ctermbg=NONE guibg=NONE
+    autocmd colorscheme * :hi Visual cterm=bold,italic gui=bold,italic
+    autocmd colorscheme * :hi Comment cterm=italic gui=italic
+  augroup END
 ]])
 
 lvim.log.level = "warn"
@@ -163,3 +177,5 @@ require 'nvim-treesitter.configs'.setup({
     max_file_lines = 1000
   }
 })
+lvim.builtin.lualine.style = "lvim"
+lvim.builtin.lualine.sections.lualine_y = { 'fileformat', 'filesize', 'location', 'progress' }
