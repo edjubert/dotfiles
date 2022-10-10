@@ -20,7 +20,7 @@ font:
 colors:
   # Default colors
   primary:
-    background: '0x292C3E'
+    background: '0x212C30'
     foreground: '0xEBEBEB'
 
   # Cursor colors
@@ -51,6 +51,7 @@ colors:
     white:   '0xFEFEF8'
 
 window:
+  opacity: 0.3
   padding:
     x: 0
     y: 0
