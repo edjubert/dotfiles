@@ -66,8 +66,8 @@ bindsym $mod+semicolon workspace back_and_forth
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec wezterm
-# bindsym $mod+Return exec alacritty
+# bindsym $mod+Return exec wezterm
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
