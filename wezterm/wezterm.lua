@@ -12,7 +12,7 @@ return {
     brightness = 0.8
   },
   font = wezterm.font_with_fallback {
-    { family = 'Iosevka Term', weight = 'Bold' },
+    { family = 'Iosevka Term', weight = 'Medium' },
     {
       family = 'JetBrains Mono',
       weight = 'Medium',
