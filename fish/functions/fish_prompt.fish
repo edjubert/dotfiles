@@ -30,15 +30,27 @@ function fish_prompt
   set -l red (set_color red)
 
   # Configure __fish_git_prompt
-  set -g __fish_git_prompt_char_stateseparator ' '
+  set -g __fish_git_prompt_char_stateseparator ' |'
   set -g __fish_git_prompt_color 5fdfff
   set -g __fish_git_prompt_color_flags df5f00
   set -g __fish_git_prompt_color_prefix white
   set -g __fish_git_prompt_color_suffix white
-  set -g __fish_git_prompt_showdirtystate true
-  set -g __fish_git_prompt_showuntrackedfiles true
-  set -g __fish_git_prompt_showstashstate true
-  set -g __fish_git_prompt_show_informative_status true
+  set -g __fish_git_prompt_showdirtystate false
+
+  set -g __fish_git_prompt_showuntrackedfiles false
+  set -g __fish_git_prompt_showstashstate false
+  set -g __fish_git_prompt_show_informative_status false
+  set -g __fish_git_prompt_use_informative_chars false
+  set -g __fish_git_prompt_char_cleanstate ' ✔ '
+  set -g __fish_git_prompt_char_dirtystate ' ✚ '
+  set -g __fish_git_prompt_char_invalidstate ' ✖ '
+  set -g __fish_git_prompt_char_stagedstate ' ● '
+  set -g __fish_git_prompt_char_stashstate ' ⚑ '
+  set -g __fish_git_prompt_char_untrackedfiles ' … '
+  set -g __fish_git_prompt_char_upstream_ahead ' ↑ '
+  set -g __fish_git_prompt_char_upstream_ahead ' ↓ '
+  set -g __fish_git_prompt_char_upstream_diverged ' <>'
+  set -g __fish_git_prompt_char_upstream_equal ' ='
 
   set -l current_user (whoami)
 
