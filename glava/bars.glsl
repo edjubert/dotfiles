@@ -22,9 +22,9 @@
 /* Bar color */
 #define COLOR (#227755 * GRADIENT)
 /* Direction that the bars are facing, 0 for inward, 1 for outward */
-#define DIRECTION 0
+#define DIRECTION 1
 /* Whether to switch left/right audio buffers */
-#define INVERT 0
+#define INVERT 1
 /* Whether to flip the output vertically */
 #define FLIP 0
 /* Whether to mirror output along `Y = X`, causing output to render on the left side of the window */
