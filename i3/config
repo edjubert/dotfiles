@@ -33,6 +33,8 @@ exec --no-startup-id krunner -d
 exec --no-startup-id tilda
 exec --no-startup-id fusuma
 exec --no-startup-id feh --bg-scale /usr/share/wallpapers/MilkyWay/contents/images/5120x2880.png
+exec --no-startup-id mpDris2
+exec --no-startup-id glava -d
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
