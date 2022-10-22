@@ -27,14 +27,14 @@ default_floating_border pixel 1
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id picom --config /home/edjubert/.config/picom/picom.conf --experimental-backends
+exec --no-startup-id picom --config /home/edjubert/.config/picom/picom.conf --experimental-backends --backend glx
 # exec --no-startup-id polybar
 exec --no-startup-id krunner -d
 exec --no-startup-id tilda
 exec --no-startup-id fusuma
 exec --no-startup-id feh --bg-scale /usr/share/wallpapers/MilkyWay/contents/images/5120x2880.png
 exec --no-startup-id mpDris2
-exec --no-startup-id glava -d
+# exec --no-startup-id glava -d
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -159,26 +159,26 @@ set $ws18 "18"
 set $ws19 "19"
 set $ws20 "20"
 
-workspace $ws1 output eDP-1 HDMI-1-0
-workspace $ws2 output eDP-1 HDMI-1-0
-workspace $ws3 output eDP-1 HDMI-1-0
-workspace $ws4 output eDP-1 HDMI-1-0
-workspace $ws5 output eDP-1 HDMI-1-0
-workspace $ws6 output eDP-1 HDMI-1-0
-workspace $ws7 output eDP-1 HDMI-1-0
-workspace $ws8 output eDP-1 HDMI-1-0
-workspace $ws9 output eDP-1 HDMI-1-0
-workspace $ws10 output eDP-1 HDMI-1-0
-workspace $ws11 output HDMI-1-0 eDP-1
-workspace $ws12 output HDMI-1-0 eDP-1
-workspace $ws13 output HDMI-1-0 eDP-1
-workspace $ws14 output HDMI-1-0 eDP-1
-workspace $ws15 output HDMI-1-0 eDP-1
-workspace $ws16 output HDMI-1-0 eDP-1
-workspace $ws17 output HDMI-1-0 eDP-1
-workspace $ws18 output HDMI-1-0 eDP-1
-workspace $ws19 output HDMI-1-0 eDP-1
-workspace $ws20 output HDMI-1-0 eDP-1
+workspace $ws1 output HDMI-1-0 eDP-1
+workspace $ws2 output HDMI-1-0 eDP-1
+workspace $ws3 output HDMI-1-0 eDP-1
+workspace $ws4 output HDMI-1-0 eDP-1
+workspace $ws5 output HDMI-1-0 eDP-1
+workspace $ws6 output HDMI-1-0 eDP-1
+workspace $ws7 output HDMI-1-0 eDP-1
+workspace $ws8 output HDMI-1-0 eDP-1
+workspace $ws9 output HDMI-1-0 eDP-1
+workspace $ws10 output HDMI-1-0 eDP-1
+workspace $ws11 output eDP-1 HDMI-1-0 
+workspace $ws12 output eDP-1 HDMI-1-0
+workspace $ws13 output eDP-1 HDMI-1-0
+workspace $ws14 output eDP-1 HDMI-1-0
+workspace $ws15 output eDP-1 HDMI-1-0
+workspace $ws16 output eDP-1 HDMI-1-0
+workspace $ws17 output eDP-1 HDMI-1-0
+workspace $ws18 output eDP-1 HDMI-1-0
+workspace $ws19 output eDP-1 HDMI-1-0
+workspace $ws20 output 
 
 
 # switch to workspace

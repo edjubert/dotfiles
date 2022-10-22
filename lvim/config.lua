@@ -48,7 +48,7 @@ vim.g.terminal_color_15 = white_blue
 
 -- Neovide Special config
 vim.o.guifont = "Iosevka Nerd Font"
-vim.g.neovide_transparency = 0.6
+vim.g.neovide_transparency = 0
 vim.api.nvim_command([[
   augroup transparentBackground
     autocmd colorscheme * :hi CursorLine ctermbg=NONE cterm=bold,italic guibg=NONE gui=bold,italic
@@ -82,6 +82,7 @@ lvim.builtin.which_key.mappings["n"] = {
   n = { "<cmd>bn<cr>", "Buffer next" },
 }
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+lvim.builtin.which_key.mappings["C"] = { "<cmd>Centerpad 70 70<CR>", "Center buffer" }
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",
   r = { "<cmd>Trouble lsp_references<cr>", "References" },
@@ -121,6 +122,7 @@ lvim.builtin.treesitter.highlight.enabled = true
 
 lvim.plugins = {
   { "tpope/vim-surround" },
+  { "smithbm2316/centerpad.nvim" },
   { "xiyaowong/nvim-transparent" },
   { "easymotion/vim-easymotion" },
   { "f-person/git-blame.nvim" },
@@ -136,6 +138,7 @@ lvim.plugins = {
   { "sainnhe/edge" },
   { "p00f/nvim-ts-rainbow" },
   { "tree-sitter/tree-sitter-go" },
+  { "t9md/vim-choosewin" },
   { "mitchellh/tree-sitter-proto" },
   {
     "folke/trouble.nvim",
