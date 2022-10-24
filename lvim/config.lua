@@ -49,6 +49,28 @@ vim.g.terminal_color_15 = white_blue
 -- Neovide Special config
 vim.o.guifont = "Iosevka Nerd Font"
 vim.g.neovide_transparency = 0
+
+lvim.log.level = "warn"
+lvim.format_on_save = true
+lvim.colorscheme = "onedark"
+
+require('onedark').setup({
+  comment_style = "NONE",
+  keyword_style = "NONE",
+  function_style = "NONE",
+  variable_style = "NONE",
+  dark_sidebar = 1,
+  dark_float = 1,
+  highlight_linenumber = 0,
+  hide_inactive_statusline = 1,
+  transparent = 1,
+  transparent_sidebar = 1
+})
+
+lvim.transparent_window = true
+
+lvim.leader = "space"
+
 vim.api.nvim_command([[
   augroup transparentBackground
     autocmd colorscheme * :hi CursorLine ctermbg=NONE cterm=bold,italic guibg=NONE gui=bold,italic
@@ -66,13 +88,6 @@ vim.api.nvim_command([[
     autocmd colorscheme * :hi Comment cterm=italic gui=italic
   augroup END
 ]])
-
-lvim.log.level = "warn"
-lvim.format_on_save = true
-lvim.colorscheme = "onedarkpro"
-lvim.transparent_window = true
-
-lvim.leader = "space"
 
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
@@ -123,19 +138,15 @@ lvim.builtin.treesitter.highlight.enabled = true
 lvim.plugins = {
   { "tpope/vim-surround" },
   { "smithbm2316/centerpad.nvim" },
-  { "xiyaowong/nvim-transparent" },
   { "easymotion/vim-easymotion" },
   { "f-person/git-blame.nvim" },
-  { "folke/zen-mode.nvim" },
   { "danilamihailov/beacon.nvim" },
   { "psliwka/vim-smoothie" },
   { "airblade/vim-gitgutter" },
-  { "camspiers/animate.vim" },
   { "ray-x/lsp_signature.nvim" },
   { "olimorris/onedarkpro.nvim" },
+  { "ful1e5/onedark.nvim" },
   { "lukas-reineke/indent-blankline.nvim" },
-  { "rafamadriz/neon" },
-  { "sainnhe/edge" },
   { "p00f/nvim-ts-rainbow" },
   { "tree-sitter/tree-sitter-go" },
   { "t9md/vim-choosewin" },
@@ -149,18 +160,6 @@ lvim.plugins = {
   }
 }
 
-require 'transparent'.setup({
-  enable = true,
-  "BufferLineTabClose",
-  "BufferlineBufferSelected",
-  "BufferLineFill",
-  "BufferLineBackground",
-  "BufferLineSeparator",
-  "BufferLineIndicatorSelected",
-  "CursorLineNr",
-  "LineNr"
-})
-
 require 'lsp_signature'.setup({
   bind = true,
   handler_opts = {
@@ -173,12 +172,5 @@ require 'indent_blankline'.setup({
   show_current_context_start = true,
 })
 
-require 'nvim-treesitter.configs'.setup({
-  rainbow = {
-    enable = true,
-    extended_mode = true,
-    max_file_lines = 1000
-  }
-})
 lvim.builtin.lualine.style = "lvim"
 lvim.builtin.lualine.sections.lualine_y = { 'fileformat', 'filesize', 'location', 'progress' }
