@@ -71,6 +71,12 @@ lvim.transparent_window = true
 
 lvim.leader = "space"
 
+vim.g.rnvimr_enable_ex = 1
+vim.g.rnvimr_enable_picker = 1
+vim.g.rnvimr_draw_border = 1
+vim.g.rnvimr_shadow_winblend = 100
+
+
 vim.api.nvim_command([[
   augroup transparentBackground
     autocmd colorscheme * :hi CursorLine ctermbg=NONE cterm=bold,italic guibg=NONE gui=bold,italic
@@ -93,8 +99,16 @@ vim.api.nvim_command([[
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 
 -- Use which-key to add extra bindings with the leader-key prefix
+lvim.builtin.which_key.mappings["X"] = { "<cmd>lua require('silicon').visualise(false, false)<CR>" }
 lvim.builtin.which_key.mappings["n"] = {
   n = { "<cmd>bn<cr>", "Buffer next" },
+}
+lvim.builtin.which_key.mappings["r"] = { "<cmd>RnvimrToggle<CR>", "Open Ranger" }
+lvim.builtin.which_key.mappings["S"] = {
+  name = "+Spectre",
+  s = { "<cmd>lua require('spectre').open()<CR>", "Open Spectre" },
+  w = { "<cmd>lua require('spectre').open_visual({ select_word=true })<CR>", "Search current word" },
+  p = { "viw:lua require('spectre').open_file_search()<CR>", "Search in file" }
 }
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
 lvim.builtin.which_key.mappings["C"] = { "<cmd>Centerpad 70 70<CR>", "Center buffer" }
@@ -150,7 +164,16 @@ lvim.plugins = {
   { "p00f/nvim-ts-rainbow" },
   { "tree-sitter/tree-sitter-go" },
   { "t9md/vim-choosewin" },
+  { "kevinhwang91/rnvimr" },
+  { "windwp/nvim-spectre" },
   { "mitchellh/tree-sitter-proto" },
+  {
+    "narutoxy/silicon.lua",
+    requires = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require('silicon').setup({})
+    end
+  },
   {
     "folke/trouble.nvim",
     require = "kyazdani24/nvim-web-devicons",
