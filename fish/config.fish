@@ -6,3 +6,4 @@ end
 function fish_mode_prompt; end
 
 set fish_greeting
+set -gx EDITOR /home/edjubert/.local/bin/lvim
