@@ -32,7 +32,8 @@ exec --no-startup-id picom --config /home/edjubert/.config/picom/picom.conf --ex
 exec --no-startup-id krunner -d
 exec --no-startup-id tilda
 exec --no-startup-id fusuma
-exec --no-startup-id feh --bg-scale /usr/share/wallpapers/MilkyWay/contents/images/5120x2880.png
+exec --no-startup-id feh --bg-scale /home/edjubert/Workspace/dotfiles/Wallpapers/hiking_in_space.jpg
+# exec --no-startup-id feh --bg-scale /usr/share/wallpapers/MilkyWay/contents/images/5120x2880.png
 exec --no-startup-id mpDris2
 # exec --no-startup-id glava -d
 

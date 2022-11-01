@@ -29,26 +29,27 @@ local green      = '#a1cd5e'
 local cyan_blue  = '#296596'
 
 -- Specify the colors used by the inbuilt terminal of Neovim and Vim
-vim.g.terminal_color_0  = regal_blue
-vim.g.terminal_color_1  = red
-vim.g.terminal_color_2  = green
-vim.g.terminal_color_3  = peach
-vim.g.terminal_color_4  = blue
-vim.g.terminal_color_5  = violet
-vim.g.terminal_color_6  = turquoise
-vim.g.terminal_color_7  = white
-vim.g.terminal_color_8  = grey_blue
-vim.g.terminal_color_9  = watermelon
-vim.g.terminal_color_10 = emerald
-vim.g.terminal_color_11 = tan
-vim.g.terminal_color_12 = blue
-vim.g.terminal_color_13 = purple
-vim.g.terminal_color_14 = turquoise
-vim.g.terminal_color_15 = white_blue
+vim.g.terminal_color_0        = regal_blue
+vim.g.terminal_color_1        = red
+vim.g.terminal_color_2        = green
+vim.g.terminal_color_3        = peach
+vim.g.terminal_color_4        = blue
+vim.g.terminal_color_5        = violet
+vim.g.terminal_color_6        = turquoise
+vim.g.terminal_color_7        = white
+vim.g.terminal_color_8        = grey_blue
+vim.g.terminal_color_9        = watermelon
+vim.g.terminal_color_10       = emerald
+vim.g.terminal_color_11       = tan
+vim.g.terminal_color_12       = blue
+vim.g.terminal_color_13       = purple
+vim.g.terminal_color_14       = turquoise
+vim.g.terminal_color_15       = white_blue
+vim.g.neovide_cursor_vfx_mode = "sonicboom"
 
 -- Neovide Special config
 vim.o.guifont = "Iosevka Nerd Font"
-vim.g.neovide_transparency = 0
+vim.g.neovide_transparency = 0.3
 
 lvim.log.level = "warn"
 lvim.format_on_save = true
@@ -111,7 +112,7 @@ lvim.builtin.which_key.mappings["S"] = {
   p = { "viw:lua require('spectre').open_file_search()<CR>", "Search in file" }
 }
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
-lvim.builtin.which_key.mappings["C"] = { "<cmd>Centerpad 70 70<CR>", "Center buffer" }
+lvim.builtin.which_key.mappings["C"] = { "<cmd>Centerpad 30 30<CR>", "Center buffer" }
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",
   r = { "<cmd>Trouble lsp_references<cr>", "References" },
@@ -149,10 +150,27 @@ lvim.builtin.treesitter.ensure_installed = {
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
+local hop = require('hop')
+local directions = require('hop.hint').HintDirection
+vim.keymap.set('', 'fw', function()
+  hop.hint_words()
+end, { remap = true, silent = true })
+vim.keymap.set('', 'ff', function()
+  hop.hint_char1({ direction = directions.AFTER_CURSOR })
+end, { remap = true, silent = true })
+vim.keymap.set('', 'fF', function()
+  hop.hint_char1({ direction = directions.BEFORE_CURSOR })
+end, { remap = true, silent = true })
+-- vim.keymap.set('', 't', function()
+--   hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })
+-- end, { remap = true })
+-- vim.keymap.set('', 'T', function()
+--   hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
+-- end, { remap = true })
+
 lvim.plugins = {
   { "tpope/vim-surround" },
   { "smithbm2316/centerpad.nvim" },
-  { "easymotion/vim-easymotion" },
   { "f-person/git-blame.nvim" },
   { "danilamihailov/beacon.nvim" },
   { "psliwka/vim-smoothie" },
@@ -168,6 +186,14 @@ lvim.plugins = {
   { "windwp/nvim-spectre" },
   { "mitchellh/tree-sitter-proto" },
   {
+    "phaazon/hop.nvim",
+    branch = 'v2', -- optional but strongly recommended
+    config = function()
+      -- you can configure Hop the way you like here; see :h hop-config
+      require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+    end
+  },
+  {
     "narutoxy/silicon.lua",
     requires = { "nvim-lua/plenary.nvim" },
     config = function()
@@ -182,7 +208,6 @@ lvim.plugins = {
     end
   }
 }
-
 require 'lsp_signature'.setup({
   bind = true,
   handler_opts = {
