@@ -77,6 +77,7 @@ vim.g.rnvimr_enable_picker = 1
 vim.g.rnvimr_draw_border = 1
 vim.g.rnvimr_shadow_winblend = 100
 
+vim.g.smoothie_experimental_mappings = true
 
 vim.api.nvim_command([[
   augroup transparentBackground
@@ -98,6 +99,7 @@ vim.api.nvim_command([[
 
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+
 
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["X"] = { "<cmd>lua require('silicon').visualise(false, false)<CR>" }
@@ -161,12 +163,6 @@ end, { remap = true, silent = true })
 vim.keymap.set('', 'fF', function()
   hop.hint_char1({ direction = directions.BEFORE_CURSOR })
 end, { remap = true, silent = true })
--- vim.keymap.set('', 't', function()
---   hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })
--- end, { remap = true })
--- vim.keymap.set('', 'T', function()
---   hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })
--- end, { remap = true })
 
 lvim.plugins = {
   { "tpope/vim-surround" },
@@ -185,6 +181,7 @@ lvim.plugins = {
   { "kevinhwang91/rnvimr" },
   { "windwp/nvim-spectre" },
   { "mitchellh/tree-sitter-proto" },
+  { "cbochs/portal.nvim" },
   {
     "phaazon/hop.nvim",
     branch = 'v2', -- optional but strongly recommended
@@ -221,4 +218,27 @@ require 'indent_blankline'.setup({
 })
 
 lvim.builtin.lualine.style = "lvim"
-lvim.builtin.lualine.sections.lualine_y = { 'fileformat', 'filesize', 'location', 'progress' }
+lvim.builtin.lualine.sections.lualine_y = { 'portal_status', 'fileformat', 'filesize', 'location', 'progress' }
+
+require("portal").setup({
+  jump = {
+    query = { "tagged", "modified", "different", "valid" },
+    labels = {
+      select = { "j", "k", "h", "l" },
+      escape = {
+        ["<esc>"] = true
+      },
+    },
+  },
+})
+
+vim.keymap.set('n', 'fo', require 'portal'.jump_backward, { remap = true, silent = false })
+vim.keymap.set('n', 'fi', require 'portal'.jump_forward, { remap = true, silent = false })
+
+local types = require("portal.types")
+local query = require("portal.query").resolve({ "tagged" })
+local jumps = require("portal.jump").search(query, types.Direction.BACKWARD)
+if jumps[1].direction ~= types.Direction.NONE then
+  require("portal.jump").select(jumps[1])
+end
+vim.keymap.set('n', 'fm', require 'portal.tag'.toggle, { remap = true, silent = true })
