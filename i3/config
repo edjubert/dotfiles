@@ -65,12 +65,16 @@ bindsym $mod+m workspace prev
 bindsym $mod+comma workspace next
 bindsym $mod+semicolon workspace back_and_forth
 
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
 # bindsym $mod+Return exec wezterm
 bindsym $mod+Return exec alacritty
+bindsym $mod+Shift+Return exec --no-startup-id /home/edjubert/.local/bin/lvim-gui
 
 # kill focused window
 bindsym $mod+Shift+q kill
