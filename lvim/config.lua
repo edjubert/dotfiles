@@ -180,15 +180,12 @@ lvim.plugins = {
   { "t9md/vim-choosewin" },
   { "kevinhwang91/rnvimr" },
   { "windwp/nvim-spectre" },
+  { "MunifTanjim/eslint.nvim" },
   { "mitchellh/tree-sitter-proto" },
   { "cbochs/portal.nvim" },
   {
     "phaazon/hop.nvim",
     branch = 'v2', -- optional but strongly recommended
-    config = function()
-      -- you can configure Hop the way you like here; see :h hop-config
-      require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
-    end
   },
   {
     "narutoxy/silicon.lua",
@@ -220,6 +217,7 @@ require 'indent_blankline'.setup({
 lvim.builtin.lualine.style = "lvim"
 lvim.builtin.lualine.sections.lualine_y = { 'portal_status', 'fileformat', 'filesize', 'location', 'progress' }
 
+require('hop').setup({ keys = 'etovxqpdygfblzhckisuran' })
 require("portal").setup({
   jump = {
     query = { "tagged", "modified", "different", "valid" },
@@ -242,3 +240,28 @@ if jumps[1].direction ~= types.Direction.NONE then
   require("portal.jump").select(jumps[1])
 end
 vim.keymap.set('n', 'fm', require 'portal.tag'.toggle, { remap = true, silent = true })
+
+local null_ls = require("null-ls")
+local eslint = require("eslint")
+
+null_ls.setup()
+
+eslint.setup({
+  bin = 'eslint', -- or `eslint_d`
+  code_actions = {
+    enable = true,
+    apply_on_save = {
+      enable = true,
+      types = { "problem", "suggestion", "layout" },
+    },
+    disable_rule_comment = {
+      enable = true,
+      location = "separate_line", -- or `same_line`
+    },
+  },
+  diagnostics = {
+    enable = true,
+    report_unused_disable_directives = false,
+    run_on = "type", -- or `save`
+  },
+})
