@@ -53,22 +53,46 @@ vim.g.neovide_transparency = 0.3
 
 lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.colorscheme = "onedark"
+vim.cmd([[ command! -nargs=1 Browse silent exec '!open "<args>"' ]])
 
-require('onedark').setup({
-  comment_style = "NONE",
-  keyword_style = "NONE",
-  function_style = "NONE",
-  variable_style = "NONE",
-  dark_sidebar = 1,
-  dark_float = 1,
-  highlight_linenumber = 0,
-  hide_inactive_statusline = 1,
-  transparent = 1,
-  transparent_sidebar = 1
-})
+-- lvim.colorscheme = "catppuccin"
+-- require('catppuccin').setup({
+--   flavour = "mocha",
+--   transparent_background = false,
+--   term_colors = false,
+--   dim_inactive = {
+--     enable = true,
+--     shade = "dark",
+--     percentage = 0.5
+--   },
+--   styles = {
+--     comments = { "italic" },
+--     conditionals = { "italic" },
+--   },
+--   integrations = {
+--     cmp = true,
+--     gitsigns = true,
+--     nvimtree = true,
+--     telescope = true,
+--     treesitter = true,
+--   }
+-- })
 
-lvim.transparent_window = true
+-- lvim.colorscheme = "onedark"
+-- require('onedark').setup({
+--   comment_style = "NONE",
+--   keyword_style = "NONE",
+--   function_style = "NONE",
+--   variable_style = "NONE",
+--   dark_sidebar = 1,
+--   dark_float = 1,
+--   highlight_linenumber = 0,
+--   hide_inactive_statusline = 1,
+--   transparent = 1,
+--   transparent_sidebar = 1
+-- })
+
+-- lvim.transparent_window = true
 
 lvim.leader = "space"
 
@@ -81,7 +105,7 @@ vim.g.smoothie_experimental_mappings = true
 
 vim.api.nvim_command([[
   augroup transparentBackground
-    autocmd colorscheme * :hi CursorLine ctermbg=NONE cterm=bold,italic guibg=NONE gui=bold,italic
+    autocmd colorscheme * :hi CursorLine ctermbg=NONE cterm=bold guibg=NONE gui=bold
     autocmd colorscheme * :hi TelescopeNormal ctermbg=NONE guibg=NONE
     autocmd colorscheme * :hi TelescopeBorder ctermbg=NONE guibg=NONE
     autocmd colorscheme * :hi FloatBorder ctermbg=NONE guibg=NONE
@@ -92,7 +116,7 @@ vim.api.nvim_command([[
     autocmd colorscheme * :hi WhichKeyGroup ctermbg=NONE guibg=NONE
     autocmd colorscheme * :hi WhichKeyFloat ctermbg=NONE guibg=NONE
     autocmd colorscheme * :hi BufferLineFill ctermbg=NONE guibg=NONE
-    autocmd colorscheme * :hi Visual cterm=bold,italic gui=bold,italic
+    autocmd colorscheme * :hi Visual cterm=bold gui=bold
     autocmd colorscheme * :hi Comment cterm=italic gui=italic
   augroup END
 ]])
@@ -102,7 +126,8 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 
 
 -- Use which-key to add extra bindings with the leader-key prefix
-lvim.builtin.which_key.mappings["X"] = { "<cmd>lua require('silicon').visualise(false, false)<CR>" }
+lvim.builtin.which_key.mappings["<space>"] = { "<cmd>ChooseWin<cr>", "Choose window" }
+-- lvim.builtin.which_key.mappings["X"] = { "<cmd>lua require('silicon').visualise(false, false)<C>" }
 lvim.builtin.which_key.mappings["n"] = {
   n = { "<cmd>bn<cr>", "Buffer next" },
 }
@@ -129,7 +154,7 @@ lvim.builtin.which_key.mappings["t"] = {
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
-lvim.builtin.notify.active = true
+-- lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
@@ -166,14 +191,16 @@ end, { remap = true, silent = true })
 
 lvim.plugins = {
   { "tpope/vim-surround" },
+  { "tpope/vim-fugitive" },
+  { "tpope/vim-rhubarb" },
   { "smithbm2316/centerpad.nvim" },
   { "f-person/git-blame.nvim" },
   { "danilamihailov/beacon.nvim" },
   { "psliwka/vim-smoothie" },
   { "airblade/vim-gitgutter" },
   { "ray-x/lsp_signature.nvim" },
-  { "olimorris/onedarkpro.nvim" },
-  { "ful1e5/onedark.nvim" },
+  -- { "ful1e5/onedark.nvim" },
+  { "catppuccin/nvim", as = "catppuccin" },
   { "lukas-reineke/indent-blankline.nvim" },
   { "p00f/nvim-ts-rainbow" },
   { "tree-sitter/tree-sitter-go" },
@@ -183,6 +210,24 @@ lvim.plugins = {
   { "MunifTanjim/eslint.nvim" },
   { "mitchellh/tree-sitter-proto" },
   { "cbochs/portal.nvim" },
+  {
+    'iamcco/markdown-preview.nvim',
+    run = "cd app && npm install",
+    setup = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" }
+  },
+  {
+    "folke/zen-mode.nvim",
+    config = function()
+      require("zen-mode").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  },
   {
     "phaazon/hop.nvim",
     branch = 'v2', -- optional but strongly recommended
@@ -215,9 +260,10 @@ require 'indent_blankline'.setup({
 })
 
 lvim.builtin.lualine.style = "lvim"
-lvim.builtin.lualine.sections.lualine_y = { 'portal_status', 'fileformat', 'filesize', 'location', 'progress' }
+lvim.builtin.lualine.sections.lualine_y = { 'fileformat', 'filesize', 'location', 'progress' }
 
 require('hop').setup({ keys = 'etovxqpdygfblzhckisuran' })
+
 require("portal").setup({
   jump = {
     query = { "tagged", "modified", "different", "valid" },
