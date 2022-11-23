@@ -96,10 +96,10 @@ vim.cmd([[ command! -nargs=1 Browse silent exec '!open "<args>"' ]])
 
 lvim.leader = "space"
 
-vim.g.rnvimr_enable_ex = 1
-vim.g.rnvimr_enable_picker = 1
-vim.g.rnvimr_draw_border = 1
-vim.g.rnvimr_shadow_winblend = 100
+-- vim.g.rnvimr_enable_ex = 1
+-- vim.g.rnvimr_enable_picker = 1
+-- vim.g.rnvimr_draw_border = 1
+-- vim.g.rnvimr_shadow_winblend = 100
 
 vim.g.smoothie_experimental_mappings = true
 
@@ -131,7 +131,7 @@ lvim.builtin.which_key.mappings["<space>"] = { "<cmd>ChooseWin<cr>", "Choose win
 lvim.builtin.which_key.mappings["n"] = {
   n = { "<cmd>bn<cr>", "Buffer next" },
 }
-lvim.builtin.which_key.mappings["r"] = { "<cmd>RnvimrToggle<CR>", "Open Ranger" }
+-- lvim.builtin.which_key.mappings["r"] = { "<cmd>RnvimrToggle<CR>", "Open Ranger" }
 lvim.builtin.which_key.mappings["S"] = {
   name = "+Spectre",
   s = { "<cmd>lua require('spectre').open()<CR>", "Open Spectre" },
@@ -205,7 +205,7 @@ lvim.plugins = {
   { "p00f/nvim-ts-rainbow" },
   { "tree-sitter/tree-sitter-go" },
   { "t9md/vim-choosewin" },
-  { "kevinhwang91/rnvimr" },
+  -- { "kevinhwang91/rnvimr" },
   { "windwp/nvim-spectre" },
   { "MunifTanjim/eslint.nvim" },
   { "mitchellh/tree-sitter-proto" },
