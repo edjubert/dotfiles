@@ -55,52 +55,7 @@ lvim.log.level = "warn"
 lvim.format_on_save = true
 vim.cmd([[ command! -nargs=1 Browse silent exec '!open "<args>"' ]])
 
--- lvim.colorscheme = "catppuccin"
--- require('catppuccin').setup({
---   flavour = "mocha",
---   transparent_background = false,
---   term_colors = false,
---   dim_inactive = {
---     enable = true,
---     shade = "dark",
---     percentage = 0.5
---   },
---   styles = {
---     comments = { "italic" },
---     conditionals = { "italic" },
---   },
---   integrations = {
---     cmp = true,
---     gitsigns = true,
---     nvimtree = true,
---     telescope = true,
---     treesitter = true,
---   }
--- })
-
--- lvim.colorscheme = "onedark"
--- require('onedark').setup({
---   comment_style = "NONE",
---   keyword_style = "NONE",
---   function_style = "NONE",
---   variable_style = "NONE",
---   dark_sidebar = 1,
---   dark_float = 1,
---   highlight_linenumber = 0,
---   hide_inactive_statusline = 1,
---   transparent = 1,
---   transparent_sidebar = 1
--- })
-
--- lvim.transparent_window = true
-
 lvim.leader = "space"
-
--- vim.g.rnvimr_enable_ex = 1
--- vim.g.rnvimr_enable_picker = 1
--- vim.g.rnvimr_draw_border = 1
--- vim.g.rnvimr_shadow_winblend = 100
-
 vim.g.smoothie_experimental_mappings = true
 
 vim.api.nvim_command([[
@@ -124,7 +79,6 @@ vim.api.nvim_command([[
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 
-
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["<space>"] = { "<cmd>ChooseWin<cr>", "Choose window" }
 -- lvim.builtin.which_key.mappings["X"] = { "<cmd>lua require('silicon').visualise(false, false)<C>" }
@@ -139,7 +93,7 @@ lvim.builtin.which_key.mappings["S"] = {
   p = { "viw:lua require('spectre').open_file_search()<CR>", "Search in file" }
 }
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
-lvim.builtin.which_key.mappings["C"] = { "<cmd>Centerpad 30 30<CR>", "Center buffer" }
+lvim.builtin.which_key.mappings["C"] = { "<cmd>Centerpad 50 50<CR>", "Center buffer" }
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",
   r = { "<cmd>Trouble lsp_references<cr>", "References" },
@@ -193,39 +147,20 @@ lvim.plugins = {
   { "tpope/vim-surround" },
   { "tpope/vim-fugitive" },
   { "tpope/vim-rhubarb" },
-  { "smithbm2316/centerpad.nvim" },
   { "f-person/git-blame.nvim" },
   { "danilamihailov/beacon.nvim" },
   { "psliwka/vim-smoothie" },
   { "airblade/vim-gitgutter" },
   { "ray-x/lsp_signature.nvim" },
-  -- { "ful1e5/onedark.nvim" },
-  { "catppuccin/nvim", as = "catppuccin" },
-  { "lukas-reineke/indent-blankline.nvim" },
-  { "p00f/nvim-ts-rainbow" },
   { "tree-sitter/tree-sitter-go" },
   { "t9md/vim-choosewin" },
-  -- { "kevinhwang91/rnvimr" },
   { "windwp/nvim-spectre" },
   { "MunifTanjim/eslint.nvim" },
   { "mitchellh/tree-sitter-proto" },
-  { "cbochs/portal.nvim" },
-  {
-    'iamcco/markdown-preview.nvim',
-    run = "cd app && npm install",
-    setup = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-    end,
-    ft = { "markdown" }
-  },
   {
     "folke/zen-mode.nvim",
     config = function()
-      require("zen-mode").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
+      require("zen-mode").setup {}
     end
   },
   {
@@ -245,7 +180,55 @@ lvim.plugins = {
     config = function()
       require("trouble").setup {}
     end
-  }
+  },
+  {
+    "simrat39/rust-tools.nvim",
+    config = function()
+      -- local lsp_installer_servers = require("nvim-lsp-installer.servers")
+      -- local _, requested_server = lsp_installer_servers.get_server("rust_analyzer")
+      require("rust-tools").setup({
+        tools = {
+          autoSetHints = true,
+          -- hover_with_actions = true,
+          -- options same as lsp hover / vim.lsp.util.open_floating_preview()
+          hover_actions = {
+
+            -- the border that is used for the hover window
+            -- see vim.api.nvim_open_win()
+            border = {
+              { "╭", "FloatBorder" },
+              { "─", "FloatBorder" },
+              { "╮", "FloatBorder" },
+              { "│", "FloatBorder" },
+              { "╯", "FloatBorder" },
+              { "─", "FloatBorder" },
+              { "╰", "FloatBorder" },
+              { "│", "FloatBorder" },
+            },
+
+            -- whether the hover action window gets automatically focused
+            -- default: false
+            auto_focus = true,
+          },
+          runnables = {
+            use_telescope = true,
+          },
+        },
+        server = {
+          on_init = require("lvim.lsp").common_on_init,
+          on_attach = function(client, bufnr)
+            require("lvim.lsp").common_on_attach(client, bufnr)
+            local rt = require("rust-tools")
+            -- Hover actions
+            vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+            -- Code action groups
+            vim.keymap.set("n", "<leader>lA", rt.code_action_group.code_action_group, { buffer = bufnr })
+          end,
+        },
+      })
+    end,
+    ft = { "rust", "rs" },
+  },
 }
 require 'lsp_signature'.setup({
   bind = true,
@@ -254,6 +237,8 @@ require 'lsp_signature'.setup({
   }
 })
 
+require 'hop'.setup({})
+
 require 'indent_blankline'.setup({
   show_current_context = true,
   show_current_context_start = true,
@@ -261,31 +246,6 @@ require 'indent_blankline'.setup({
 
 lvim.builtin.lualine.style = "lvim"
 lvim.builtin.lualine.sections.lualine_y = { 'fileformat', 'filesize', 'location', 'progress' }
-
-require('hop').setup({ keys = 'etovxqpdygfblzhckisuran' })
-
-require("portal").setup({
-  jump = {
-    query = { "tagged", "modified", "different", "valid" },
-    labels = {
-      select = { "j", "k", "h", "l" },
-      escape = {
-        ["<esc>"] = true
-      },
-    },
-  },
-})
-
-vim.keymap.set('n', 'fo', require 'portal'.jump_backward, { remap = true, silent = false })
-vim.keymap.set('n', 'fi', require 'portal'.jump_forward, { remap = true, silent = false })
-
-local types = require("portal.types")
-local query = require("portal.query").resolve({ "tagged" })
-local jumps = require("portal.jump").search(query, types.Direction.BACKWARD)
-if jumps[1].direction ~= types.Direction.NONE then
-  require("portal.jump").select(jumps[1])
-end
-vim.keymap.set('n', 'fm', require 'portal.tag'.toggle, { remap = true, silent = true })
 
 local null_ls = require("null-ls")
 local eslint = require("eslint")
@@ -310,4 +270,9 @@ eslint.setup({
     report_unused_disable_directives = false,
     run_on = "type", -- or `save`
   },
+})
+
+local formatters = require("lvim.lsp.null-ls.formatters")
+formatters.setup({
+  { command = "rustfmt", filetypes = { "rust" } },
 })
