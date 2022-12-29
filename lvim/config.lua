@@ -1,31 +1,32 @@
-local black      = '#011627'
 local white      = '#c3ccdc'
 -- Variations of blue-grey
-local black_blue = '#081e2f'
-local dark_blue  = '#092236'
-local deep_blue  = '#0e293f'
-local slate_blue = '#2c3043'
 local regal_blue = '#1d3b53'
-local steel_blue = '#4b6479'
 local grey_blue  = '#7c8f8f'
-local cadet_blue = '#a1aab8'
-local ash_blue   = '#acb4c2'
 local white_blue = '#d6deeb'
 -- Core theme colors
-local yellow     = '#e3d18a'
 local peach      = '#ffcb8b'
 local tan        = '#ecc48d'
-local orange     = '#f78c6c'
 local red        = '#fc514e'
-local watermelon = '#ff5874'
+local watermelon = '#ff5888'
 local violet     = '#c792ea'
 local purple     = '#ae81ff'
-local indigo     = '#5e97ec'
 local blue       = '#82aaff'
 local turquoise  = '#7fdbca'
 local emerald    = '#21c7a8'
 local green      = '#a1cd5e'
+--
 -- Extra colors
+local black      = '#011627'
+local black_blue = '#081e2f'
+local dark_blue  = '#092236'
+local deep_blue  = '#0e293f'
+local slate_blue = '#2c3043'
+local steel_blue = '#4b6479'
+local cadet_blue = '#a1aab8'
+local ash_blue   = '#acb4c2'
+local yellow     = '#e3d18a'
+local orange     = '#f78c6c'
+local indigo     = '#5e97ec'
 local cyan_blue  = '#296596'
 
 -- Specify the colors used by the inbuilt terminal of Neovim and Vim
@@ -46,6 +47,8 @@ vim.g.terminal_color_13       = purple
 vim.g.terminal_color_14       = turquoise
 vim.g.terminal_color_15       = white_blue
 vim.g.neovide_cursor_vfx_mode = "sonicboom"
+
+vim.g.Hexokinase_highlighters = { "virtual", "foreground" }
 
 -- Neovide Special config
 vim.o.guifont = "Iosevka Nerd Font"
@@ -73,19 +76,19 @@ vim.api.nvim_command([[
     autocmd colorscheme * :hi BufferLineFill ctermbg=NONE guibg=NONE
     autocmd colorscheme * :hi Visual cterm=bold gui=bold
     autocmd colorscheme * :hi Comment cterm=italic gui=italic
+    autocmd colorscheme * :hi NotifyBackground cterm=italic gui=italic
   augroup END
 ]])
 
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+lvim.builtin.terminal.open_mapping = [[<C-t>]]
 
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["<space>"] = { "<cmd>ChooseWin<cr>", "Choose window" }
--- lvim.builtin.which_key.mappings["X"] = { "<cmd>lua require('silicon').visualise(false, false)<C>" }
 lvim.builtin.which_key.mappings["n"] = {
   n = { "<cmd>bn<cr>", "Buffer next" },
 }
--- lvim.builtin.which_key.mappings["r"] = { "<cmd>RnvimrToggle<CR>", "Open Ranger" }
 lvim.builtin.which_key.mappings["S"] = {
   name = "+Spectre",
   s = { "<cmd>lua require('spectre').open()<CR>", "Open Spectre" },
@@ -141,11 +144,25 @@ lvim.plugins = {
   { "psliwka/vim-smoothie" },
   { "airblade/vim-gitgutter" },
   { "ray-x/lsp_signature.nvim" },
+  { "RRethy/vim-hexokinase", run = "make hexokinase" },
+  {
+    "max397574/colortils.nvim",
+    cmd = "Colortils",
+    config = function()
+      require("colortils").setup()
+    end,
+  },
   { "tree-sitter/tree-sitter-go" },
   { "t9md/vim-choosewin" },
   { "windwp/nvim-spectre" },
   { "MunifTanjim/eslint.nvim" },
   { "mitchellh/tree-sitter-proto" },
+  { "rcarriga/nvim-notify" },
+  { "ziontee113/color-picker.nvim",
+    config = function()
+      require("color-picker")
+    end,
+  },
   {
     "folke/zen-mode.nvim",
     config = function()
@@ -226,7 +243,11 @@ require 'lsp_signature'.setup({
   }
 })
 
-require 'hop'.setup({})
+require 'hop'.setup({
+  create_hl_autocmd = true,
+  uppercase_labels = false,
+  multi_windows = false
+})
 local hop = require('hop')
 local directions = require('hop.hint').HintDirection
 vim.keymap.set('', 'fw', function()
@@ -238,6 +259,12 @@ end, { remap = true, silent = true })
 vim.keymap.set('', 'fF', function()
   hop.hint_char1({ direction = directions.BEFORE_CURSOR })
 end, { remap = true, silent = true })
+
+
+require('telescope').load_extension('notify')
+require "notify".setup({
+  background_colour = white
+})
 
 require 'indent_blankline'.setup({
   show_current_context = true,
@@ -277,4 +304,4 @@ formatters.setup({
   { command = "rustfmt", filetypes = { "rust" } },
 })
 
-lvim.builtin.terminal.open_mapping = [[<C-t>]]
+require 'colortils'.setup({})
