@@ -131,17 +131,6 @@ lvim.builtin.treesitter.ensure_installed = {
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
-local hop = require('hop')
-local directions = require('hop.hint').HintDirection
-vim.keymap.set('', 'fw', function()
-  hop.hint_words()
-end, { remap = true, silent = true })
-vim.keymap.set('', 'ff', function()
-  hop.hint_char1({ direction = directions.AFTER_CURSOR })
-end, { remap = true, silent = true })
-vim.keymap.set('', 'fF', function()
-  hop.hint_char1({ direction = directions.BEFORE_CURSOR })
-end, { remap = true, silent = true })
 
 lvim.plugins = {
   { "tpope/vim-surround" },
@@ -238,6 +227,17 @@ require 'lsp_signature'.setup({
 })
 
 require 'hop'.setup({})
+local hop = require('hop')
+local directions = require('hop.hint').HintDirection
+vim.keymap.set('', 'fw', function()
+  hop.hint_words()
+end, { remap = true, silent = true })
+vim.keymap.set('', 'ff', function()
+  hop.hint_char1({ direction = directions.AFTER_CURSOR })
+end, { remap = true, silent = true })
+vim.keymap.set('', 'fF', function()
+  hop.hint_char1({ direction = directions.BEFORE_CURSOR })
+end, { remap = true, silent = true })
 
 require 'indent_blankline'.setup({
   show_current_context = true,
