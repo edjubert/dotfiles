@@ -276,3 +276,5 @@ local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
   { command = "rustfmt", filetypes = { "rust" } },
 })
+
+lvim.builtin.terminal.open_mapping = [[<C-t>]]
