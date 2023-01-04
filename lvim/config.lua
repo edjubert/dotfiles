@@ -107,6 +107,15 @@ lvim.builtin.which_key.mappings["t"] = {
   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
 }
 
+lvim.builtin.which_key.mappings["G"] = {
+  name = "Goto Preview",
+  d = { "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", "" },
+  t = { "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", "" },
+  i = { "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", "" },
+  c = { "<cmd>lua require('goto-preview').close_all_win()<CR>", "" },
+  r = { "<cmd>lua require('goto-preview').goto_preview_references()<CR>", "" },
+}
+
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
@@ -141,6 +150,7 @@ lvim.plugins = {
   { "tpope/vim-rhubarb" },
   { "f-person/git-blame.nvim" },
   { "danilamihailov/beacon.nvim" },
+  { "rmagatti/goto-preview" },
   { "psliwka/vim-smoothie" },
   { "airblade/vim-gitgutter" },
   { "ray-x/lsp_signature.nvim" },
@@ -305,6 +315,8 @@ local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
   { command = "rustfmt", filetypes = { "rust" } },
 })
+
+require 'goto-preview'.setup({})
 
 require 'colortils'.setup({})
 require("no-neck-pain").setup({
