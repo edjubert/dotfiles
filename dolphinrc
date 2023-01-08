@@ -11,7 +11,7 @@ eDP-1 Width 2048x1152=276
 ShowCopyMoveMenu=true
 
 [DetailsMode]
-PreviewSize=16
+PreviewSize=80
 
 [General]
 AutoExpandFolders=true

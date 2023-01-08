@@ -141,7 +141,7 @@ lvim.builtin.treesitter.ensure_installed = {
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
-lvim.builtin.treesitter.highlight.enabled = true
+-- lvim.builtin.treesitter.highlight.enabled = true
 
 
 lvim.plugins = {
@@ -318,7 +318,6 @@ formatters.setup({
 
 require 'goto-preview'.setup({})
 
-require 'colortils'.setup({})
 require("no-neck-pain").setup({
   -- Prints useful logs about what event are triggered, and reasons actions are executed.
   debug = false,
