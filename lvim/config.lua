@@ -53,6 +53,7 @@ vim.g.Hexokinase_highlighters = { "virtual", "foreground" }
 -- Neovide Special config
 vim.o.guifont = "Iosevka Nerd Font"
 vim.g.neovide_transparency = 0.3
+vim.o.relativenumber = true
 
 lvim.log.level = "warn"
 lvim.format_on_save = true
@@ -322,7 +323,7 @@ require("no-neck-pain").setup({
   -- Prints useful logs about what event are triggered, and reasons actions are executed.
   debug = false,
   -- When `true`, enables the plugin when you start Neovim.
-  enableOnVimEnter = false,
+  enableOnVimEnter = true,
   -- The width of the focused buffer when enabling NNP.
   -- If the available window size is less than `width`, the buffer will take the whole screen.
   width = 150,
