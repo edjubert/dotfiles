@@ -60,11 +60,6 @@ awful.rules.rules = {
     properties = { titlebars_enabled = true }
   },
 
-  -- Set Firefox to always map on the tag named "1" on screen 1.
-  {
-    rule = { class = "firefox" },
-    properties = { screen = 1, tag = "WEB" }
-  },
   {
     rule = { instance = "plugin-container" },
     roperties = { floating = true }
