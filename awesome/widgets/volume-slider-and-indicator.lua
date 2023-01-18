@@ -64,13 +64,13 @@ local slider_wrapped = wibox.widget {
 
 local update_volume_icon = function()
   awful.spawn.easy_async(
-    [[ sh -c "pacmd list-sinks | awk '/muted/ { print \$2 }'"]],
+    [[ sh -c "pamixer --get-mute"]],
     function(stdout)
-      if stdout:match("yes") then
+      if stdout:match("true") then
         icon:set_image(beautiful.volume_muted_icon)
         button:set_bg(beautiful.bg_button)
         panel_volume_indicator:set_image(beautiful.volume_muted_icon)
-      elseif stdout:match("no") then
+      elseif stdout:match("false") then
         icon:set_image(beautiful.volume_normal_icon)
         button:set_bg(beautiful.button_active)
         panel_volume_indicator:set_image(beautiful.volume_normal_icon)
@@ -81,7 +81,7 @@ end
 
 local toggle_mute = function()
   awful.spawn.easy_async(
-    'amixer -D pulse set Master 1+ toggle',
+    'pamixer -t',
     function(_)
       update_volume_icon()
     end
@@ -89,15 +89,14 @@ local toggle_mute = function()
 end
 
 local set_volume = function(vol)
-  awful.spawn.with_shell('amixer -D pulse sset Master ' .. vol .. '%')
+  awful.spawn.with_shell('pamixer --set-volume ' .. vol)
 end
 
 local update_volume = function()
   awful.spawn.easy_async_with_shell(
-    [[bash -c "amixer -D pulse sget Master"]],
+    [[bash -c "pamixer --get-volume"]],
     function(stdout)
-      local volume = string.match(stdout, '(%d?%d?%d)%%')
-      widget_slider.value = tonumber(volume)
+      widget_slider.value = tonumber(stdout)
     end
   )
 end

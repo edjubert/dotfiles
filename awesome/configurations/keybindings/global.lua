@@ -240,7 +240,7 @@ local globalkeys = gears.table.join(
   ),
 
   awful.key(
-    { super, ctrl },
+    { super, shift },
     keys.minimize,
     function()
       local c = awful.client.restore()
