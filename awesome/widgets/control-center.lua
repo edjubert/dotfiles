@@ -10,6 +10,7 @@ local btn_bg_container = require("widgets.button-active-container")
 local network_widget = require("widgets.buttons.network-button")
 local battery_widget = require("widgets.buttons.battery")
 local volume_widget = require("widgets.volume-slider-and-indicator")
+local brightness_widget = require("widgets.brightness-slider")
 
 local control_center = function(s)
   -- Widget to show on panel
@@ -179,12 +180,12 @@ local control_center = function(s)
     return t
   end
 
-  -- local slider_contols = wibox.widget{
-  -- 	layout = wibox.layout.fixed.vertical,
-  -- 	spacing = dpi(10),
-  -- 	volume_widget.slider,
-  -- 	require("widgets.brightness-slider"),
-  -- }
+  local slider_contols = wibox.widget {
+    layout = wibox.layout.fixed.vertical,
+    spacing = dpi(10),
+    volume_widget.slider,
+    brightness_widget
+  }
 
 
   local space = wibox.widget {
@@ -198,7 +199,7 @@ local control_center = function(s)
   table.insert(rows, session_widget())
   table.insert(rows, control_buttons)
   table.insert(rows, space)
-  -- table.insert(rows, slider_contols)
+  table.insert(rows, slider_contols)
 
   local notification_center = wibox.widget {
     require("widgets.noti-center"),
