@@ -169,7 +169,7 @@ theme.icon_system_restart = theme_path .. "icons/system/system-restart.svg"
 theme.icon_system_sleep = theme_path .. "icons/system/system-suspend.svg"
 theme.icon_system_screen_lock = theme_path .. "icons/system/system-lock-screen.svg"
 theme.icon_system_logout = theme_path .. "icons/system/system-log-out.svg"
-theme.face_image = theme_path .. "icons/system/default.png"
+theme.face_image = theme_path .. "icons/system/edjubert.png"
 
 theme.icon_bell = theme_path .. "icons/notifications.svg"
 theme.icon_lock = theme_path .. "icons/lock.svg"
