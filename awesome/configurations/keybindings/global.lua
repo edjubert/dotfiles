@@ -150,8 +150,8 @@ local globalkeys = gears.table.join(
     { description = "reload awesome", group = "awesome" }
   ),
   awful.key(
-    { super, shift },
-    "e",
+    { super },
+    "q",
     function()
       awesome.emit_signal('module::exit_screen:show')
     end,
