@@ -216,7 +216,7 @@ local control_center = function(s)
     visible = false,
     screen = s,
     placement = function(w)
-      awful.placement.bottom_right(w, {
+      awful.placement.top_right(w, {
         margins = {
           left = 0,
           bottom = 5,
@@ -231,7 +231,7 @@ local control_center = function(s)
     widget = wibox.container.background,
     bg = beautiful.bg_normal,
     shape = beautiful.widget_shape,
-    forced_height = popup_height,
+    max_height = popup_height,
     {
       rows,
       widget = wibox.container.margin,

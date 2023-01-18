@@ -38,7 +38,7 @@ local create_clock = function(s)
   }
 
 
-  local popup_height = s.geometry.height - (beautiful.wibar_height + dpi(10))
+  -- local popup_height = s.geometry.height - (beautiful.wibar_height + dpi(200))
   local time_format = "<span font='Ubuntu light 36'> %I:%M </span> "
   local date_formate = "<span font='Ubuntu bold 12'> %A, %B, %d </span>"
   local time = wibox.container.place(wibox.widget.textclock(time_format, 60))
@@ -59,7 +59,7 @@ local create_clock = function(s)
     bg = "#00000000",
     screen = s,
     placement = function(w)
-      awful.placement.bottom_right(w, {
+      awful.placement.top_right(w, {
         margins = { left = 0, bottom = 5, top = beautiful.wibar_height + dpi(5), right = dpi(5) }
       })
     end,
@@ -86,7 +86,7 @@ local create_clock = function(s)
         widget = wibox.container.margin,
       },
       bg = beautiful.bg_normal,
-      forced_height = popup_height,
+      -- forced_height = popup_height,
       shape = beautiful.widget_shape,
       widget = wibox.container.background
     }
