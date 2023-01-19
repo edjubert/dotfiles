@@ -50,6 +50,8 @@ vim.g.neovide_cursor_vfx_mode = "sonicboom"
 
 vim.g.Hexokinase_highlighters = { "virtual", "foreground" }
 
+
+lvim.transparent_window = true
 -- Neovide Special config
 vim.o.guifont = "Iosevka Nerd Font"
 vim.g.neovide_transparency = 0.3

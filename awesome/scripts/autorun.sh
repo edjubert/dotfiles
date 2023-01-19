@@ -10,7 +10,8 @@ run() {
 run dex --autostart --environment Awesome
 
 run /home/edjubert/.config/awesome/scripts/hotplug.sh
-run /usr/bin/picom --config /home/edjubert/.config/picom/picom.conf --backend glx
+# run /usr/bin/picom --config /home/edjubert/.config/picom/picom.conf --backend glx
+run /usr/bin/picom --config /home/edjubert/.config/awesome/configurations/picom.conf
 
 # run xinput set-prop "UNIW0001:00 093A:0255 Touchpad" "libinput Tapping Enabled" 1
 
