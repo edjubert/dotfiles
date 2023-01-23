@@ -14,10 +14,10 @@ bling.widget.tag_preview.enable {
   honor_padding = true,
   honor_workarea = true,
   placement_fn = function(c)
-    awful.placement.top(c, {
+    awful.placement.under_mouse(c, {
       margins = {
-        top = 30,
-        left = 10
+        top = 400,
+        -- left = 100
       }
     })
   end,

@@ -302,6 +302,11 @@ theme.tag_preview_widget_border_color = theme.border_normal -- The border color 
 theme.tag_preview_widget_border_width = theme.border_width -- The border width of the widget
 theme.tag_preview_widget_margin = 0
 
+theme.task_preview_widget_border_radius = 0 -- Border radius of the widget (With AA)
+theme.task_preview_widget_bg = "#000000" -- The bg color of the widget
+theme.task_preview_widget_border_color = theme.border_normal -- The border color of the widget
+theme.task_preview_widget_border_width = theme.border_width -- The border width of the widget
+theme.task_preview_widget_margin = 0
 
 return theme
 
