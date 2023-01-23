@@ -48,11 +48,15 @@ super = "Mod4"
 shift = "Shift"
 ctrl = "Control"
 
+local bling = require('bling')
+
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-  awful.layout.suit.tile,
+  bling.layout.equalarea,
+  bling.layout.centered,
+  bling.layout.mstab,
+  bling.layout.deck,
   awful.layout.suit.floating,
-  awful.layout.suit.max,
 }
 
 -- Set wallpaper
@@ -84,6 +88,7 @@ awful.screen.connect_for_each_screen(function(s)
     height = beautiful.wibar_height,
     bg = "#00000000"
   })
+
 
   -- Add widgets to the wibox
   s.mywibox:setup {

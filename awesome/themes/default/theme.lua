@@ -291,6 +291,18 @@ theme.awesome_icon = theme_assets.awesome_icon(
 
 theme.icon_theme = "Material-Originals-Icons-Blue-dark"
 
+theme.tag_preview_widget_border_radius = 0 -- Border radius of the widget (With AA)
+theme.tag_preview_client_border_radius = 0 -- Border radius of each client in the widget (With AA)
+theme.tag_preview_client_opacity = 0.5 -- Opacity of each client
+theme.tag_preview_client_bg = "#000000" -- The bg color of each client
+theme.tag_preview_client_border_color = theme.border_normal -- The border color of each client
+theme.tag_preview_client_border_width = theme.border_width -- The border width of each client
+theme.tag_preview_widget_bg = "#000000" -- The bg color of the widget
+theme.tag_preview_widget_border_color = theme.border_normal -- The border color of the widget
+theme.tag_preview_widget_border_width = theme.border_width -- The border width of the widget
+theme.tag_preview_widget_margin = 0
+
+
 return theme
 
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
