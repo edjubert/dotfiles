@@ -46,9 +46,12 @@ local control_center = function(s)
   --- Control buttons
   local button_row_1 = wibox.widget {
     network_widget.network_button,
-    require("widgets.buttons.dnd"),
-    require("widgets.buttons.redshift"),
-    require("widgets.buttons.airplane"),
+    -- require("widgets.buttons.dnd"),
+    -- require("widgets.buttons.redshift"),
+    -- require("widgets.buttons.airplane"),
+    require("widgets.buttons.bluetooth-button"),
+    require("widgets.buttons.global-floating-mode"),
+    require("widgets.buttons.screen-shot")(s),
     battery_widget.button,
     spacing = beautiful.widget_margin,
     layout = wibox.layout.fixed.horizontal
@@ -57,8 +60,8 @@ local control_center = function(s)
     require("widgets.buttons.bluetooth-button"),
     require("widgets.buttons.global-floating-mode"),
     require("widgets.buttons.screen-shot")(s),
-    require("widgets.buttons.microphone"),
-    require("widgets.buttons.software-update"),
+    -- require("widgets.buttons.microphone"),
+    -- require("widgets.buttons.software-update"),
     spacing = beautiful.widget_margin,
     layout = wibox.layout.fixed.horizontal
   }
@@ -70,10 +73,10 @@ local control_center = function(s)
         button_row_1,
         widget = wibox.container.place
       },
-      {
-        button_row_2,
-        widget = wibox.container.place
-      },
+      -- {
+      --   button_row_2,
+      --   widget = wibox.container.place
+      -- },
       spacing = beautiful.widget_margin * 2,
       layout = wibox.layout.fixed.vertical
     },

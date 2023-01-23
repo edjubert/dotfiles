@@ -9,13 +9,13 @@ local theme = {}
 -- Theme name, available values "dark" and "glassy"
 theme.mode = "glassy"
 -- Fonts
-theme.font = "Ubuntu 10"
-theme.font_bold = "Ubuntu 10"
-theme.font_large = "Ubuntu 12"
-theme.font_large_bold = "Ubuntu bold 12"
-theme.font_small = "Ubuntu 9"
-theme.font_extra_small = "Ubuntu 9"
-theme.taglist_font = "Ubuntu Nerd Font 12"
+theme.font = "JetBrains Mono Nerd Font 10"
+theme.font_bold = "JetBrains Mono Nerd Font 10"
+theme.font_large = "JetBrains Mono Nerd Font 12"
+theme.font_large_bold = "JetBrains Mono Nerd Font bold 12"
+theme.font_small = "JetBrains Mono Nerd Font 9"
+theme.font_extra_small = "JetBrains Mono Nerd Font 9"
+theme.taglist_font = "JetBrains Mono Nerd Font 12"
 
 -- Colors Definations
 local colors = {}
@@ -94,7 +94,7 @@ theme.useless_gap                      = dpi(10)
 theme.gap_single_client                = true
 theme.maximized_hide_border            = true
 theme.border_width                     = dpi(1)
-theme.button_panel_border_width        = dpi(0)
+theme.button_panel_border_width        = dpi(1)
 theme.button_panel_border_width_active = dpi(1)
 
 -- shapes
@@ -292,9 +292,9 @@ theme.awesome_icon = theme_assets.awesome_icon(
 theme.icon_theme = "Material-Originals-Icons-Blue-dark"
 
 theme.tag_preview_widget_border_radius = 5 -- Border radius of the widget (With AA)
-theme.tag_preview_client_border_radius = 5 -- Border radius of each client in the widget (With AA)
+theme.tag_preview_client_border_radius = 2 -- Border radius of each client in the widget (With AA)
 theme.tag_preview_client_opacity = 1 -- Opacity of each client
-theme.tag_preview_client_bg = "#00000000" -- The bg color of each client
+theme.tag_preview_client_bg = "#00000088" -- The bg color of each client
 theme.tag_preview_client_border_color = theme.border_normal -- The border color of each client
 theme.tag_preview_client_border_width = theme.border_width -- The border width of each client
 theme.tag_preview_widget_bg = "#00000000" -- The bg color of the widget

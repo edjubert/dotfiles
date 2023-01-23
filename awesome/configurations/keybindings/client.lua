@@ -25,7 +25,7 @@ local clientkeys = gears.table.join(
 
   -- Toggle floating
   awful.key(
-    { super, shift },
+    { super, alt },
     "space",
     awful.client.floating.toggle,
     { description = "toggle floating", group = "client" }

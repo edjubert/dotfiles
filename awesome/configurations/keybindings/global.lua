@@ -233,7 +233,7 @@ local globalkeys = gears.table.join(
 
   -- Previous layout
   awful.key(
-    { super, ctrl },
+    { super, shift },
     "space",
     function() awful.layout.inc(-1) end,
     { description = "select previous", group = "layout" }
@@ -279,7 +279,7 @@ local globalkeys = gears.table.join(
   -- My keybindings
   awful.key(
     { super },
-    "d",
+    "p",
     --function() awful.spawn("rofi -show drun -columns 2 -theme codeDark -no-show-icons") end
     function() awful.spawn(default_apps.app_menu, false) end,
     { description = "Application launcher", group = 'launcher' }
@@ -383,41 +383,7 @@ local globalkeys = gears.table.join(
     on_press = function()
       awful.util.spawn('flameshot gui')
     end
-  },
-  awful.key {
-    modifiers = { super },
-    key = 'a',
-    description = "Toggle systray",
-    group = 'awesome',
-    on_press = function()
-      awful.screen.focused().systray.visible = not awful.screen.focused().systray.visible
-    end
-  },
-  awful.key(
-    {},
-    'Print',
-    function()
-      awful.spawn.single_instance('scrot', false)
-    end,
-    { description = 'Display configuration', group = 'hotkeys' }
-  ),
-  awful.key(
-    { super, shift },
-    's',
-    function()
-      local c = client.focus
-      if c.sticky then
-        c.floating = not c.floating
-        c.sticky = not c.sticky
-        c.ontop = not c.ontop
-      else
-        c.sticky = true
-        c.floating = true
-        c.ontop = true
-      end
-    end,
-    { description = 'Toggle client sticky', group = 'client' }
-  )
+  }
 )
 
 return globalkeys

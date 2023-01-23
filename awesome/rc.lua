@@ -45,6 +45,7 @@ editor = os.getenv("EDITOR") or "lvim"
 editor_cmd = terminal .. " -e " .. editor
 
 super = "Mod4"
+alt = "Mod1"
 shift = "Shift"
 ctrl = "Control"
 
