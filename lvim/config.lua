@@ -50,12 +50,9 @@ vim.g.neovide_cursor_vfx_mode = "sonicboom"
 
 vim.g.Hexokinase_highlighters = { "virtual", "foreground" }
 
-
-lvim.transparent_window = false
 -- Neovide Special config
 vim.o.guifont = "Iosevka Nerd Font"
 vim.g.neovide_transparency = 0.3
-vim.o.relativenumber = true
 
 lvim.log.level = "warn"
 lvim.format_on_save = true
@@ -83,12 +80,15 @@ vim.api.nvim_command([[
   augroup END
 ]])
 
+
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 lvim.builtin.terminal.open_mapping = [[<C-t>]]
 
 -- Use which-key to add extra bindings with the leader-key prefix
-lvim.builtin.which_key.mappings["<space>"] = { "<cmd>ChooseWin<cr>", "Choose window" }
+-- lvim.builtin.which_key.mappings["<space>"] = { "<cmd>ChooseWin<cr>", "Choose window" }
+lvim.builtin.which_key.mappings["<space>"] = { "<cmd>lua local winid = require'winpick'.select(); if winid then vim.api.nvim_set_current_win(winid) end<cr>",
+  "Choose window" }
 lvim.builtin.which_key.mappings["n"] = {
   n = { "<cmd>bn<cr>", "Buffer next" },
 }
@@ -144,7 +144,7 @@ lvim.builtin.treesitter.ensure_installed = {
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
--- lvim.builtin.treesitter.highlight.enabled = true
+lvim.builtin.treesitter.highlight.enabled = true
 
 
 lvim.plugins = {
@@ -166,7 +166,8 @@ lvim.plugins = {
     end,
   },
   { "tree-sitter/tree-sitter-go" },
-  { "t9md/vim-choosewin" },
+  -- { "t9md/vim-choosewin" },
+  { "gbrlsnchs/winpick.nvim" },
   { "windwp/nvim-spectre" },
   { "MunifTanjim/eslint.nvim" },
   { "mitchellh/tree-sitter-proto" },
@@ -321,6 +322,7 @@ formatters.setup({
 
 require 'goto-preview'.setup({})
 
+require 'colortils'.setup({})
 require("no-neck-pain").setup({
   -- Prints useful logs about what event are triggered, and reasons actions are executed.
   debug = false,
@@ -447,5 +449,9 @@ BufferOptions = {
     list = false,
     wrap = true,
     linebreak = true,
+
   },
 }
+
+
+require 'winpick'.setup({})
