@@ -8,29 +8,28 @@ fi
 if [ "$@" ]
 then
   desc="$*"
-  device=$(pamixer --list-sources | awk '{split($0,a," "); print a[2]}' | awk '{gsub(/"/, "", $0); print $0}')
+  device=$(pamixer --list-sources | grep "$desc" | grep -v "monitor" | awk '{split($0,a," "); print a[2]}' | awk '{gsub(/"/, "", $0); print $0}')
   isAlready=$(echo "$desc" | grep "\->")
   if [ "$isAlready" != "" ]
   then
     exit 0
-  elif pactl set-default-source "$desc"
+  elif pactl set-default-source "$device"
   then
-    notify-send "Activated: $desc"
+    notify-send "Audio input changed to '$desc'"
   else
     notify-send "Error activating $desc"
   fi
 else
   echo -en "\x00prompt\x1fSelect Input\n"
   running=$(wpctl status | grep "Audio/Source" | awk '{split($0,a," "); print a[3]}')
-  for x in $(pamixer --list-sources | awk '{split($0,a," "); print a[2]}' | awk '{gsub(/"/, "", $0); print $0}')
+  for x in $(pamixer --list-sources | grep -v "monitor" | awk '{split($0,a," "); print a[2]}' | awk '{gsub(/"/, "", $0); print $0}')
   do
-    isMonitor=$(echo "$x" | grep "monitor")
+    name=$(pamixer --list-sources | grep "$x" | awk '{split($0,a," \""); print a[4]}' | awk '{gsub(/"/, "", $0);print $0}')
     if [ "$x" = "$running" ]
     then
-      echo "-> $x"
-    elif [ "$isMonitor" = "" ]
-    then
-      echo "$x"|xargs
+      echo "-> $name"
+    else
+      echo "$name"|xargs
     fi
   done
   echo "quit"

@@ -8,14 +8,14 @@ fi
 if [ "$@" ]
 then
   desc="$*"
-  device=$(pamixer --list-sinks | awk '{split($0,a," "); print a[2]}' | awk '{gsub(/"/, "", $0); print $0}')
+  device=$(pamixer --list-sinks | grep "$desc" | awk '{split($0,a," "); print a[2]}' | awk '{gsub(/"/, "", $0); print $0}')
   isAlready=$(echo "$desc" | grep "\->")
   if [ "$isAlready" != "" ]
   then
     exit 0
-  elif pactl set-default-sink "$desc"
+  elif pactl set-default-sink "$device"
   then
-    notify-send "Activated: $desc"
+    notify-send "Audio output changed to '$desc'"
   else
     notify-send "Error activating $desc"
   fi
@@ -24,11 +24,12 @@ else
   running=$(wpctl status | grep "Audio/Sink" | awk '{split($0,a," "); print a[3]}')
   for x in $(pamixer --list-sinks | awk '{split($0,a," "); print a[2]}' | awk '{gsub(/"/, "", $0);print $0}')
   do
+    name=$(pamixer --list-sinks | grep "$x" | awk '{split($0,a," \""); print a[4]}' | awk '{gsub(/"/, "", $0);print $0}')
     if [ "$x" = "$running" ]
     then
-      echo "-> $x"
+      echo "-> $name"
     else
-      echo "$x"|xargs
+      echo "$name"|xargs
     fi
   done
   echo "quit"
