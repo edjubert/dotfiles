@@ -1,5 +1,6 @@
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
+local beautiful = require("beautiful")
 local dpi = xresources.apply_dpi
 local gears = require("gears")
 local gfs = require("gears.filesystem")
@@ -273,6 +274,7 @@ theme.layout_floating   = theme_path .. "layouts/floating.svg"
 theme.layout_max        = theme_path .. "layouts/max.svg"
 theme.layout_fullscreen = theme_path .. "layouts/fullscreen.svg"
 theme.layout_tile       = theme_path .. "layouts/tile.svg"
+theme.layout_tileleft   = theme_path .. "layouts/tile.svg"
 theme.layout_dwindle    = theme_path .. "layouts/dwindle.svg"
 
 -- Hotkey popup
