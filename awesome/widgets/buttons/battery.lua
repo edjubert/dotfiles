@@ -36,7 +36,7 @@ local update_status = function()
     function(stdout)
       local state = str_split(stdout:gsub(",", ""), " ")
       local status = state[3]:gsub("%s+", "")
-      local charge = ''
+      local charge = "0"
       --
       -- This is required because sometime bad battery show "Not Charging"
       if status == "Not" then
@@ -58,17 +58,17 @@ local update_status = function()
         battery_panel_indicator:set_image(beautiful.battery_icon)
       end
 
-      charge = tonumber(charge)
-      if (charge >= 0 and charge < 15) then
-        -- Checking only for "Discharging" because sometimes staus can be "Unknown" and "Not changing"
-        -- and dont want to give notification for those status
-        if status ~= "Charging" and os.difftime(os.time(), last_battery_check) > 300 then
-          last_battery_check = os.time()
-          local msg = "Battery is criticaly low, save your work or plug adapter"
-          local title = "<b>Battery criticaly low</b>"
-          show_battery_notification(msg, title, beautiful.icon_bat_caution, 20)
-        end
-      end
+      -- charge = tonumber(charge)
+      -- if (charge >= 0 and charge < 15) then
+      --   -- Checking only for "Discharging" because sometimes staus can be "Unknown" and "Not changing"
+      --   -- and dont want to give notification for those status
+      --   if status ~= "Charging" and os.difftime(os.time(), last_battery_check) > 300 then
+      --     last_battery_check = os.time()
+      --     local msg = "Battery is criticaly low, save your work or plug adapter"
+      --     local title = "<b>Battery criticaly low</b>"
+      --     show_battery_notification(msg, title, beautiful.icon_bat_caution, 20)
+      --   end
+      -- end
     end
   )
 end

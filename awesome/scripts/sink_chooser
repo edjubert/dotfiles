@@ -1,0 +1,35 @@
+#!/bin/bash
+
+if [ "$*" = "quit" ]
+then
+  exit 0
+fi
+
+if [ "$@" ]
+then
+  desc="$*"
+  device=$(pamixer --list-sinks | awk '{split($0,a," "); print a[2]}' | awk '{gsub(/"/, "", $0); print $0}')
+  isAlready=$(echo "$desc" | grep "\->")
+  if [ "$isAlready" != "" ]
+  then
+    exit 0
+  elif pactl set-default-sink "$desc"
+  then
+    notify-send "Activated: $desc"
+  else
+    notify-send "Error activating $desc"
+  fi
+else
+  echo -en "\x00prompt\x1fSelect Output\n"
+  running=$(pamixer --list-sinks | grep "Running" | awk '{split($0,a," "); print a[2]}' | awk '{gsub(/"/, "", $0); print $0}')
+  for x in $(pamixer --list-sinks | awk '{split($0,a," "); print a[2]}' | awk '{gsub(/"/, "", $0);print $0}')
+  do
+    if [ "$x" = "$running" ]
+    then
+      echo "-> $x"
+    else
+      echo "$x"|xargs
+    fi
+  done
+  echo "quit"
+fi

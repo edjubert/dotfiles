@@ -383,6 +383,24 @@ local globalkeys = gears.table.join(
     on_press = function()
       awful.util.spawn('flameshot gui')
     end
+  },
+  awful.key {
+    modifiers = { super },
+    key = 'd',
+    description = "Choose audio sink",
+    group = 'audio',
+    on_press = function()
+      awful.util.spawn('rofi -modi "choose_sink:/home/edjubert/.config/awesome/scripts/sink_chooser" -show choose_sink')
+    end
+  },
+  awful.key {
+    modifiers = { super, shift },
+    key = 'd',
+    description = "Choose audio source",
+    group = 'audio',
+    on_press = function()
+      awful.util.spawn('rofi -modi "choose_source:/home/edjubert/.config/awesome/scripts/source_chooser" -show choose_source')
+    end
   }
 )
 
