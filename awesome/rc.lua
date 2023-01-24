@@ -53,6 +53,7 @@ local bling = require('bling')
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
+  awful.layout.suit.fair,
   bling.layout.equalarea,
   bling.layout.centered,
   bling.layout.mstab,
@@ -233,7 +234,7 @@ local function move_mouse_onto_focused_client()
 end
 
 client.connect_signal("focus", move_mouse_onto_focused_client)
-client.connect_signal("swapped", move_mouse_onto_focused_client)
+-- client.connect_signal("swapped", move_mouse_onto_focused_client)
 
 
 -- Set keys

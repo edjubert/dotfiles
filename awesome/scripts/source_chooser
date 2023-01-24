@@ -21,13 +21,15 @@ then
   fi
 else
   echo -en "\x00prompt\x1fSelect Input\n"
-  running=$(pamixer --list-sources | grep "Running" | awk '{split($0,a," "); print a[2]}' | awk '{gsub(/"/, "", $0); print $0}')
+  running=$(wpctl status | grep "Audio/Source" | awk '{split($0,a," "); print a[3]}')
   for x in $(pamixer --list-sources | awk '{split($0,a," "); print a[2]}' | awk '{gsub(/"/, "", $0); print $0}')
   do
+    isMonitor=$(echo "$x" | grep "monitor")
     if [ "$x" = "$running" ]
     then
       echo "-> $x"
-    else
+    elif [ "$isMonitor" = "" ]
+    then
       echo "$x"|xargs
     fi
   done

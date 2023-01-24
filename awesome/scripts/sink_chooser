@@ -21,7 +21,7 @@ then
   fi
 else
   echo -en "\x00prompt\x1fSelect Output\n"
-  running=$(pamixer --list-sinks | grep "Running" | awk '{split($0,a," "); print a[2]}' | awk '{gsub(/"/, "", $0); print $0}')
+  running=$(wpctl status | grep "Audio/Sink" | awk '{split($0,a," "); print a[3]}')
   for x in $(pamixer --list-sinks | awk '{split($0,a," "); print a[2]}' | awk '{gsub(/"/, "", $0);print $0}')
   do
     if [ "$x" = "$running" ]
