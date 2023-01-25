@@ -110,7 +110,7 @@ awful.screen.connect_for_each_screen(function(s)
       require("widgets.panel.taglist")(s),
       { -- Right widgets
         layout = wibox.layout.fixed.horizontal,
-        require("widgets.panel.systray-no-toggle")(),
+        -- require("widgets.panel.systray-no-toggle")(),
         require("widgets.panel.layoutbox")(s),
         require("widgets.clock")(s),
         require("widgets.control-center")(s),

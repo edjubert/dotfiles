@@ -22,7 +22,7 @@ bling.widget.tag_preview.enable {
     })
   end,
   background_widget = wibox.widget {
-    image = beautiful.wallpaper,
+    image = beautiful.wallpaper_blur,
     horizontal_fit_policy = "fit",
     vertical_fit_policy = "fit",
     widget = wibox.widget.imagebox

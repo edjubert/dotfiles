@@ -1,5 +1,5 @@
 configuration {
-	font:							      "Iosevka Nerd font 12";
+	font:							      "JetBrains Mono font 12";
   show-icons:             true;
   display-drun: 					"";
   drun-display-format:    "{name}";
@@ -12,7 +12,7 @@ configuration {
 * {
   background:             #11111199;
   background-alt:         #00000000;
-  background-bar:         #000000AA;
+  background-bar:         #88888800;
   foreground:             #ffffff;
 }
 
@@ -22,7 +22,7 @@ window {
   text-color:             @foreground;
 	border:							    0px;
 	border-color:					  @border;
-  border-radius:          0px;
+  border-radius:          5px;
 	width:							    80%;
 	height:                 80%;
 	anchor:                 center;
@@ -42,7 +42,7 @@ entry {
     placeholder-color:    @foreground;
     expand:               true;
     horizontal-align:     0;
-	  font:                 "Iosevka  light 10";
+	  font:                 "JetBrains Mono  light 10";
     placeholder:          "Type to search";
     padding:              0.30% 0% 0% 0.25%;
     blink:                true;
