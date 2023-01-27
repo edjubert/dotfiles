@@ -80,14 +80,14 @@ local plugins = {
 
   ["RRethy/vim-hexokinase"] = {
     override_options = overrides.vimhexokinase,
-    run = "make hexokinase"
+    run = "make hexokinase",
   },
 
   ["max397574/colortils.nvim"] = {
     override_options = overrides.colortils,
     cmd = "Colortils",
     config = function()
-      require'colortils'.setup()
+      require("colortils").setup()
     end,
   },
 
@@ -121,22 +121,109 @@ local plugins = {
 
   ["shortcuts/no-neck-pain.nvim"] = {
     override_options = overrides.noneckpain,
-    version = "*"
+    version = "*",
+    config = function()
+      require("no-neck-pain").setup {
+        debug = false,
+        enableOnVimEnter = true,
+        width = 200,
+        toogleMapping = "<leader>np",
+        disableOnLastBuffer = false,
+        killAllBuffersOnDisable = false,
+        buffers = {
+          setNames = false,
+          backgroundColor = nil,
+          blend = 0,
+          textColor = nil,
+          bo = {
+            filetype = "no-neck-pain",
+            buftype = "nofile",
+            bufhidden = "hide",
+            buflisted = false,
+            swapfile = false,
+          },
+          wo = {
+            cursorline = false,
+            cursorcolumn = false,
+            number = false,
+            relativenumber = false,
+            foldenable = false,
+            list = false,
+            wrap = true,
+            linebreak = true,
+          },
+          left = {
+            enabled = true,
+            backgroundColor = nil,
+            blend = 0,
+            textColor = nil,
+            bo = {
+              filetype = "no-neck-pain",
+              buftype = "nofile",
+              bufhidden = "hide",
+              buflisted = false,
+              swapfile = false,
+            },
+            wo = {
+              cursorline = false,
+              cursorcolumn = false,
+              number = false,
+              relativenumber = false,
+              foldenable = false,
+              list = false,
+              wrap = true,
+              linebreak = true,
+            },
+          },
+          right = {
+            enabled = true,
+            backgroundColor = nil,
+            blend = 0,
+            textColor = nil,
+            bo = {
+              filetype = "no-neck-pain",
+              buftype = "nofile",
+              bufhidden = "hide",
+              buflisted = false,
+              swapfile = false,
+            },
+            wo = {
+              cursorline = false,
+              cursorcolumn = false,
+              number = false,
+              relativenumber = false,
+              foldenable = false,
+              list = false,
+              wrap = true,
+              linebreak = true,
+            },
+          },
+        },
+        integrations = {
+          NvimTree = {
+            position = "left",
+          },
+          undotree = {
+            position = "left",
+          },
+        },
+      }
+    end,
   },
 
   ["phaazon/hop.nvim"] = {
     override_options = overrides.hop,
-    branch = 'v2',
+    branch = "v2",
     config = function()
-      require'hop'.setup()
-    end
+      require("hop").setup()
+    end,
   },
 
   ["folke/trouble.nvim"] = {
     override_options = overrides.trouble,
     config = function()
-      require'trouble'.setup()
-    end
+      require("trouble").setup()
+    end,
   },
 
   ["folke/which-key.nvim"] = {
@@ -145,13 +232,16 @@ local plugins = {
       vim.o.timeout = true
       vim.o.timeoutlen = 300
       require("which-key").setup {}
-    end
+    end,
   },
 
-  [ "lukas-reineke/indent-blankline.nvim"] = {
-    override_options = overrides.indentblankline
+  ["lukas-reineke/indent-blankline.nvim"] = {
+    override_options = overrides.indentblankline,
   },
 
+  ["kdheepak/lazygit.nvim"] = {
+    override_options = overrides.lazygitnvim,
+  },
 
   -- remove plugin
   -- ["hrsh7th/cmp-path"] = false,
