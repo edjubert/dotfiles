@@ -5,7 +5,7 @@ local M = {}
 M.general = {
 	n = {
 		[";"] = { ":", "enter command mode", opts = { nowait = true } },
-		["nf"] = { "<cmd>HopWord<CR>", "hop anywhere", opts = { nowait = true } },
+		["fw"] = { "<cmd>HopWord<CR>", "hop anywhere", opts = { nowait = true } },
 		["<leader>C"] = { "<cmd>NoNeckPain<CR>", "toggle NoNeckPain", opts = { nowait = true, silent = true } },
 		["<leader>gg"] = { "<cmd>LazyGit<CR>", "toggle LazyGit", opts = { nowait = true } },
 		["<leader>q"] = { "<cmd>q<CR>", "quit window", opts = { nowait = true } },
@@ -14,6 +14,20 @@ M.general = {
 		["<leader><space>"] = {
 			"<cmd>lua local winid = require'winpick'.select(); if winid then vim.api.nvim_set_current_win(winid) end<CR>",
 			"toggle winpick",
+			opts = { nowait = true },
+		},
+		["<leader>lj"] = {
+			function()
+				vim.diagnostic.goto_prev()
+			end,
+			"prev diagnostic",
+			opts = { nowait = true },
+		},
+		["<leader>ll"] = {
+			function()
+				vim.diagnostic.goto_prev()
+			end,
+			"prev diagnostic",
 			opts = { nowait = true },
 		},
 	},
