@@ -17,7 +17,6 @@ local sources = {
 
 	-- cpp
 	b.formatting.clang_format,
-	b.formatting.rustfm,
 }
 
 null_ls.setup({
