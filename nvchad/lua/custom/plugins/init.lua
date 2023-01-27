@@ -168,7 +168,7 @@ local plugins = {
 			require("no-neck-pain").setup({
 				debug = false,
 				enableOnVimEnter = true,
-				width = 200,
+				width = 150,
 				toogleMapping = "<leader>np",
 				disableOnLastBuffer = false,
 				killAllBuffersOnDisable = false,
