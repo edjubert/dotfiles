@@ -10,6 +10,7 @@ return {
   { "tree-sitter/tree-sitter-go" },
   { "windwp/nvim-spectre" },
   { "danilamihailov/beacon.nvim" },
+  { "phaazon/hop.nvim" },
   {
     "max397574/colortils.nvim",
     cmd = "Colortils",

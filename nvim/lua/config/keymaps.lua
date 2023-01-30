@@ -29,3 +29,7 @@ map("n", "<leader>ll", function()
 end, { desc = "Prev diagnostic" })
 map("n", "<leader>Ss", "<cmd>lua require'spectre'.open()<cr>", { desc = "Open Spectr" })
 map("n", "<leader>Sw", "<cmd>lua require'spectre'.open_visual()<cr>", { desc = "Open Spectr under current word" })
+
+map("n", "<leader>tf", "<cmd>Telescope find_file<cr>", { desc = "Find file" })
+map("n", "<leader>tt", "<cmd>Telescope live_grep<cr>", { desc = "Find in files" })
+map("n", "fw", "<cmd>HopWord<CR>", { desc = "Hop anywhere" })
