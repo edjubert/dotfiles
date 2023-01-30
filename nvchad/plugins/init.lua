@@ -235,6 +235,13 @@ local plugins = {
     end,
   },
 
+  ["folke/tokyonight.nvim"] = {
+    override_options = overrides.tokyonight,
+    config = function()
+      vim.cmd [[colorscheme tokyonight-night]]
+    end,
+  },
+
   ["folke/trouble.nvim"] = {
     override_options = overrides.trouble,
     config = function()

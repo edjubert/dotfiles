@@ -25,7 +25,7 @@ M.general = {
     },
     ["<leader>ll"] = {
       function()
-        vim.diagnostic.goto_prev()
+        vim.diagnostic.goto_next()
       end,
       "prev diagnostic",
       opts = { nowait = true },
