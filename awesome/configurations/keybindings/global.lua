@@ -401,6 +401,15 @@ local globalkeys = gears.table.join(
     on_press = function()
       awful.util.spawn('rofi -modi "choose_source:/home/edjubert/.config/awesome/scripts/source_chooser" -show choose_source')
     end
+  },
+  awful.key {
+    modifiers = { super },
+    key = 'c',
+    description = "Choose keyboard layout",
+    group = 'keyboard',
+    on_press = function()
+      awful.util.spawn('rofi -modi "choose_layout:/home/edjubert/.config/awesome/scripts/keyboardLayoutChooser" -show choose_layout')
+    end
   }
 )
 
