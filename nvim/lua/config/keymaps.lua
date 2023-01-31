@@ -30,8 +30,12 @@ end, { desc = "Prev diagnostic" })
 map("n", "<leader>Ss", "<cmd>lua require'spectre'.open()<cr>", { desc = "Open Spectr" })
 map("n", "<leader>Sw", "<cmd>lua require'spectre'.open_visual()<cr>", { desc = "Open Spectr under current word" })
 
-map("n", "<leader>tf", "<cmd>Telescope find_file<cr>", { desc = "Find file" })
+map("n", "<leader>tf", "<cmd>Telescope find_files<cr>", { desc = "Find file" })
 map("n", "<leader>tt", "<cmd>Telescope live_grep<cr>", { desc = "Find in files" })
+
+map("n", "bn", "<cmd>bnext<cr>", { desc = "Buffer next" })
+map("n", "bb", "<cmd>bprev<cr>", { desc = "Buffer prev" })
+
 map("n", "fw", "<cmd>HopWord<CR>", { desc = "Hop anywhere" })
 
 map({ "n", "v", "i" }, "<c-t>", "<cmd>ToggleTerm direction='float'<cr>", { desc = "toggle terminal" })

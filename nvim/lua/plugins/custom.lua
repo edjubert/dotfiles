@@ -3,8 +3,21 @@ return {
   { "tpope/vim-fugitive" },
   { "tpope/vim-rhubarb" },
   { "tpope/vim-commentary" },
+  {
+    "rmagatti/goto-preview",
+    config = function()
+      require("goto-preview").setup()
+    end,
+  },
   { "f-person/git-blame.nvim" },
   { "airblade/vim-gitgutter" },
+  {
+    "narutoxy/silicon.lua",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("silicon").setup()
+    end,
+  },
   { "gbrlsnchs/winpick.nvim" },
   { "simnalamburt/vim-mundo" },
   { "mitchellh/tree-sitter-proto" },
@@ -13,7 +26,6 @@ return {
   { "danilamihailov/beacon.nvim" },
   {
     "akinsho/toggleterm.nvim",
-    tag = "*",
     config = function()
       require("toggleterm").setup()
     end,
@@ -30,9 +42,5 @@ return {
     config = function()
       require("colortils").setup()
     end,
-  },
-  {
-    "RRethy/vim-hexokinase",
-    run = "make hexokinase",
   },
 }

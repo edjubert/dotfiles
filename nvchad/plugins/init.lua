@@ -91,7 +91,7 @@ local plugins = {
 
   ["RRethy/vim-hexokinase"] = {
     override_options = overrides.vimhexokinase,
-    run = "make hexokinase",
+    build = "make hexokinase",
   },
 
   ["max397574/colortils.nvim"] = {
