@@ -4,7 +4,7 @@ return {
     config = function()
       require("no-neck-pain").setup({
         debug = false,
-        enableOnVimEnter = false,
+        enableOnVimEnter = true,
         width = 150,
         toogleMapping = "<leader>np",
         disableOnLastBuffer = false,
