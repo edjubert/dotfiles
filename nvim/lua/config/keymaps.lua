@@ -33,8 +33,8 @@ map("n", "<leader>Sw", "<cmd>lua require'spectre'.open_visual()<cr>", { desc = "
 map("n", "<leader>tf", "<cmd>Telescope find_files<cr>", { desc = "Find file" })
 map("n", "<leader>tt", "<cmd>Telescope live_grep<cr>", { desc = "Find in files" })
 
-map("n", "bn", "<cmd>bnext<cr>", { desc = "Buffer next" })
-map("n", "bb", "<cmd>bprev<cr>", { desc = "Buffer prev" })
+map("n", "<leader>bn", "<cmd>bnext<cr>", { desc = "Buffer next" })
+map("n", "<leader>bb", "<cmd>bprev<cr>", { desc = "Buffer prev" })
 
 map("n", "fw", "<cmd>HopWord<CR>", { desc = "Hop anywhere" })
 
