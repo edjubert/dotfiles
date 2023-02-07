@@ -33,6 +33,7 @@ lvim.builtin.which_key.mappings["t"] = {
     q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
     l = { "<cmd>Trouble loclist<cr>", "LocationList" },
     w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
+    a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code actions" }
 }
 
 lvim.builtin.terminal.open_mapping = [[<C-t>]]
