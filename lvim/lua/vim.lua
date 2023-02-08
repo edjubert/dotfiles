@@ -13,6 +13,7 @@
 -- })
 
 vim.cmd([[ command! -nargs=1 Browse silent exec '!open "<args>"' ]])
+vim.cmd([[ set mousemodel=extend ]])
 vim.g.smoothie_experimental_mappings = true
 vim.api.nvim_command([[
   augroup transparentBackground
