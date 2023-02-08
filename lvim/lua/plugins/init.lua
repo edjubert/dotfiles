@@ -12,6 +12,7 @@ return {
         "folke/trouble.nvim",
         cmd = "TroubleToggle",
     },
+    { "folke/lsp-colors.nvim" },
     {
         "phaazon/hop.nvim",
         branch = 'v2',
