@@ -1,46 +1,25 @@
 return {
-    {
-        "max397574/colortils.nvim",
-        cmd = "Colortils",
-        config = function() require("colortils").setup() end
-    },
-    {
-        "shortcuts/no-neck-pain.nvim",
-        tag = "*"
-    },
-    {
-        "folke/trouble.nvim",
-        cmd = "TroubleToggle",
-    },
-    { "folke/lsp-colors.nvim" },
-    {
-        "folke/todo-comments.nvim",
-        requires = "nvim-lua/plenary.nvim",
-        config = function()
-          require("todo-comments").setup({})
-        end
-    },
-    {
-        "phaazon/hop.nvim",
-        branch = 'v2',
-    },
     { "tpope/vim-surround" },
     { "tpope/vim-fugitive" },
     { "tpope/vim-rhubarb" },
-    { "rmagatti/goto-preview" },
     { "f-person/git-blame.nvim" },
     { "airblade/vim-gitgutter" },
-    {
-        "narutoxy/silicon.lua",
-        dependencies = { "nvim-lua/plenary.nvim" },
-    },
     { "simnalamburt/vim-mundo" },
     { "mitchellh/tree-sitter-proto" },
     { "tree-sitter/tree-sitter-go" },
     { "windwp/nvim-spectre" },
     { "danilamihailov/beacon.nvim" },
-    { "MunifTanjim/eslint.nvim" },
-    { "gbrlsnchs/winpick.nvim" },
-    require('plugins.noice'),
-    require('plugins.rust-tools'),
+    require('plugins.installs.noice'),
+    require('plugins.installs.rust-tools'),
+    require('plugins.installs.no-neck-pain'),
+    require('plugins.installs.eslint'),
+    require('plugins.installs.twilight'),
+    require('plugins.installs.lsp-colors'),
+    require('plugins.installs.trouble'),
+    require('plugins.installs.colortils'),
+    require('plugins.installs.todo-comments'),
+    require('plugins.installs.hop-install'),
+    require('plugins.installs.silicon'),
+    require('plugins.installs.winpick'),
+    require('plugins.installs.goto-preview'),
 }

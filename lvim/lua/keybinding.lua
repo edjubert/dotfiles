@@ -62,11 +62,6 @@ lvim.builtin.which_key.mappings["G"] = {
 
 local hop = require('hop')
 local directions = require('hop.hint').HintDirection
-hop.setup({
-    create_hl_autocmd = true,
-    uppercase_labels = false,
-    multi_windows = false
-})
 
 vim.keymap.set('', 'fw', function() hop.hint_words() end, { remap = true, silent = true })
 vim.keymap.set('', 'ff', function() hop.hint_char1({ direction = directions.AFTER_CURSOR }) end,
