@@ -60,6 +60,19 @@ lvim.builtin.which_key.mappings["G"] = {
     r = { "<cmd>lua require('goto-preview').goto_preview_references()<CR>", "" },
 }
 
+lvim.builtin.which_key.mappings["z"] = {
+    name = "Persistance",
+    s = { "<cmd>lua require('persistence').load()<cr>", "Persistance load" },
+    l = { "<cmd>lua require('persistence').load({ last = true })<cr>", "Persistance load last" },
+    d = { "<cmd>lua require('persistence').stop()<cr>", "Persistance stop" },
+}
+
+lvim.builtin.which_key.mappings["m"] = {
+    name = "Markdown previewer (peek)",
+    o = { "<cmd>lua require('peek').open()<cr>", "Open preview" },
+    c = { "<cmd>lua require('peek').close()<cr>", "Close preview" }
+}
+
 local hop = require('hop')
 local directions = require('hop.hint').HintDirection
 

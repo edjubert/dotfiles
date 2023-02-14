@@ -1,3 +1,4 @@
+-- @class cava
 return {
     { "tpope/vim-surround" },
     { "tpope/vim-fugitive" },
@@ -9,6 +10,7 @@ return {
     { "tree-sitter/tree-sitter-go" },
     { "windwp/nvim-spectre" },
     { "danilamihailov/beacon.nvim" },
+    require('plugins.installs.hlslens'),
     require('plugins.installs.noice'),
     require('plugins.installs.rust-tools'),
     require('plugins.installs.no-neck-pain'),
@@ -22,4 +24,7 @@ return {
     require('plugins.installs.silicon'),
     require('plugins.installs.winpick'),
     require('plugins.installs.goto-preview'),
+    require('plugins.installs.persistance'),
+    require('plugins.installs.peek'),
+    require('plugins.installs.scrollbar'),
 }
