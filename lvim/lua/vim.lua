@@ -36,8 +36,3 @@ vim.api.nvim_command([[
 
 vim.opt.numberwidth = 3
 vim.opt.relativenumber = true
--- vim.opt.statuscolumn = "%=%{v:virtnum < 1 ? (v:relnum ? v:relnum : v:lnum < 10 ? v:lnum .'' : v:lnum) : ''}%=%s"
-
-vim.opt.list = true
--- vim.opt.listchars:append "space:⋅"
-vim.opt.listchars:append "eol:⋅"
