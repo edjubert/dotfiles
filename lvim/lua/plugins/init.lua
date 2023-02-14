@@ -14,6 +14,13 @@ return {
     },
     { "folke/lsp-colors.nvim" },
     {
+        "folke/todo-comments.nvim",
+        requires = "nvim-lua/plenary.nvim",
+        config = function()
+          require("todo-comments").setup({})
+        end
+    },
+    {
         "phaazon/hop.nvim",
         branch = 'v2',
     },

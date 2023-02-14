@@ -17,3 +17,7 @@ lvim.builtin.telescope.pickers.find_files.previewer = nil
 lvim.builtin.telescope.pickers.git_files.previewer = nil
 lvim.builtin.telescope.defaults.layout_strategy = "horizontal"
 lvim.builtin.telescope.defaults.layout_config.width = 0.8
+
+-- equire('telescope.builtin').find_files({ layout_strategy = 'vertical', layout_config = { width = 0.5 } })
+-- lua
+-- require('telescope.builtin').find_files({ layout_strategy = 'vertical', layout_config = { width = 0.5 } })
