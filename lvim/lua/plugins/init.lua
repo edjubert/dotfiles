@@ -1,4 +1,3 @@
--- @class cava
 return {
     { "tpope/vim-surround" },
     { "tpope/vim-fugitive" },
@@ -27,4 +26,5 @@ return {
     require('plugins.installs.persistance'),
     require('plugins.installs.peek'),
     require('plugins.installs.scrollbar'),
+    require('plugins.installs.mini-indentscope'),
 }
