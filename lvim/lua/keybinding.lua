@@ -33,7 +33,8 @@ lvim.builtin.which_key.mappings["t"] = {
     q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
     l = { "<cmd>Trouble loclist<cr>", "LocationList" },
     w = { "<cmd>Trouble workspace_diagnostics<cr>", "Workspace Diagnostics" },
-    a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code actions" }
+    a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code actions" },
+    t = { "<cmd>TroubleToggle<cr>", "Toggle Trouble" }
 }
 
 lvim.builtin.terminal.open_mapping = [[<C-t>]]
@@ -42,7 +43,9 @@ lvim.builtin.which_key.mappings["<space>"] = {
     "<cmd>lua local winid = require'winpick'.select(); if winid then vim.api.nvim_set_current_win(winid) end<cr>",
     "Choose window" }
 lvim.builtin.which_key.mappings["n"] = {
+    name = "Buffer next, no neck pain and close notifications",
     n = { "<cmd>bn<cr>", "Buffer next" },
+    c = { "<cmd>lua require('notify').dismiss()<cr>", "Close all notifications" }
 }
 lvim.builtin.which_key.mappings["S"] = {
     name = "+Spectre",
@@ -50,7 +53,6 @@ lvim.builtin.which_key.mappings["S"] = {
     w = { "<cmd>lua require('spectre').open_visual({ select_word=true })<CR>", "Search current word" },
     p = { "viw:lua require('spectre').open_file_search()<CR>", "Search in file" }
 }
-lvim.builtin.which_key.mappings["C"] = { "<cmd>NoNeckPain<CR>", "Center buffer" }
 lvim.builtin.which_key.mappings["G"] = {
     name = "Goto Preview",
     d = { "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", "" },
