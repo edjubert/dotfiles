@@ -6,6 +6,16 @@ local default_apps = require("configurations.default-apps")
 local keys = require("configurations.keybindings.keys")
 require("awful.autofocus")
 
+local function move_mouse_onto_focused_client()
+  local c = client.focus
+  if c then
+    local geometry = c:geometry()
+    local x = geometry.x + geometry.width / 2
+    local y = geometry.y + geometry.height / 2
+    mouse.coords({ x = x, y = y }, true)
+  end
+end
+
 local notifyPlayerctl = function()
   awful.spawn.easy_async_with_shell('playerctl metadata --format "{{ mpris:artUrl }}"', function(artUrl)
     awful.spawn.easy_async_with_shell(
@@ -59,10 +69,12 @@ local globalkeys = gears.table.join(
   -- Focus client
   awful.key({ super }, keys.down, function()
     awful.client.focus.byidx(1)
+    move_mouse_onto_focused_client()
   end, { description = "focus next by index", group = "client" }),
   awful.key({ super }, "Right", awful.tag.viewnext, { description = "focus next by index", group = "client" }),
   awful.key({ super }, keys.up, function()
     awful.client.focus.byidx(-1)
+    move_mouse_onto_focused_client()
   end, { description = "focus previous by index", group = "client" }),
   awful.key({ super }, "Left", awful.tag.viewprev, { description = "focus previous by index", group = "client" }),
   -- Relative focus
