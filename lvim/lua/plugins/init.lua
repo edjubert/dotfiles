@@ -29,4 +29,5 @@ return {
   require('plugins.installs.mini-indentscope'),
   -- require('plugins.installs.mini-animate'),
   require('plugins.installs.mini-trailspace'),
+  require('plugins.installs.alpha-nvim'),
 }
