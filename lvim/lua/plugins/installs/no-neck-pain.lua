@@ -47,7 +47,7 @@ return {
     local noNeckPain = require('no-neck-pain')
     noNeckPain.setup({
       debug = false,
-      enableOnVimEnter = true,
+      enableOnVimEnter = false,
       width = 150,
       toggleMapping = "<Leader>np",
       disableOnLastBuffer = false,

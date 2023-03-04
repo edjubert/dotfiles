@@ -17,69 +17,69 @@
 -- - rose-pine-dawn
 
 local BufferOptions = {
-    enabled = true,
-    backgroundColor = nil,
-    blend = 0,
-    textColor = nil,
-    bo = {
-        filetype = "no-neck-pain",
-        buftype = "nofile",
-        bufhidden = "hide",
-        buflisted = false,
-        swapfile = false,
-    },
-    wo = {
-        cursorline = false,
-        cursorcolumn = false,
-        number = false,
-        relativenumber = false,
-        foldenable = false,
-        list = false,
-        wrap = true,
-        linebreak = true,
+  enabled = true,
+  backgroundColor = nil,
+  blend = 0,
+  textColor = nil,
+  bo = {
+    filetype = "no-neck-pain",
+    buftype = "nofile",
+    bufhidden = "hide",
+    buflisted = false,
+    swapfile = false,
+  },
+  wo = {
+    cursorline = false,
+    cursorcolumn = false,
+    number = false,
+    relativenumber = false,
+    foldenable = false,
+    list = false,
+    wrap = true,
+    linebreak = true,
 
-    },
+  },
 }
 
 local noNeckPain = require('no-neck-pain')
 noNeckPain.setup({
-    debug = false,
-    enableOnVimEnter = true,
-    width = 150,
-    toggleMapping = "<Leader>np",
-    disableOnLastBuffer = false,
-    killAllBuffersOnDisable = false,
-    buffers = {
-        setNames = false,
-        backgroundColor = nil,
-        blend = 0,
-        textColor = nil,
-        bo = {
-            filetype = "no-neck-pain",
-            buftype = "nofile",
-            bufhidden = "hide",
-            buflisted = false,
-            swapfile = false,
-        },
-        wo = {
-            cursorline = false,
-            cursorcolumn = false,
-            number = false,
-            relativenumber = false,
-            foldenable = false,
-            list = false,
-            wrap = true,
-            linebreak = true,
-        },
-        left = BufferOptions,
-        right = BufferOptions,
+  debug = false,
+  enableOnVimEnter = false,
+  width = 150,
+  toggleMapping = "<Leader>np",
+  disableOnLastBuffer = false,
+  killAllBuffersOnDisable = false,
+  buffers = {
+    setNames = false,
+    backgroundColor = nil,
+    blend = 0,
+    textColor = nil,
+    bo = {
+      filetype = "no-neck-pain",
+      buftype = "nofile",
+      bufhidden = "hide",
+      buflisted = false,
+      swapfile = false,
     },
-    integrations = {
-        NvimTree = {
-            position = "left",
-        },
-        undotree = {
-            position = "left",
-        },
+    wo = {
+      cursorline = false,
+      cursorcolumn = false,
+      number = false,
+      relativenumber = false,
+      foldenable = false,
+      list = false,
+      wrap = true,
+      linebreak = true,
     },
+    left = BufferOptions,
+    right = BufferOptions,
+  },
+  integrations = {
+    NvimTree = {
+      position = "left",
+    },
+    undotree = {
+      position = "left",
+    },
+  },
 })
