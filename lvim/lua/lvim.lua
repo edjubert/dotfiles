@@ -11,7 +11,7 @@ lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.renderer.icons.show.git = false
 
 
-lvim.builtin.telescope.pickers.find_files.previewer = nil
-lvim.builtin.telescope.pickers.git_files.previewer = nil
+lvim.builtin.telescope.pickers.find_files.previewer = true
+lvim.builtin.telescope.pickers.git_files.previewer = true
 lvim.builtin.telescope.defaults.layout_strategy = "horizontal"
 lvim.builtin.telescope.defaults.layout_config.width = 0.8
