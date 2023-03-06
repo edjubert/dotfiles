@@ -27,6 +27,7 @@ return {
   require('plugins.installs.peek'),
   require('plugins.installs.scrollbar'),
   require('plugins.installs.mini-indentscope'),
+  require('plugins.installs.telescope'),
   -- require('plugins.installs.mini-animate'),
   require('plugins.installs.mini-trailspace'),
   require('plugins.installs.alpha-nvim'),
