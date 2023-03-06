@@ -23,7 +23,9 @@ return {
     local BufferOptions = {
       enabled = true,
       backgroundColor = nil,
-      blend = 0,
+      colors = {
+        blend = 0,
+      },
       textColor = nil,
       bo = {
         filetype = "no-neck-pain",
@@ -47,15 +49,21 @@ return {
     local noNeckPain = require('no-neck-pain')
     noNeckPain.setup({
       debug = false,
-      enableOnVimEnter = false,
+      autoCmd = {
+        enableOnVimEnter = false,
+      },
       width = 150,
-      toggleMapping = "<Leader>np",
+      mappings = {
+        mapping = "<Leader>np"
+      },
       disableOnLastBuffer = false,
       killAllBuffersOnDisable = false,
       buffers = {
         setNames = false,
         backgroundColor = nil,
-        blend = 0,
+        colors = {
+          blend = 0,
+        },
         textColor = nil,
         bo = {
           filetype = "no-neck-pain",
