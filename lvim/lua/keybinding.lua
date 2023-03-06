@@ -1,7 +1,7 @@
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 -- unmap a default keymapping
--- vim.keymap.del("n", "<C-Up>")
+-- vim.keymap.del("n", "<space>f")
 -- override a default keymapping
 -- lvim.keys.normal_mode["<C-q>"] = ":q<cr>" -- or vim.keymap.set("n", "<C-q>", ":q<cr>" )
 
@@ -22,6 +22,36 @@ lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
 --     ["<C-k>"] = actions.move_selection_previous,
 --   },
 -- }
+-- ~/.config/lvim/config.lua
+lvim.builtin.telescope.defaults.prompt_prefix = "  "
+lvim.builtin.telescope.defaults.borderchars = {
+  prompt = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+  results = { "─", "▐", "─", "│", "╭", "▐", "▐", "╰" },
+  preview = { " ", "│", " ", "▌", "▌", "╮", "╯", "▌" },
+}
+lvim.builtin.telescope.defaults.selection_caret = "  "
+lvim.builtin.telescope.defaults.layout_config = {
+  width = 0.90,
+  height = 0.85,
+  preview_cutoff = 120,
+  prompt_position = "bottom",
+  horizontal = {
+    preview_width = function(_, cols, _)
+      return math.floor(cols * 0.6)
+    end,
+  },
+  vertical = {
+    width = 0.9,
+    height = 0.95,
+    preview_height = 0.5,
+  },
+  flex = {
+    horizontal = {
+      preview_width = 0.9,
+    },
+  },
+}
+lvim.builtin.telescope.defaults.layout_strategy = "horizontal"
 
 -- Use which-key to add extra bindings with the leader-key prefix
 lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
@@ -83,3 +113,4 @@ vim.keymap.set('', 'ff', function() hop.hint_char1({ direction = directions.AFTE
   { remap = true, silent = true })
 vim.keymap.set('', 'fF', function() hop.hint_char1({ direction = directions.BEFORE_CURSOR }) end,
   { remap = true, silent = true })
+vim.keymap.set('', ';', ":")

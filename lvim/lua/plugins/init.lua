@@ -9,6 +9,15 @@ return {
   { "tree-sitter/tree-sitter-go" },
   { "windwp/nvim-spectre" },
   { "danilamihailov/beacon.nvim" },
+  {
+    "LunarVim/lvim-themes",
+    config = function()
+      require('lvim-themes').setup {
+        theme = "flat",
+        telescope = { set_highlights = false },
+      }
+    end
+  },
   require('plugins.installs.hlslens'),
   require('plugins.installs.noice'),
   require('plugins.installs.rust-tools'),
