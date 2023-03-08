@@ -15,3 +15,5 @@ lvim.builtin.telescope.pickers.find_files.previewer = true
 lvim.builtin.telescope.pickers.git_files.previewer = true
 lvim.builtin.telescope.defaults.layout_strategy = "horizontal"
 lvim.builtin.telescope.defaults.layout_config.width = 0.8
+
+lvim.builtin.lualine.options.globalstatus = true
