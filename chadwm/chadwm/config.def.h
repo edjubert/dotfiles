@@ -302,10 +302,10 @@ static const Key keys[] = {
  * ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
     /* click                event mask      button          function argument */
-    {ClkLtSymbol, 0, Button1, setlayout, {0}},
-    {ClkLtSymbol, 0, Button3, setlayout, {.v = &layouts[2]}},
-    {ClkWinTitle, 0, Button2, zoom, {0}},
-    {ClkStatusText, 0, Button2, spawn, SHCMD("alacritty")},
+    {ClkLtSymbol, 0, Button1, cyclelayout, {.i = +1}},
+    {ClkLtSymbol, 0, Button3, cyclelayout, {.i = -1}},
+    {ClkWinTitle, 0, Button3, zoom, {0}},
+    {ClkStatusText, 0, Button3, spawn, SHCMD("alacritty")},
 
     /* Keep movemouse? */
     /* { ClkClientWin,         MODKEY,         Button1,        movemouse, {0} },
