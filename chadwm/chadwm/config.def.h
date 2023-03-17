@@ -46,14 +46,7 @@ static const char *mutevol[] = {"pamixer", "-t", NULL};
 static const char *playvol[] = {"pamixer", "play-pause", NULL};
 static const char *nextvol[] = {"pamixer", "next", NULL};
 static const char *prevvol[] = {"pamixer", "previous", NULL};
-// static const char *upvol[] = {"/usr/bin/pactl", "set-sink-volume", "0",
-// "+5%",
-//                               NULL};
-// static const char *downvol[] = {"/usr/bin/pactl", "set-sink-volume", "0",
-// "-5%",
-//                                 NULL};
-// static const char *mutevol[] = {"/usr/bin/pactl", "set-sink-mute", "0",
-//                                 "toggle", NULL};
+
 static const char *light_up[] = {"/usr/bin/light", "-A", "5", NULL};
 static const char *light_down[] = {"/usr/bin/light", "-U", "5", NULL};
 static const int new_window_attach_on_end =
@@ -161,12 +154,8 @@ static const Layout layouts[] = {
     .v = (const char *[]) { "/bin/sh", "-c", cmd, NULL }                       \
   }
 
-/* commands */
-
 static const Key keys[] = {
     /* modifier                         key         function        argument */
-
-    // brightness and audio
     {0, XF86XK_AudioLowerVolume, spawn, {.v = downvol}},
     {0, XF86XK_AudioMute, spawn, {.v = mutevol}},
     {0, XF86XK_AudioRaiseVolume, spawn, {.v = upvol}},
@@ -176,11 +165,6 @@ static const Key keys[] = {
     {0, XF86XK_MonBrightnessUp, spawn, {.v = light_up}},
     {0, XF86XK_MonBrightnessDown, spawn, {.v = light_down}},
 
-    // screenshot fullscreen and cropped
-    // {MODKEY | ControlMask, XK_u, spawn,
-    //  SHCMD("maim | xclip -selection clipboard -t image/png")},
-    // {MODKEY, XK_u, spawn,
-    //  SHCMD("maim --select | xclip -selection clipboard -t image/png")},
     {MODKEY, XK_u, spawn, SHCMD("flameshot gui")},
 
     {MODKEY, XK_p, spawn, SHCMD("rofi -show drun")},
