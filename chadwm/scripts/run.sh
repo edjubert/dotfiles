@@ -20,6 +20,7 @@ run xss-lock --transfer-sleep-lock -- i3lock --blur 5 --screen 1 --indicator --t
 run nm-applet
 run greenclip daemon
 run dunst
+run eww daemon
 # feh --bg-fill /home/edjubert/Workspace/dotfiles/Wallpapers/hiking_in_space.jpg
 
 ~/.config/chadwm/scripts/bar.sh &
