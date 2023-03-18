@@ -86,10 +86,12 @@ static char *tags[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
 
 static const char *eww[] = {"/home/edjubert/.config/eww/dashboard/dashboard",
                             NULL};
+static const char *launcher[] = {"rofi", "-show", "drun", NULL};
 
 static const Launcher launchers[] = {
     /* command     name to display */
     {eww, ""},
+    {launcher, ""},
 };
 
 static const int tagschemes[] = {SchemeTag1, SchemeTag2, SchemeTag3,
@@ -168,6 +170,8 @@ static const Key keys[] = {
     {MODKEY, XK_u, spawn, SHCMD("flameshot gui")},
 
     {MODKEY, XK_p, spawn, SHCMD("rofi -show drun")},
+    {MODKEY, XK_r, spawn, SHCMD("rofi -show run")},
+    {MODKEY, XK_Escape, spawn, SHCMD("rofi -show window")},
     {MODKEY, XK_Return, spawn, SHCMD("alacritty")},
     {MODKEY, XK_w, spawn, SHCMD("brave")},
     {MODKEY, XK_a, spawn,

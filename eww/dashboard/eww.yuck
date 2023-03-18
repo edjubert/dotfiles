@@ -57,8 +57,7 @@
 
 ;; background
 (defwidget bg [] 
-	(box :class "bg")
-)
+	(box :class "bg"))
 
 ;; profile
 (defwidget user [] 
@@ -179,7 +178,8 @@
 		(button :class "btn_logout" :onclick "killall bar.sh dwm" "")))
 (defwidget sleep [] 
 	(box :class "genwin" :vexpand "false" :hexpand "false" 
-		(button :class "btn_sleep" :onclick "systemctl suspend" "󰒲")))
+		(button :class "btn_sleep" :onclick "/home/edjubert/.config/eww/dashboard/dashboard" "")))
+		;; (button :class "btn_sleep" :onclick "systemctl suspend" "󰒲")))
 (defwidget reboot [] 
 	(box :class "genwin" :vexpand "false" :hexpand "false" 
 		(button :class "btn_reboot" :onclick "systemctl reboot" "")))
@@ -223,8 +223,11 @@
 
 
 ;; background
-(defwindow background :stacking "fg" :focusable "false" :screen 1 
-	    :geometry (geometry :x 0 :y 0 :width "2560px" :height "1440px")
+(defwindow background
+      ;; :monitor 1 
+      :focusable "false"
+	    :geometry (geometry :x 0 :y 0 :width "5120px" :height "1440px")
+      :stacking "fg"
 					(bg))
 
 ;; profile
@@ -303,12 +306,12 @@
 					(reboot))
 
 ;; sleep
-(defwindow sleep :stacking "fg" :focusable "false" :screen 1 
-	    :geometry (geometry :x 880 :y 630 :width 155 :height 140)
+(defwindow sleep :stacking "fg" :focusable "false" :screen 1
+	    :geometry (geometry :x 880 :y 790 :width 155 :height 140)
 					(sleep))
 ;; lock
 (defwindow lock :stacking "fg" :focusable "false" :screen 1 
-	    :geometry (geometry :x 880 :y 790 :width 155 :height 140)
+	    :geometry (geometry :x 880 :y 630 :width 155 :height 140)
 					(lock))
 
 ;; folders
