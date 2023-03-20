@@ -17,7 +17,7 @@ static const unsigned int gappov =
 static const int smartgaps =
     0; /* 1 means no outer gap when there is only one window */
 static const unsigned int systraypinning =
-    1; /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor
+    2; /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor
           X */
 static const unsigned int systrayspacing = 8; /* systray spacing */
 static const int systraypinningfailfirst =
