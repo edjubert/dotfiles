@@ -1,11 +1,12 @@
+
 /* Notification center */
 
 .blurredBG, #main_window, .blurredBG.low, .blurredBG.normal {
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(36, 40, 59, 0.8);
 }
 
 .noti-center.time {
-    font-size: 32px;
+    font-size: 40px;
 }
 
 /* Notifications */
@@ -24,33 +25,34 @@
 }
 
 .blurredBG.notification {
-    border-radius: 10px;
-    background:  rgba(255, 255, 255, 0.4);
+    /* background:  rgba(125, 207, 255, 0.8); */
+    background:  rgba(36, 40, 59, 0.8);
 }
 
 .blurredBG.notification.critical {
-    background: rgba(255, 0, 0, 0.5);
+    background: rgba(247, 110, 142, 0.7);
 }
 
 .notificationInCenter.critical {
-    background: rgba(155, 0, 20, 0.5);
+    /* background: rgba(155, 0, 20, 0.5); */
+    background: rgba(247, 118, 142, 0.5);
 }
 
 /* Labels */
 
 label {
-    color: #322;
+    color: #a9b1d6;
 }
 
 label.notification {
-    color: #322;
+    color: #c0caf5;
 }
 
 label.critical {
-    color: #000;
+    color: #1d202f;
 }
 .notificationInCenter label.critical {
-    color: #000;
+    color: #a9b1d6;
 }
 
 
@@ -58,7 +60,7 @@ label.critical {
 
 button {
     background: transparent;
-    color: #322;
+    color: #a9b1d6;
     border-radius: 3px;
     border-width: 0px;
     background-position: 0px 0px;
@@ -67,28 +69,27 @@ button {
 
 button:hover {
     border-radius: 3px;
-    background: rgba(0, 20, 20, 0.2);
+    background: rgba(168,177,214, 0.2);
     border-width: 0px;
     border-top: transparent;
     border-color: #f00;
-    color: #fee;
+    color: #c0caf5;
 }
 
 
 /* Custom Buttons */
 
 .userbutton {
-    background: rgba(20,0,0, 0.15);
-    border-radius: 5px;
+    background: rgba(168,177,214, 0.15);
 }
 
 .userbuttonlabel {
-    color: #222;
+    color: #c0caf5;
     font-size: 12px;
 }
 
 .userbutton:hover {
-    background: rgba(20, 0, 0, 0.2);
+    background: rgba(168,177,214, 0.2);
 }
 
 .userbuttonlabel:hover {
@@ -96,7 +97,7 @@ button:hover {
 }
 
 button.buttonState1 {
-    background: rgba(20,0,0,0.5);
+    background: rgba(168,177,214, 0.5);
 }
 
 .userbuttonlabel.buttonState1 {
@@ -104,7 +105,7 @@ button.buttonState1 {
 }
 
 button.buttonState1:hover {
-    background: rgba(20,0,0, 0.4);
+    background: rgba(168,177,214, 0.4);
 }
 
 .userbuttonlabel.buttonState1:hover {
@@ -120,7 +121,7 @@ button.buttonState2 {
 }
 
 button.buttonState2:hover {
-    background: rgba(20,0,0, 0.3);
+    background: rgba(168,177,214, 0.3);
 }
 
 .userbuttonlabel.buttonState2:hover {
@@ -131,6 +132,5 @@ button.buttonState2:hover {
 /* Images */
 
 image.deadd-noti-center.notification.image {
-    margin-left: 20px;
-    border-radius: 10px;
+    margin-left: 15px;
 }
