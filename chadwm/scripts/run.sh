@@ -11,7 +11,7 @@ xrdb merge ~/.Xresources
 xbacklight -set 10 &
 xset r rate 200 50 &
 # picom &
-picom --config /home/edjubert/.config/awesome/configurations/picom.conf &
+picom --config /home/edjubert/.config/awesome/configurations/picom.conf --experimental-backend &
 
 run dex --autostart --environment dwm
 run /home/edjubert/.config/awesome/scripts/hotplug.sh
