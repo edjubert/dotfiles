@@ -85,7 +85,7 @@ static const char *colors[][3] = {
 static char *tags[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
 
 static const char *notif[] = {
-    "/home/edjubert/.config/chadwm/scripts/toggle_notification_center", NULL};
+    "/home/edjubert/.config/dwm/scripts/toggle_notification_center", NULL};
 static const char *launcher[] = {"rofi", "-show", "drun", NULL};
 
 static const Launcher launchers[] = {
@@ -181,7 +181,7 @@ static const Key keys[] = {
     {MODKEY | ShiftMask, XK_v, spawn,
      SHCMD("rofi -modi \"clipboard:greenclip print\" -show clipboard "
            "-run-command \"{cmd}\" --config "
-           "/home/edjubert/.config/chadwm/rofi/config.rasi")},
+           "/home/edjubert/.config/dwm/rofi/config.rasi")},
     {MODKEY, XK_d, spawn,
      SHCMD("rofi -modi "
            "\"choose_sink:/home/edjubert/.config/awesome/scripts/"

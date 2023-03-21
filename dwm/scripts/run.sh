@@ -23,5 +23,5 @@ run deadd-notification-center
 run eww daemon
 # feh --bg-fill /home/edjubert/Workspace/dotfiles/Wallpapers/hiking_in_space.jpg
 
-~/.config/chadwm/scripts/bar.sh &
+~/.config/dwm/scripts/bar.sh &
 while type dwm >/dev/null; do dwm && continue || break; done
