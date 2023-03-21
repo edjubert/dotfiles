@@ -1,9 +1,9 @@
 ### Margins for notification-center/notifications
-margin-top: 0
-margin-right: 0
+margin-top: 10
+margin-right: 10
 
 ### Margins for notification-center
-margin-bottom: 0
+margin-bottom: 10
 
 ### Width of the notification center/notifications in pixels.
 width: 500
@@ -200,8 +200,7 @@ notification:
     ### be used to avoid overlap between notifications and a bar such as
     ### polybar or i3blocks.
     margin-top: 50
-    margin-right: 50
-    margin-between: 20
+    margin-right: 0
 
     ### Defines after how many lines of text the body will be truncated. 
     ### Use 0 if you want to disable truncation.
