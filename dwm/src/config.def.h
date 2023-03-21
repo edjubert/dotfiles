@@ -75,7 +75,7 @@ static const char *colors[][3] = {
     [SchemeTag3] = {orange, black, black},
     [SchemeTag4] = {green, black, black},
     [SchemeTag5] = {pink, black, black},
-    [SchemeLayout] = {green, black, black},
+    [SchemeLayout] = {blue, black, black},
     [SchemeBtnPrev] = {green, black, black},
     [SchemeBtnNext] = {yellow, black, black},
     [SchemeBtnClose] = {red, black, black},
@@ -205,8 +205,8 @@ static const Key keys[] = {
     {MODKEY | ControlMask, XK_w, tabmode, {-1}},
     {MODKEY, XK_n, focusstack, {.i = +1}},
     {MODKEY, XK_e, focusstack, {.i = -1}},
-    {MODKEY | ShiftMask, XK_i, incnmaster, {.i = +1}},
-    {MODKEY | ShiftMask, XK_h, incnmaster, {.i = -1}},
+    {MODKEY | ControlMask, XK_i, incnmaster, {.i = +1}},
+    {MODKEY | ControlMask, XK_h, incnmaster, {.i = -1}},
 
     // shift view
     {MODKEY, XK_Left, shiftview, {.i = -1}},
@@ -215,36 +215,14 @@ static const Key keys[] = {
     // change m,cfact sizes
     {MODKEY, XK_h, setmfact, {.f = -0.05}},
     {MODKEY, XK_i, setmfact, {.f = +0.05}},
-    // {MODKEY | ShiftMask, XK_h, setcfact, {.f = +0.25}},
-    // {MODKEY | ShiftMask, XK_l, setcfact, {.f = -0.25}},
+    {MODKEY | ShiftMask, XK_h, setcfact, {.f = +0.25}},
+    {MODKEY | ShiftMask, XK_i, setcfact, {.f = -0.25}},
     // {MODKEY | ShiftMask, XK_o, setcfact, {.f = 0.00}},
 
     {MODKEY | ShiftMask, XK_n, movestack, {.i = +1}},
     {MODKEY | ShiftMask, XK_e, movestack, {.i = -1}},
     {MODKEY | ShiftMask, XK_Return, zoom, {0}},
     {MODKEY, XK_Tab, view, {0}},
-
-    // overall gaps
-    {MODKEY | ControlMask, XK_i, incrgaps, {.i = +1}},
-    {MODKEY | ControlMask, XK_h, incrgaps, {.i = -1}},
-
-    // inner gaps
-    // {MODKEY | ShiftMask, XK_i, incrigaps, {.i = +1}},
-    // {MODKEY | ControlMask | ShiftMask, XK_i, incrigaps, {.i = -1}},
-
-    // outer gaps
-    // {MODKEY | ControlMask, XK_o, incrogaps, {.i = +1}},
-    // {MODKEY | ControlMask | ShiftMask, XK_o, incrogaps, {.i = -1}},
-
-    // inner+outer hori, vert gaps
-    // {MODKEY | ControlMask, XK_6, incrihgaps, {.i = +1}},
-    // {MODKEY | ControlMask | ShiftMask, XK_6, incrihgaps, {.i = -1}},
-    // {MODKEY | ControlMask, XK_7, incrivgaps, {.i = +1}},
-    // {MODKEY | ControlMask | ShiftMask, XK_7, incrivgaps, {.i = -1}},
-    // {MODKEY | ControlMask, XK_8, incrohgaps, {.i = +1}},
-    // {MODKEY | ControlMask | ShiftMask, XK_8, incrohgaps, {.i = -1}},
-    // {MODKEY | ControlMask, XK_9, incrovgaps, {.i = +1}},
-    // {MODKEY | ControlMask | ShiftMask, XK_9, incrovgaps, {.i = -1}},
 
     {MODKEY | ControlMask | ShiftMask, XK_d, defaultgaps, {0}},
 
