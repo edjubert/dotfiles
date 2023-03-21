@@ -72,12 +72,14 @@ notification-center:
       #   command: "sudo vpnToggle"
       - label: Bluetooth
         command: bluetoothToggle
-      - label: Wifi
-        command: wifiToggle
-      - label: Screensaver
-        command: screensaverToggle
+      - label: Logout
+        command: systemctl restart sddm.service
+      - label: Reboot
+        command: reboot
+      - label: Shutdown
+        command: shutdown now
       - label: Keyboard
-        command: keyboardToggle
+        command: rofi -modi "choose_layout:/home/edjubert/.config/awesome/scripts/keyboardLayoutChooser" -show choose_layout
 
 notification:
   ### If true, markup (<u>, <i>, <b>, <a>) will be displayed properly
@@ -110,14 +112,14 @@ notification:
 
     ### The display size of the application icons in the notification 
     ### pop-ups and in the notification center
-    icon-size: 15
+    icon-size: 30
 
   image:
 
     ### The maximal display size of images that are part of
     ### notifications for notification pop-ups and in the notification
     ### center
-    size: 100
+    size: 80
 
     ### The margin around the top, bottom, left, and right of
     ### notification images.

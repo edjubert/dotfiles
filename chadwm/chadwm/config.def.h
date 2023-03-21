@@ -5,7 +5,7 @@
 /* appearance */
 static const unsigned int borderpx = 1; /* border pixel of windows */
 static const unsigned int default_border =
-    1; /* to switch back to default border after dynamic border resizing via
+    0; /* to switch back to default border after dynamic border resizing via
           keybinds */
 static const unsigned int snap = 32;   /* snap pixel */
 static const unsigned int gappih = 20; /* horiz inner gap between windows */
@@ -84,13 +84,13 @@ static const char *colors[][3] = {
 /* tagging */
 static char *tags[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
 
-static const char *eww[] = {"/home/edjubert/.config/eww/dashboard/dashboard",
-                            NULL};
+static const char *notif[] = {
+    "/home/edjubert/.config/chadwm/scripts/toggle_notification_center", NULL};
 static const char *launcher[] = {"rofi", "-show", "drun", NULL};
 
 static const Launcher launchers[] = {
     /* command     name to display */
-    {eww, ""},
+    {notif, ""},
     {launcher, ""},
 };
 
@@ -116,7 +116,6 @@ static const Rule rules[] = {
        monitor */
     // {"Gimp", NULL, NULL, 0, 0, 1, -1},
     {"brave", NULL, NULL, 1 << 8, 0, 0, -1},
-    {"eww", NULL, NULL, 0, 0, 1, -1},
     {"floating_term", NULL, NULL, 0, 0, 1},
 };
 
@@ -177,8 +176,6 @@ static const Key keys[] = {
     {MODKEY | ShiftMask, XK_Return, spawn,
      SHCMD("alacritty --class floating_term")},
     {MODKEY, XK_w, spawn, SHCMD("brave")},
-    {MODKEY | ShiftMask, XK_q, spawn,
-     SHCMD("/home/edjubert/.config/eww/dashboard/dashboard")},
     {MODKEY, XK_a, spawn,
      SHCMD("kill -s USR1 $(pidof deadd-notification-center)")},
     {MODKEY | ShiftMask, XK_v, spawn,
@@ -197,6 +194,7 @@ static const Key keys[] = {
      SHCMD("rofi -modi "
            "\"choose_layout:/home/edjubert/.config/awesome/scripts/"
            "keyboardLayoutChooser\" -show choose_layout")},
+    {MODKEY | ShiftMask, XK_p, spawn, SHCMD("flameshot gui")},
 
     // toggle stuff
     {MODKEY, XK_b, togglebar, {0}},
@@ -270,14 +268,14 @@ static const Key keys[] = {
 
     // change border size
     {MODKEY | ShiftMask, XK_minus, setborderpx, {.i = -1}},
-    {MODKEY | ShiftMask, XK_p, setborderpx, {.i = +1}},
+    {MODKEY, XK_minus, setborderpx, {.i = +1}},
     {MODKEY | ShiftMask, XK_w, setborderpx, {.i = default_border}},
 
     // kill dwm
     {MODKEY | ControlMask, XK_q, spawn, SHCMD("killall bar.sh dwm")},
 
     // kill window
-    {MODKEY, XK_q, killclient, {0}},
+    {MODKEY | ShiftMask, XK_c, killclient, {0}},
 
     // restart
     {MODKEY | ShiftMask, XK_r, restart, {0}},

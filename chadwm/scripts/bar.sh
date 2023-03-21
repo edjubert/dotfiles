@@ -6,7 +6,7 @@
 interval=0
 
 # load colors
-. ~/.config/chadwm/scripts/bar_themes/catppuccin
+. ~/.config/chadwm/scripts/bar_themes/tokyo_night
 
 cpu() {
   cpu_val=$(grep -o "^[^ ]*" /proc/loadavg)
@@ -32,21 +32,9 @@ battery() {
   printf "^c$blue^   $get_capacity"
 }
 
-brightness() {
-  printf "^c$red^   "
-  printf "^c$red^%.0f\n" $(cat /sys/class/backlight/*/brightness)
-}
-
 mem() {
   printf "^c$blue^^b$black^  "
   printf "^c$blue^ $(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g)"
-}
-
-wlan() {
-	case "$(cat /sys/class/net/wl*/operstate 2>/dev/null)" in
-	up) printf "^c$black^ ^b$blue^  ^d^%s" " ^c$blue^Connected" ;;
-	down) printf "^c$black^ ^b$blue^  ^d^%s" " ^c$blue^Disconnected" ;;
-	esac
 }
 
 clock() {
@@ -64,5 +52,5 @@ while true; do
   [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates)
   interval=$((interval + 1))
 
-  sleep 1 && xsetroot -name "$updates $(battery) $(cpu) $(mem) $(wlan) $(clock) $(empty) "
+  sleep 1 && xsetroot -name "$updates $(battery) $(cpu) $(mem) $(clock) $(empty) "
 done
