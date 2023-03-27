@@ -50,6 +50,18 @@ static const char *prevvol[] = {"pamixer", "previous", NULL};
 static const char *light_up[] = {"/usr/bin/brightnessctl", "set", "20%+", NULL};
 static const char *light_down[] = {"/usr/bin/brightnessctl", "set", "20%-",
                                    NULL};
+static const char *keyboard_up[] = {"/usr/bin/brightnessctl",
+                                    "--device",
+                                    "ite_8291::kbd_backlight",
+                                    "set",
+                                    "20%+",
+                                    NULL};
+static const char *keyboard_down[] = {"/usr/bin/brightnessctl",
+                                      "--device",
+                                      "ite_8291::kbd_backlight",
+                                      "set",
+                                      "20%-",
+                                      NULL};
 static const int new_window_attach_on_end =
     0; /*  1 means the new window will attach on the end; 0 means the new window
           will attach on the front,default is front */
@@ -88,11 +100,23 @@ static char *tags[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
 static const char *notif[] = {
     "/home/edjubert/.config/dwm/scripts/toggle_notification_center", NULL};
 static const char *launcher[] = {"rofi", "-show", "drun", NULL};
+static const char *fm[] = {"pcmanfm", NULL};
+static const char *clippy[] = {"rofi",
+                               "-modi",
+                               "\"clipboard:greenclip print\"",
+                               "-show",
+                               "clipboard",
+                               "-run-command '{cmd}'",
+                               "--config",
+                               "/home/edjubert/.config/dwm/rofi/config.rasi",
+                               NULL};
 
 static const Launcher launchers[] = {
     /* command     name to display */
-    {notif, ""},
-    {launcher, ""},
+    {notif, "󰂚"},
+    {launcher, "󱓞"},
+    {fm, "󱞊"},
+    {clippy, "󰅏"},
 };
 
 static const int tagschemes[] = {SchemeTag1, SchemeTag2, SchemeTag3,
@@ -135,10 +159,13 @@ static const int lockfullscreen =
 static const Layout layouts[] = {
     /* symbol     arrange function */
     {"况", tile}, /* first entry is default */
-    {"頻", centeredmaster}, {"侀", spiral},    {"r侀", dwindle},
-    {"H[]", deck},          {"充", bstack},    {"充", bstackhoriz},
-    {"全", grid},           {"###", nrowgrid}, {"---", horizgrid},
-    {"𤋮", gaplessgrid},    {"頻", monocle},   {"恵", centeredfloatingmaster},
+    {"頻", centeredmaster},
+    {"󰁌", monocle},
+    // {"r侀", dwindle},
+    //   {"H[]", deck},          {"充", bstack},    {"充", bstackhoriz},
+    //   {"全", grid},           {"###", nrowgrid}, {"---", horizgrid},
+    //   {"𤋮", gaplessgrid},    {"侀", spiral},    {"恵",
+    //   centeredfloatingmaster},
     {"><>", NULL}, /* no layout function means floating behavior */
     {NULL, NULL},
 };
@@ -167,6 +194,8 @@ static const Key keys[] = {
     {0, XF86XK_AudioPrev, spawn, {.v = prevvol}},
     {0, XF86XK_MonBrightnessUp, spawn, {.v = light_up}},
     {0, XF86XK_MonBrightnessDown, spawn, {.v = light_down}},
+    {ShiftMask, XF86XK_MonBrightnessUp, spawn, {.v = keyboard_up}},
+    {ShiftMask, XF86XK_MonBrightnessDown, spawn, {.v = keyboard_down}},
 
     {MODKEY, XK_u, spawn, SHCMD("flameshot gui")},
 
@@ -196,6 +225,7 @@ static const Key keys[] = {
            "\"choose_layout:/home/edjubert/.config/awesome/scripts/"
            "keyboardLayoutChooser\" -show choose_layout")},
     {MODKEY | ShiftMask, XK_p, spawn, SHCMD("flameshot gui")},
+    {MODKEY, XK_t, spawn, SHCMD("pcmanfm")},
 
     // toggle stuff
     {MODKEY, XK_b, togglebar, {0}},
@@ -228,11 +258,11 @@ static const Key keys[] = {
     {MODKEY | ControlMask | ShiftMask, XK_d, defaultgaps, {0}},
 
     // layout
-    {MODKEY, XK_t, setlayout, {.v = &layouts[0]}},
+    // {MODKEY, XK_t, setlayout, {.v = &layouts[0]}},
     {MODKEY | ShiftMask, XK_f, setlayout, {.v = &layouts[1]}},
     {MODKEY, XK_m, setlayout, {.v = &layouts[2]}},
-    {MODKEY | ControlMask, XK_g, setlayout, {.v = &layouts[10]}},
-    {MODKEY | ControlMask | ShiftMask, XK_t, setlayout, {.v = &layouts[13]}},
+    // {MODKEY | ControlMask, XK_g, setlayout, {.v = &layouts[10]}},
+    // {MODKEY | ControlMask | ShiftMask, XK_t, setlayout, {.v = &layouts[13]}},
     {MODKEY | ShiftMask, XK_space, setlayout, {0}},
     {MODKEY, XK_k, cyclelayout, {.i = +1}},
     {MODKEY | ShiftMask, XK_k, cyclelayout, {.i = -1}},
