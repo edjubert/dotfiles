@@ -26,5 +26,4 @@ run xss-lock --transfer-sleep-lock -- i3lock --blur 5 --screen 1 --indicator --t
 run nm-applet
 run greenclip daemon
 
-run pasystray
 
