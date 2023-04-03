@@ -160,12 +160,13 @@ static const Layout layouts[] = {
     /* symbol     arrange function */
     {"况", tile}, /* first entry is default */
     {"頻", centeredmaster},
-    {"󰁌", monocle},
+    // {"󰁌", monocle},
     // {"r侀", dwindle},
     //   {"H[]", deck},          {"充", bstack},    {"充", bstackhoriz},
-    //   {"全", grid},           {"###", nrowgrid}, {"---", horizgrid},
-    //   {"𤋮", gaplessgrid},    {"侀", spiral},    {"恵",
-    //   centeredfloatingmaster},
+    //   {"𤋮", gaplessgrid},           {"###", nrowgrid}, {"---", horizgrid},
+    {"全", grid},
+    {"侀", spiral},
+    {"恵", centeredfloatingmaster},
     {"><>", NULL}, /* no layout function means floating behavior */
     {NULL, NULL},
 };
@@ -260,7 +261,7 @@ static const Key keys[] = {
     // layout
     // {MODKEY, XK_t, setlayout, {.v = &layouts[0]}},
     {MODKEY | ShiftMask, XK_f, setlayout, {.v = &layouts[1]}},
-    {MODKEY, XK_m, setlayout, {.v = &layouts[2]}},
+    {MODKEY, XK_m, setlayout, {.v = &layouts[4]}},
     // {MODKEY | ControlMask, XK_g, setlayout, {.v = &layouts[10]}},
     // {MODKEY | ControlMask | ShiftMask, XK_t, setlayout, {.v = &layouts[13]}},
     {MODKEY | ShiftMask, XK_space, setlayout, {0}},
