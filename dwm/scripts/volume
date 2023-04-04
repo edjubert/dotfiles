@@ -1,0 +1,44 @@
+#!/bin/bash
+
+if [ "$1" == "inc" ]; then
+   pamixer -i 10
+fi
+
+if [ "$1" == "dec" ]; then
+   pamixer -d 10
+fi
+
+if [ "$1" == "mute" ]; then
+   pamixer -t
+fi
+
+
+VOLUME=$(pamixer --get-volume)
+MUTE=$(pamixer --get-mute)
+
+echo $VOLUME
+echo $MUTE
+
+if [[ $VOLUME -le 20 ]]; then
+  echo "LESS THAN 20"
+    ICON=audio-volume-low
+elif [[ $VOLUME -le 60 ]]; then
+  echo "LESS THAN 60"
+  ICON=audio-volume-medium
+else 
+  ICON=audio-volume-high
+fi
+if [ "$MUTE" == "true" ]; then
+  ICON=audio-volume-muted
+fi 
+
+
+
+echo $VOLUME
+echo $ICON
+NOTI_ID=$(notify-send.py "$VOLUME%" \
+                         --hint string:image-path:$ICON boolean:transient:true \
+                                int:has-percentage:$VOLUME \
+                         --replaces-process "volume-popup")
+
+echo "$NOTI_ID"

@@ -40,28 +40,43 @@ static const int tag_preview = 1; /* 1 means enable, 0 is off */
 static const int colorfultag =
     1; /* 0 means use SchemeSel for selected non vacant tag */
 
-static const char *upvol[] = {"pamixer", "-i", "10", NULL};
-static const char *downvol[] = {"pamixer", "-d", "10", NULL};
-static const char *mutevol[] = {"pamixer", "-t", NULL};
+// static const char *upvol[] = {"pamixer", "-i", "10", NULL};
+static const char *upvol[] = {"/home/edjubert/.config/dwm/scripts/volume",
+                              "inc", NULL};
+// static const char *downvol[] = {"pamixer", "-d", "10", NULL};
+static const char *downvol[] = {"/home/edjubert/.config/dwm/scripts/volume",
+                                "dec", NULL};
+// static const char *mutevol[] = {"pamixer", "-t", NULL};
+static const char *mutevol[] = {"/home/edjubert/.config/dwm/scripts/volume",
+                                "mute", NULL};
 static const char *playvol[] = {"pamixer", "play-pause", NULL};
 static const char *nextvol[] = {"pamixer", "next", NULL};
 static const char *prevvol[] = {"pamixer", "previous", NULL};
 
-static const char *light_up[] = {"/usr/bin/brightnessctl", "set", "20%+", NULL};
-static const char *light_down[] = {"/usr/bin/brightnessctl", "set", "20%-",
-                                   NULL};
-static const char *keyboard_up[] = {"/usr/bin/brightnessctl",
-                                    "--device",
-                                    "ite_8291::kbd_backlight",
-                                    "set",
-                                    "20%+",
-                                    NULL};
-static const char *keyboard_down[] = {"/usr/bin/brightnessctl",
-                                      "--device",
-                                      "ite_8291::kbd_backlight",
-                                      "set",
-                                      "20%-",
-                                      NULL};
+static const char *light_up[] = {
+    "/home/edjubert/.config/dwm/scripts/brightness", "inc", NULL};
+// static const char *light_up[] = {"/usr/bin/brightnessctl", "set", "20%+",
+// NULL};
+static const char *light_down[] = {
+    "/home/edjubert/.config/dwm/scripts/brightness", "dec", NULL};
+// static const char *light_down[] = {"/usr/bin/brightnessctl", "set", "20%-",
+//                                    NULL};
+// static const char *keyboard_up[] = {"/usr/bin/brightnessctl",
+//                                     "--device",
+//                                     "ite_8291::kbd_backlight",
+//                                     "set",
+//                                     "20%+",
+//                                     NULL};
+// static const char *keyboard_down[] = {"/usr/bin/brightnessctl",
+//                                       "--device",
+//                                       "ite_8291::kbd_backlight",
+//                                       "set",
+//                                       "20%-",
+//                                       NULL};
+static const char *keyboard_up[] = {
+    "/home/edjubert/.config/dwm/scripts/keyboard_brightness", "inc", NULL};
+static const char *keyboard_down[] = {
+    "/home/edjubert/.config/dwm/scripts/keyboard_brightness", "dec", NULL};
 static const int new_window_attach_on_end =
     0; /*  1 means the new window will attach on the end; 0 means the new window
           will attach on the front,default is front */
@@ -141,7 +156,7 @@ static const Rule rules[] = {
        monitor */
     // {"Gimp", NULL, NULL, 0, 0, 1, -1},
     {"brave", NULL, NULL, 1 << 8, 0, 0, -1},
-    {"floating_term", NULL, NULL, 0, 0, 1},
+    {"floating_term", NULL, NULL, 0, 1, 1},
 };
 
 /* layout(s) */
