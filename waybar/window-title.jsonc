@@ -1,0 +1,35 @@
+{
+  "layer": "top",
+  "position": "bottom",
+  "mod": "dock",
+  "height": 28,
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+  "modules-left": [],
+  "modules-center": [
+    "hyprland/window"
+  ],
+  "modules-right": [],
+  "hyprland/window": {
+    // "format": "   {}",
+    "format": "{}",
+    "separate-outputs": true,
+    "rewrite": {
+      "tittu@kryptonite:(.*)": "$1 ",
+      "(.*) — Mozilla Firefox": "$1 󰈹",
+      "(.*)Mozilla Firefox": "Firefox 󰈹",
+      "(.*) — Brave": "$1 ",
+      "(.*)Brave": "Brave ",
+      "(.*) — Chromium": "$1 ",
+      "(.*)Chromium": "Brave ",
+      "(.*) — NVIM": "$1 ",
+      "(.*)NVIM": "NVIM ",
+      "(.*) - Visual Studio Code": "$1 󰨞",
+      "(.*)Visual Studio Code": "Code 󰨞",
+      "(.*) — Dolphin": "$1 󰉋",
+      "(.*)Spotify Free": "Spotify 󰓇",
+      "(.*)Steam": "Steam 󰓓"
+    }
+  },
+}

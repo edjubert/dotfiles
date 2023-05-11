@@ -7,50 +7,59 @@
   "passthrough": false,
   "gtk-layer-shell": true,
   "modules-left": [
-    "cpu",
-    "memory",
+    "custom/power",
     "clock"
   ],
   "modules-center": [
     "wlr/workspaces",
-    "hyprland/window"
   ],
   "modules-right": [
     "custom/updates",
+    "battery",
+    "cpu",
+    "memory",
     "network",
     "bluetooth",
     "pulseaudio",
     "pulseaudio#microphone",
     "custom/wallchange",
-    "custom/mode",
-    "tray",
-    "custom/power"
+    "tray"
   ],
   // center modules //
   "wlr/workspaces": {
     "disable-scroll": true,
     "all-outputs": false,
     "on-click": "activate",
-    "persistent_workspaces": {}
-  },
-  "hyprland/window": {
-    "format": "  {}",
-    "separate-outputs": true,
-    "rewrite": {
-      "tittu@kryptonite:(.*)": "$1 ",
-      "(.*) — Mozilla Firefox": "$1 󰈹",
-      "(.*)Mozilla Firefox": "Firefox 󰈹",
-      "(.*) — Brave": "$1 ",
-      "(.*)Brave": "Brave ",
-      "(.*) — Chromium": "$1 ",
-      "(.*)Chromium": "Brave ",
-      "(.*) — NVIM": "$1 ",
-      "(.*)NVIM": "NVIM ",
-      "(.*) - Visual Studio Code": "$1 󰨞",
-      "(.*)Visual Studio Code": "Code 󰨞",
-      "(.*) — Dolphin": "$1 󰉋",
-      "(.*)Spotify Free": "Spotify 󰓇",
-      "(.*)Steam": "Steam 󰓓"
+    "persistent_workspaces": {},
+    "format": "{icon}",
+    "format-icons": {
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "11": "1",
+      "12": "2",
+      "13": "3",
+      "14": "4",
+      "15": "5",
+      "16": "6",
+      "17": "7",
+      "18": "8",
+      "19": "9",
+      "21": "1",
+      "22": "2",
+      "23": "3",
+      "24": "4",
+      "25": "5",
+      "26": "6",
+      "27": "7",
+      "28": "8",
+      "29": "9",
     }
   },
   // left modules //
@@ -78,8 +87,7 @@
     "tooltip-format": " {used:0.1f}GB/{total:0.1f}GB"
   },
   "clock": {
-    "format": "{: %I:%M %p 󰃭 %a %d}",
-    "format-alt": "{:󰥔 %H:%M  %b %Y}",
+    "format": "{: %H:%M %p 󰃭 %a%d %b %Y}",
     "tooltip-format": "<tt><big>{calendar}</big></tt>"
   },
   // right modules //
@@ -89,6 +97,23 @@
     "on-click": "~/.config/waybar/scripts/update-sys.sh update",
     "interval": 86400, // once every day
     "tooltip": true
+  },
+  "battery": {
+    "bat": "BAT1",
+    "interval": 60,
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}% {icon}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "max-length": 25
   },
   "network": {
     // "interface": "wlp2*", // (Optional) To force the use of this interface
@@ -159,9 +184,9 @@
     "icon-size": 15,
     "spacing": 5
   },
-  // "custom/power": {
-  //   "format": "",
-  //   "on-click": "wlogout -b 2 -c 0 -r 0 -L 930 -R 930 -T 300 -B 300 --protocol layer-shell",
-  //   "tooltip": false
-  // }
+  "custom/power": {
+    "format": " ",
+    "on-click": "wlogout -b 2 -c 0 -r 0 -L 930 -R 930 -T 300 -B 300 --protocol layer-shell",
+    "tooltip": false
+  }
 }
