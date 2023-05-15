@@ -105,15 +105,17 @@
       "warning": 30,
       "critical": 15
     },
-    "format": "{capacity}% {icon}",
+    "format": "<span font='Font Awesome 5 Free 11'>{icon}</span>  {capacity}%",
+    "on-click": "gnome-power-statistics",
+    "format-charging": "<span font='Font Awesome 5 Free'></span>  <span font='Font Awesome 5 Free 11'>{icon}</span>  {capacity}% - {time}",
+    "format-charged": "<span font='Font Awesome 5 Free'></span>  <span font='Font Awesome 5 Free 11'>{icon}</span>  Charged",
     "format-icons": [
       "",
       "",
       "",
       "",
       ""
-    ],
-    "max-length": 25
+    ]
   },
   "network": {
     // "interface": "wlp2*", // (Optional) To force the use of this interface
