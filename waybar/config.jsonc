@@ -8,6 +8,8 @@
   "gtk-layer-shell": true,
   "modules-left": [
     "custom/power",
+    "custom/wallchange",
+    "battery",
     "clock"
   ],
   "modules-center": [
@@ -15,14 +17,12 @@
   ],
   "modules-right": [
     "custom/updates",
-    "battery",
     "cpu",
     "memory",
     "network",
     "bluetooth",
     "pulseaudio",
     "pulseaudio#microphone",
-    "custom/wallchange",
     "tray"
   ],
   // center modules //
@@ -168,8 +168,8 @@
   },
   "custom/wallchange": {
     "format": "{}",
-    "exec": "~/.config/swww/swwwallpaper.sh -t",
-    "on-click": "~/.config/swww/swwwallpaper.sh -n",
+    "exec": "bash ~/.config/swww/swwwallpaper.sh -t",
+    "on-click": "bash ~/.config/swww/swwwallpaper.sh -n",
     "interval": 86400, // once every day
     "tooltip": true
   },
