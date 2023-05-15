@@ -170,6 +170,7 @@
     "format": "{}",
     "exec": "bash ~/.config/swww/swwwallpaper.sh -t",
     "on-click": "bash ~/.config/swww/swwwallpaper.sh -n",
+    "on-click-right": "bash ~/.config/swww/swwwallpaper.sh -s",
     "interval": 86400, // once every day
     "tooltip": true
   },
