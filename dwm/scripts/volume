@@ -1,11 +1,11 @@
 #!/bin/bash
 
 if [ "$1" == "inc" ]; then
-   pamixer -i 10
+   pamixer -i 5
 fi
 
 if [ "$1" == "dec" ]; then
-   pamixer -d 10
+   pamixer -d 5
 fi
 
 if [ "$1" == "mute" ]; then
