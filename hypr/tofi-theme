@@ -13,7 +13,7 @@
 	# characters not in the chosen font will fail to render.
 	#
 	# Otherwise, fonts are interpreted in Pango format.
-	font = "Ubuntu"
+	font = "Iosevka Term Nerd Font"
 
 	# Point size of text.
 	font-size = 15
@@ -69,9 +69,9 @@
 
 	# Prompt text theme
 	# prompt-color = #FFFFFF
-	prompt-background = #00000000
-	prompt-background-padding = 0
-	prompt-background-corner-radius = 0
+	prompt-background = #1affffaa
+	prompt-background-padding = 15
+	prompt-background-corner-radius = 10
 
 	# Placeholder text theme
 	placeholder-color = #1affffee
@@ -80,7 +80,7 @@
 	placeholder-background-corner-radius = 0
 
 	# Input text theme
-	# input-color = #FFFFFF
+	input-color = #1affffee
 	input-background = #00000000
 	input-background-padding = 0
 	input-background-corner-radius = 0
@@ -142,10 +142,10 @@
 ### Text layout
 #
 	# Prompt to display.
-	prompt-text = "-> "
+	prompt-text = "Run: "
 
 	# Extra horizontal padding between prompt and input.
-	prompt-padding = 0
+	prompt-padding = 10
 
 	# Placeholder input text.
 	placeholder-text = ""
@@ -239,7 +239,7 @@
 	hide-cursor = false
 
 	# Show a text cursor in the input field.
-	text-cursor = false
+	text-cursor = true
 
 	# Sort results by number of usages in run and drun modes.
 	history = true
@@ -256,7 +256,7 @@
 	# algorithm.
 	#
 	# Supported values: normal, prefix, fuzzy
-	matching-algorithm = normal
+	matching-algorithm = fuzzy
 
 	# If true, require a match to allow a selection to be made. If false,
 	# making a selection with no matches will print input to stdout.
@@ -279,7 +279,7 @@
 
 	# If true, directly launch applications on selection when in drun mode.
 	# Otherwise, just print the command line to stdout.
-	drun-launch = false
+	drun-launch = true
 
 	# The terminal to run terminal programs in when in drun mode.
 	# This option has no effect if drun-launch is set to true.
