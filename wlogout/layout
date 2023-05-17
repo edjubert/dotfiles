@@ -1,6 +1,6 @@
 {
     "label" : "lock",
-    "action" : "/home/edouard.jubert.ext/.config/hypr/scripts/lockscreen",
+    "action" : "$HOME/.config/hypr/scripts/lockscreen",
     "text" : "Lock",
     "keybind" : "l"
 }
