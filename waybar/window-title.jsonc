@@ -33,7 +33,8 @@
       "(.*)Visual Studio Code": "Code 󰨞",
       "(.*) — Dolphin": "$1 󰉋",
       "(.*)Spotify Free": "Spotify 󰓇",
-      "(.*)Steam": "Steam 󰓓"
+      "(.*)Steam": "Steam 󰓓",
+      "WhatsDesk": "WhatsApp 󰖣"
     }
   },
 }

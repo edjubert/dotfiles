@@ -47,10 +47,12 @@ tooltip {
 }
 
 #workspaces button:hover {
-    background: #f5c2e7;
+    background: #a6adc8;
     color: #313244;
-    padding-left: 2px;
-    padding-right: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
     animation: gradient_f 20s ease-in infinite;
     transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
 }
