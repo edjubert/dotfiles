@@ -6,10 +6,10 @@
   "exclusive": true,
   "passthrough": false,
   "gtk-layer-shell": true,
-  "modules-left": [
+  "modules-left": [],
+  "modules-center": [
     "custom/waybar-mpris"
   ],
-  "modules-center": [],
   "modules-right": [],
   "hyprland/window": {
     // "format": "   {}",
