@@ -6,11 +6,13 @@
   "exclusive": true,
   "passthrough": false,
   "gtk-layer-shell": true,
-  "modules-left": [],
-  "modules-center": [
+  "modules-left": [
+    "custom/waybar-mpris"
+  ],
+  "modules-center": [],
+  "modules-right": [
     "hyprland/window"
   ],
-  "modules-right": [],
   "hyprland/window": {
     // "format": "   {}",
     "format": "{}",
@@ -37,4 +39,47 @@
       "WhatsDesk": "WhatsApp 󰖣"
     }
   },
+  "custom/waybar-mpris": {
+    "return-type": "json",
+    "exec": "waybar-mpris --position --autofocus",
+    "on-click": "waybar-mpris --send toggle",
+    // This option will switch between players on right click.
+    "on-click-right": "waybar-mpris --send player-next",
+    // The options below will switch the selected player on scroll
+    // "on-scroll-up": "waybar-mpris --send player-next",
+    // "on-scroll-down": "waybar-mpris --send player-prev",
+    // The options below will go to next/previous track on scroll
+    // "on-scroll-up": "waybar-mpris --send next",
+    // "on-scroll-down": "waybar-mpris --send prev",
+    "escape": true,
+  },
+  "mpd": {
+    "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ",
+    "format-disconnected": "Disconnected ",
+    "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+    "interval": 2,
+    "consume-icons": {
+      "on": " " // Icon shows only when "consume" is on
+    },
+    "random-icons": {
+      "off": "<span color=\"#f53c3c\"></span> ", // Icon grayed out when "random" is off
+      "on": " "
+    },
+    "repeat-icons": {
+      "on": " "
+    },
+    "single-icons": {
+      "on": "1 "
+    },
+    "state-icons": {
+      "paused": "",
+      "playing": ""
+    },
+    "tooltip-format": "MPD (connected)",
+    "tooltip-format-disconnected": "MPD (disconnected)"
+  },
+  "mediaplayer": {
+    "interval": 10,
+    "tooltip": true
+  }
 }
