@@ -10,9 +10,7 @@
     "custom/waybar-mpris"
   ],
   "modules-center": [],
-  "modules-right": [
-    // "hyprland/window"
-  ],
+  "modules-right": [],
   "hyprland/window": {
     // "format": "   {}",
     "format": "{}",
