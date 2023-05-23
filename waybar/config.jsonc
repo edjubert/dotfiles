@@ -10,21 +10,22 @@
     "custom/power",
     "custom/wallchange",
     "battery",
+    "hyprland/window"
+  ],
+  "modules-center": [
+    "wlr/workspaces"
+  ],
+  "modules-right": [
     "cpu",
     "memory",
     "bluetooth",
     "pulseaudio",
     "pulseaudio#microphone",
-  ],
-  "modules-center": [
-    "clock",
-    "wlr/workspaces"
-  ],
-  "modules-right": [
     "custom/updates",
     "network",
     "tray",
-    "clock#calendar"
+    "clock#calendar",
+    "clock",
   ],
   // center modules //
   "wlr/workspaces": {
