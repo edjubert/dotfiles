@@ -16,11 +16,18 @@
     "wlr/workspaces"
   ],
   "modules-right": [
+    // "custom/layout",
     "custom/updates",
     "network",
     "tray",
     "clock",
   ],
+  "custom/layout": {
+    "format": "{}",
+    "interval": 1,
+    "exec": "hyprctl devices | grep 'active keymap' | sed -n 3p | cut -f2 -d':'",
+    "on-click": "hyprctl switchxkblayout",
+  },
   "hyprland/window": {
     // "format": "   {}",
     "format": "{}",
@@ -148,7 +155,7 @@
   },
   "custom/power": {
     "format": " ",
-    "on-click": "wlogout -b 2 -c 0 -r 0 -L 930 -R 930 -T 300 -B 300 --protocol layer-shell",
+    "on-click": "wlogout -b 4 -c 5 -r 5 -m 300 --protocol layer-shell",
     "tooltip": false
   }
 }

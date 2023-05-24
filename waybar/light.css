@@ -59,6 +59,7 @@ tooltip {
 #cpu,
 #memory,
 #custom-power,
+#custom-layout,
 #clock,
 #workspaces,
 #window,
@@ -138,8 +139,13 @@ tooltip {
     padding-left: 12px;
 }
 
+#custom-layout {
+    border-radius: 10px;
+    padding-right: 12px;
+    padding-left: 12px;
+}
+
 #custom-waybar-mpris {
-    /* border-radius: 0px 10px 10px 0px; */
     border-radius: 10px;
     padding-right: 12px;
     padding-left: 12px;

@@ -97,7 +97,7 @@
     "scroll-step": 5
   },
   "clock#calendar": {
-    "format": "{:󰃭 %a%d %b %Y}",
+    "format": "{:%A %d %b %Y}",
     "tooltip-format": "<tt><big>{calendar}</big></tt>"
   },
 }
