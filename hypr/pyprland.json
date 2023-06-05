@@ -1,18 +1,19 @@
 {
   "pyprland": {
     "plugins": [
-      "scratchpads"
+      "scratchpads",
+      "workspaces_follow_focus"
     ]
   },
   "scratchpads": {
     "term": {
       "command": "kitty --class kitty-dropterm",
       "animation": "fromTop",
-      "margin": 50,
       "unfocus": "hide"
     },
     "volume": {
       "command": "pavucontrol",
+      "unfocus": "hide",
       "animation": "fromRight"
     }
   }
