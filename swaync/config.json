@@ -27,8 +27,8 @@
   "scripts": {
     "scripts": {
       "open-scratchpad-slack": {
-        "exec": "cd ~/workspace/gophrland/; go run ./cmd -- scratchpads toggle slack",
-        "app-name": "slack",
+        "exec": "gophrland scratchpads toggle slack",
+        "app-name": "Slack",
         "urgency": "Normal"
       }
     },
