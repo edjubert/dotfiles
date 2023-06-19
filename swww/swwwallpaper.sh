@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 ## define functions ##
 Wall_Next()
@@ -6,7 +6,7 @@ Wall_Next()
     WallSet=`readlink $BASEDIR/wall.$WALLMODE`
     Wallist=(`dirname $WallSet`/*)
 
-    for((i=0;i<${#Wallist[@]};i++))
+    for(( i=0; i < ${#Wallist[@]}; i++ ))
     do
         if [ $((i + 1)) -eq ${#Wallist[@]} ] ; then
             ln -fs ${Wallist[0]} $BASEDIR/wall.$WALLMODE
@@ -25,7 +25,7 @@ Wall_Set()
     --transition-type grow \
     --transition-duration 1 \
     --transition-fps 144 \
-    --transition-pos bottom-right
+    --transition-pos top-left
 }
 
 ## main script ##
@@ -87,4 +87,5 @@ fi
 ## set wallpaper ##
 Wall_Set
 convert -scale 10% -blur 0x2.5 -resize 1000% $BASEDIR/wall.set $BASEDIR/wall.blur
+
 

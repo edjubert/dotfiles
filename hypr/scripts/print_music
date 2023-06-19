@@ -1,0 +1,22 @@
+#!/bin/bash
+
+title=`playerctl metadata xesam:title`
+artist=`playerctl metadata xesam:artist`
+album=`playerctl metadata xesam:album`
+
+if [[ "$title" != "" ]];
+then
+  echo -n $title
+fi
+
+if [[ "$artist" != "" ]];
+then
+  echo -n $artist
+fi
+
+if [[ "$album" != "" ]];
+then
+  echo -n $album
+fi
+
+echo \;

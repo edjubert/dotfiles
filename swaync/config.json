@@ -25,6 +25,16 @@
   "hide-on-action": true,
   "script-fail-notify": true,
   "scripts": {
+    "open-scratchpad-slack": {
+      "exec": "gophrland scratchpads toggle slack",
+      "app-name": "slack",
+      "run-on": "action"
+    },
+    "open-scratchpad-whatsdesk": {
+      "exec": "gophrland scratchpads toggle whatsdesk",
+      "app-name": "whatsdesk",
+      "urgency": "Normal"
+    },
     "example-script": {
       "exec": "echo 'Do something...'",
       "urgency": "Normal"
@@ -43,12 +53,17 @@
     }
   },
   "widgets": [
+    "volume",
     "inhibitors",
     "title",
     "dnd",
-    "notifications"
+    "notifications",
+    "mpris"
   ],
   "widget-config": {
+    "volume": {
+      "label": ""
+    },
     "inhibitors": {
       "text": "Inhibitors",
       "button-text": "Clear All",

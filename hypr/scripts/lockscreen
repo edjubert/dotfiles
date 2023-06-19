@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Colors
+bg='1e1e2e' bgl='313244' fg='d9e0ee'
+red='f38ba8' green='a6e3a1' yellow='f9e2af'
+blue='89b4fa' magenta='cba6f7' cyan='89dceb'
+alpha='00040000'
+image=$HOME/dotfiles/Wallpapers/hiking_in_space-blur.png
+
+# CMD
+swaylock \
+	--screenshots \
+	--clock \
+	--indicator \
+	--indicator-radius 100 \
+	--indicator-thickness 7 \
+  --effect-pixelate 60 \
+	--effect-blur 7x5 \
+	--effect-vignette 0.5:0.5 \
+	--ring-color $bg \
+	--key-hl-color $green \
+	--line-color 00000000 \
+	--inside-color 00000088 \
+	--separator-color 00000000 \
+	--fade-in 0.2

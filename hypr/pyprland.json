@@ -1,0 +1,20 @@
+{
+  "pyprland": {
+    "plugins": [
+      "scratchpads",
+      "workspaces_follow_focus"
+    ]
+  },
+  "scratchpads": {
+    "term": {
+      "command": "kitty --class kitty-dropterm",
+      "animation": "fromTop",
+      "unfocus": "hide"
+    },
+    "volume": {
+      "command": "pavucontrol",
+      "unfocus": "hide",
+      "animation": "fromRight"
+    }
+  }
+}
