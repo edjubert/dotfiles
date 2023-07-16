@@ -2,7 +2,7 @@
   "$schema": "/etc/xdg/swaync/configSchema.json",
   "positionX": "right",
   "positionY": "top",
-  "layer": "top",
+  "layer": "overlay",
   "cssPriority": "application",
   "control-center-margin-top": 0,
   "control-center-margin-bottom": 0,
@@ -26,22 +26,16 @@
   "script-fail-notify": true,
   "scripts": {
     "open-scratchpad-slack": {
-      "exec": "gophrland scratchpads toggle slack",
-      "app-name": "slack",
-      "run-on": "action"
+      "exec": "echo 'open Slack'",
+      "urgency": "Normal"
     },
     "open-scratchpad-whatsdesk": {
       "exec": "gophrland scratchpads toggle whatsdesk",
-      "app-name": "whatsdesk",
-      "urgency": "Normal"
-    },
-    "example-script": {
-      "exec": "echo 'Do something...'",
-      "urgency": "Normal"
+      "app-name": "Whatsdesk",
+      "run-on": "action"
     },
     "example-action-script": {
-      "exec": "echo 'Do something actionable!'",
-      "urgency": "Normal",
+      "exec": "echo 'open Slack'",
       "run-on": "action"
     }
   },

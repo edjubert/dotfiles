@@ -17,7 +17,8 @@
     "custom/notification"
   ],
   "modules-right": [
-    // "custom/layout",
+    "custom/whatsdesk",
+    "custom/slack",
     "custom/updates",
     "network",
     "tray",
@@ -53,6 +54,7 @@
     // "format": "   {}",
     "format": "{}",
     "separate-outputs": true,
+    "on-click": "echo 'hello'",
     "rewrite": {
       "tittu@kryptonite:(.*)": "$1 ",
       "(.*) — Mozilla Firefox": "$1 󰈹",
@@ -110,7 +112,6 @@
       "27": "7",
       "28": "8",
       "29": "9",
-      "90": ""
     }
   },
   // left modules //
@@ -160,6 +161,18 @@
     "exec": "bash ~/.config/swww/swwwallpaper.sh -t",
     "on-click": "bash ~/.config/swww/swwwallpaper.sh -n",
     "on-click-right": "bash ~/.config/swww/swwwallpaper.sh -s",
+    "interval": 86400, // once every day
+    "tooltip": true
+  },
+  "custom/slack": {
+    "format": "<span font='Font Awesome 5 Free 11'>󰒱</span>",
+    "on-click": "gophrland scratchpads toggle slack",
+    "interval": 86400, // once every day
+    "tooltip": true
+  },
+  "custom/whatsdesk": {
+    "format": "<span font='Font Awesome 5 Free 11'>󰖣</span>",
+    "on-click": "gophrland scratchpads toggle whatsdesk",
     "interval": 86400, // once every day
     "tooltip": true
   },

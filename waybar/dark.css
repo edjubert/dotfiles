@@ -70,6 +70,8 @@ tooltip {
 #bluetooth,
 #pulseaudio,
 #custom-wallchange,
+#custom-slack,
+#custom-whatsdesk,
 #custom-waybar-mpris,
 #custom-mode,
 #tray {
@@ -82,7 +84,6 @@ tooltip {
 
 
 /* resource monitor block */
-
 #cpu {
     border-radius: 10px 0px 0px 10px;
     margin-left: 6px;
@@ -91,9 +92,8 @@ tooltip {
 }
 
 #battery {
-    /* border-radius: 10px 0px 0px 10px; */
     border-radius: 10px;
-    margin-left: 4px;
+    margin-left: 6px;
     padding-left: 14px;
     padding-right: 20px;
 }
@@ -112,22 +112,18 @@ tooltip {
     border-radius: 10px;
     padding-left: 12px;
     padding-right: 12px;
-    margin-left: 6px;
-    margin-right: 6px;
+    margin-right: 12px;
 }
 #clock.calendar {
     border-radius: 10px;
-    margin-left: 6px;
     padding-left: 12px;
     padding-right: 12px;
-    margin-right: 6px;
+    margin-right: 12px;
 }
 
 
 /* workspace window block */
-
 #workspaces {
-    /* border-radius: 10px 0px 0px 10px; */
     border-radius: 10px;
     padding-left: 6px;
     padding-right: 6px;
@@ -138,31 +134,29 @@ tooltip {
 }
 
 #window {
-    /* border-radius: 0px 10px 10px 0px; */
     border-radius: 10px;
     padding-right: 12px;
     padding-left: 12px;
+    margin-left: 12px;
 }
 
 #custom-notification {
-    /* border-radius: 0px 10px 10px 0px; */
     border-radius: 10px;
     padding-right: 12px;
     padding-left: 12px;
     margin-left: 12px;
 }
 #custom-layout {
-    /* border-radius: 0px 10px 10px 0px; */
     border-radius: 10px;
     padding-right: 12px;
     padding-left: 12px;
 }
 
 #custom-waybar-mpris {
-    /* border-radius: 0px 10px 10px 0px; */
     border-radius: 10px;
     padding-right: 12px;
     padding-left: 12px;
+    margin-left: 12px;
 }
 
 
@@ -206,6 +200,19 @@ tooltip {
     margin-left: 4px;
     margin-right: 4px;
 }
+#custom-slack {
+
+    border-radius: 0 10px 10px 0;
+    padding-left: 12px;
+    padding-right: 15px;
+    margin-right: 4px;
+}
+#custom-whatsdesk {
+    border-radius: 10px 0 0 10px;
+    padding-left: 12px;
+    padding-right: 5px;
+    margin-left: 4px;
+}
 
 
 /* system tray block */
@@ -225,7 +232,6 @@ tooltip {
 }
 
 #custom-power {
-    /* border-radius: 0px 10px 10px 0px; */
     border-radius: 10px;
     padding-left: 6px;
     padding-right: 15px;
