@@ -2,7 +2,7 @@
   "$schema": "/etc/xdg/swaync/configSchema.json",
   "positionX": "right",
   "positionY": "top",
-  "layer": "top",
+  "layer": "overlay",
   "cssPriority": "application",
   "control-center-margin-top": 0,
   "control-center-margin-bottom": 0,
@@ -25,13 +25,17 @@
   "hide-on-action": true,
   "script-fail-notify": true,
   "scripts": {
-    "example-script": {
-      "exec": "echo 'Do something...'",
+    "open-scratchpad-slack": {
+      "exec": "echo 'open Slack'",
       "urgency": "Normal"
     },
+    "open-scratchpad-whatsdesk": {
+      "exec": "gophrland scratchpads toggle whatsdesk",
+      "app-name": "Whatsdesk",
+      "run-on": "action"
+    },
     "example-action-script": {
-      "exec": "echo 'Do something actionable!'",
-      "urgency": "Normal",
+      "exec": "echo 'open Slack'",
       "run-on": "action"
     }
   },
@@ -43,12 +47,17 @@
     }
   },
   "widgets": [
+    "volume",
     "inhibitors",
     "title",
     "dnd",
-    "notifications"
+    "notifications",
+    "mpris"
   ],
   "widget-config": {
+    "volume": {
+      "label": ""
+    },
     "inhibitors": {
       "text": "Inhibitors",
       "button-text": "Clear All",

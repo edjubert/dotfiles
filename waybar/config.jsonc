@@ -7,80 +7,116 @@
   "passthrough": false,
   "gtk-layer-shell": true,
   "modules-left": [
-    "cpu",
-    "memory",
-    "clock"
+    "custom/power",
+    "custom/wallchange",
+    "battery",
+    "hyprland/window"
   ],
   "modules-center": [
     "wlr/workspaces",
-    "hyprland/window"
+    "custom/notification"
   ],
   "modules-right": [
+    "custom/whatsdesk",
+    "custom/slack",
     "custom/updates",
     "network",
-    "bluetooth",
-    "pulseaudio",
-    "pulseaudio#microphone",
-    "custom/wallchange",
-    "custom/mode",
     "tray",
-    "custom/power"
+    "clock",
   ],
-  // center modules //
-  "wlr/workspaces": {
-    "disable-scroll": true,
-    "all-outputs": false,
-    "on-click": "activate",
-    "persistent_workspaces": {}
+  "custom/layout": {
+    "format": "{}",
+    "interval": 1,
+    "exec": "hyprctl devices | grep 'active keymap' | sed -n 3p | cut -f2 -d':'",
+    "on-click": "hyprctl switchxkblayout",
+  },
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": " ",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": " ",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": " ",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": " "
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
   },
   "hyprland/window": {
-    "format": "  {}",
+    // "format": "   {}",
+    "format": "{}",
     "separate-outputs": true,
+    "on-click": "echo 'hello'",
     "rewrite": {
       "tittu@kryptonite:(.*)": "$1 ",
       "(.*) — Mozilla Firefox": "$1 󰈹",
       "(.*)Mozilla Firefox": "Firefox 󰈹",
+      "go – (.*)": " $1",
       "(.*) — Brave": "$1 ",
       "(.*)Brave": "Brave ",
       "(.*) — Chromium": "$1 ",
       "(.*)Chromium": "Brave ",
+      "(.*) - Google Chrome": "$1 ",
+      "Meet – (.*) - Google Chrome": "  $1 ",
+      // "(.*)Google Chrome": "Chrome ",
       "(.*) — NVIM": "$1 ",
       "(.*)NVIM": "NVIM ",
       "(.*) - Visual Studio Code": "$1 󰨞",
       "(.*)Visual Studio Code": "Code 󰨞",
       "(.*) — Dolphin": "$1 󰉋",
       "(.*)Spotify Free": "Spotify 󰓇",
-      "(.*)Steam": "Steam 󰓓"
+      "(.*)Steam": "Steam 󰓓",
+      "WhatsDesk": "WhatsApp 󰖣"
+    }
+  },
+  // center modules //
+  "wlr/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": false,
+    "on-click": "activate",
+    "persistent_workspaces": {},
+    "format": "{icon}",
+    "format-icons": {
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "11": "1",
+      "12": "2",
+      "13": "3",
+      "14": "4",
+      "15": "5",
+      "16": "6",
+      "17": "7",
+      "18": "8",
+      "19": "9",
+      "21": "1",
+      "22": "2",
+      "23": "3",
+      "24": "4",
+      "25": "5",
+      "26": "6",
+      "27": "7",
+      "28": "8",
+      "29": "9",
     }
   },
   // left modules //
-  "cpu": {
-    "interval": 10,
-    "format": "󰍛 {usage}%",
-    "format-alt": "{icon0}{icon1}{icon2}{icon3}",
-    "format-icons": [
-      "▁",
-      "▂",
-      "▃",
-      "▄",
-      "▅",
-      "▆",
-      "▇",
-      "█"
-    ]
-  },
-  "memory": {
-    "interval": 30,
-    "format": "󰾆 {percentage}%",
-    "format-alt": "󰾅 {used}GB",
-    "max-length": 10,
-    "tooltip": true,
-    "tooltip-format": " {used:0.1f}GB/{total:0.1f}GB"
-  },
   "clock": {
-    "format": "{: %I:%M %p 󰃭 %a %d}",
-    "format-alt": "{:󰥔 %H:%M  %b %Y}",
-    "tooltip-format": "<tt><big>{calendar}</big></tt>"
+    "format": "{:%H:%M}",
   },
   // right modules //
   "custom/updates": {
@@ -89,6 +125,26 @@
     "on-click": "~/.config/waybar/scripts/update-sys.sh update",
     "interval": 86400, // once every day
     "tooltip": true
+  },
+  "battery": {
+    "bat": "BAT1",
+    "interval": 60,
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    // "format": "<span font='Font Awesome 5 Free 11'>{icon}</span> {capacity}%",
+    "format": "<span font='Font Awesome 5 Free 11'> 󰚥</span>",
+    "on-click": "gnome-power-statistics",
+    "format-charging": "<span font='Font Awesome 5 Free'> </span><span font='Font Awesome 5 Free 11'>{icon}</span>  {capacity}% - {time}",
+    "format-discharging": "<span font='Font Awesome 5 Free 11'>{icon}</span>  {capacity}% - {time}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
   },
   "network": {
     // "interface": "wlp2*", // (Optional) To force the use of this interface
@@ -100,51 +156,23 @@
     "format-alt": "󰤨 {signalStrength}%",
     "interval": 5
   },
-  "bluetooth": {
-    "format": "",
-    "format-disabled": "", // an empty format will hide the module
-    "format-connected": " {num_connections}",
-    "tooltip-format": " {device_alias}",
-    "tooltip-format-connected": "{device_enumerate}",
-    "tooltip-format-enumerate-connected": " {device_alias}"
-  },
-  "pulseaudio": {
-    "format": "{icon}",
-    "format-muted": "婢",
-    "on-click": "pavucontrol -t 3",
-    "on-click-middle": "~/.config/dwm/scripts/volume mute",
-    "on-scroll-up": "~/.config/dwm/scripts/volume inc",
-    "on-scroll-down": "~/.config/dwm/scripts/volume dec",
-    "tooltip-format": "{icon} {desc} {volume}%",
-    "scroll-step": 5,
-    "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
-      "default": [
-        "",
-        "",
-        ""
-      ]
-    }
-  },
-  "pulseaudio#microphone": {
-    "format": "{format_source}",
-    "format-source": " {volume}%",
-    "format-source-muted": "",
-    "on-click": "pavucontrol -t 4",
-    "on-click-middle": "pamixer --default-source -t",
-    "on-scroll-up": "pamixer --default-source -i 5",
-    "on-scroll-down": "pamixer --default-source -d 5",
-    "scroll-step": 5
-  },
   "custom/wallchange": {
     "format": "{}",
-    "exec": "~/.config/swww/swwwallpaper.sh -t",
-    "on-click": "~/.config/swww/swwwallpaper.sh -n",
+    "exec": "bash ~/.config/swww/swwwallpaper.sh -t",
+    "on-click": "bash ~/.config/swww/swwwallpaper.sh -n",
+    "on-click-right": "bash ~/.config/swww/swwwallpaper.sh -s",
+    "interval": 86400, // once every day
+    "tooltip": true
+  },
+  "custom/slack": {
+    "format": "<span font='Font Awesome 5 Free 11'>󰒱</span>",
+    "on-click": "gophrland scratchpads toggle slack",
+    "interval": 86400, // once every day
+    "tooltip": true
+  },
+  "custom/whatsdesk": {
+    "format": "<span font='Font Awesome 5 Free 11'>󰖣</span>",
+    "on-click": "gophrland scratchpads toggle whatsdesk",
     "interval": 86400, // once every day
     "tooltip": true
   },
@@ -159,9 +187,9 @@
     "icon-size": 15,
     "spacing": 5
   },
-  // "custom/power": {
-  //   "format": "",
-  //   "on-click": "wlogout -b 2 -c 0 -r 0 -L 930 -R 930 -T 300 -B 300 --protocol layer-shell",
-  //   "tooltip": false
-  // }
+  "custom/power": {
+    "format": " ",
+    "on-click": "wlogout -b 4 -c 5 -r 5 -m 300 --protocol layer-shell",
+    "tooltip": false
+  }
 }

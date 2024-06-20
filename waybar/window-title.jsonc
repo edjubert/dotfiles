@@ -1,0 +1,105 @@
+{
+  "layer": "top",
+  "position": "bottom",
+  "mod": "dock",
+  "height": 28,
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+  "modules-left": [
+    "custom/waybar-mpris"
+  ],
+  "modules-center": [],
+  "modules-right": [
+    "cpu",
+    "memory",
+    "bluetooth",
+    "pulseaudio",
+    "pulseaudio#microphone",
+    "clock#calendar",
+  ],
+  "custom/waybar-mpris": {
+    "return-type": "json",
+    "exec": "waybar-mpris --position --autofocus",
+    "on-click": "waybar-mpris --send toggle",
+    // This option will switch between players on right click.
+    "on-click-right": "waybar-mpris --send player-next",
+    // The options below will switch the selected player on scroll
+    // "on-scroll-up": "waybar-mpris --send player-next",
+    // "on-scroll-down": "waybar-mpris --send player-prev",
+    // The options below will go to next/previous track on scroll
+    // "on-scroll-up": "waybar-mpris --send next",
+    // "on-scroll-down": "waybar-mpris --send prev",
+    "escape": true,
+  },
+  "cpu": {
+    "interval": 10,
+    "format": "󰍛 {usage}%",
+    "format-alt": "{icon0}{icon1}{icon2}{icon3}",
+    "format-icons": [
+      "▁",
+      "▂",
+      "▃",
+      "▄",
+      "▅",
+      "▆",
+      "▇",
+      "█"
+    ]
+  },
+  "memory": {
+    "interval": 10,
+    "format": "󰾆 {percentage}%",
+    "format-alt": "󰾅 {used}GB",
+    "max-length": 10,
+    "tooltip": true,
+    "tooltip-format": " {used:0.1f}GB/{total:0.1f}GB"
+  },
+  "bluetooth": {
+    "format": "",
+    "format-disabled": "", // an empty format will hide the module
+    "format-connected": " {num_connections}",
+    "tooltip-format": " {device_alias}",
+    "tooltip-format-connected": "{device_enumerate}",
+    "tooltip-format-enumerate-connected": " {device_alias}"
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "婢",
+    "on-click": "pavucontrol -t 3",
+    // "on-click": "alacritty -T floating -o window.padding.x=10 -o window.padding.y=10 -e pulsemixer",
+    "on-click-middle": "~/.config/dwm/scripts/volume mute",
+    "on-scroll-up": "~/.config/dwm/scripts/volume inc",
+    "on-scroll-down": "~/.config/dwm/scripts/volume dec",
+    "tooltip-format": "{icon} {desc} {volume}%",
+    "scroll-step": 5,
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    }
+  },
+  "pulseaudio#microphone": {
+    "format": "{format_source}",
+    "format-source": " {volume}%",
+    "format-source-muted": "",
+    // "on-click": "alacritty -T floating -o window.padding.x=10 -o window.padding.y=10 -e pulsemixer",
+    "on-click": "pavucontrol -t 4",
+    "on-click-middle": "pamixer --default-source -t",
+    "on-scroll-up": "pamixer --default-source -i 5 --allow-boost",
+    "on-scroll-down": "pamixer --default-source -d 5 --allow-boost",
+    "scroll-step": 5
+  },
+  "clock#calendar": {
+    "format": "{:%A %d %b %Y}",
+    "tooltip-format": "<tt><big>{calendar}</big></tt>"
+  },
+}
