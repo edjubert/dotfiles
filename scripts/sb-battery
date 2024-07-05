@@ -1,9 +1,0 @@
-status=$( acpi | head -n 1 | awk '{print $3}' | cut -d ',' -f 1 )
-percent=$( acpi | head -n 1 | awk '{print $4}' )
-timeleft=$( acpi | head -n 1 | awk '{print $5}' )
-
-if [[ "$status" = "Full" ]]; then
-  echo -n "BAT: $status"
-else
-  echo -n "BAT: $percent ($timeleft) - $status"
-fi

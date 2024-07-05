@@ -1,0 +1,38 @@
+[global]
+frame_color = "#89B4FA"
+separator_color= frame
+
+follow = mouse
+width = 300
+height = 300
+origin = top-right
+offset = 10x50
+scale = 0
+progress_bar = true
+progress_bar_height = 10
+progress_bar_frame_width = 1
+progress_bar_min_width = 150
+progress_bar_max_width = 300
+frame_width = 1
+corner_radius = 5
+
+indicate_hidden = yes
+separator_height = 1
+padding = 8
+sort = yes
+idle_threshold = 120
+font = JetBrainsMono NF 10
+line_height = 0
+
+[urgency_low]
+background = "#1E1E2E"
+foreground = "#CDD6F4"
+
+[urgency_normal]
+background = "#1E1E2E"
+foreground = "#CDD6F4"
+
+[urgency_critical]
+background = "#1E1E2E"
+foreground = "#CDD6F4"
+frame_color = "#FAB387"

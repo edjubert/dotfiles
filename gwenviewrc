@@ -1,0 +1,38 @@
+[General]
+LastUsedVersion=210800
+
+[ImageView]
+ThumbnailSplitterSizes=761,217
+
+[MainWindow]
+1919x1079 screen: Window-Maximized=true
+1969x1108 screen: Window-Maximized=true
+2560x1440 screen: Window-Maximized=true
+MenuBar=Disabled
+State=AAAA/wAAAAD9AAAAAAAAAmoAAAJ9AAAABAAAAAQAAAAIAAAACPwAAAABAAAAAgAAAAEAAAAWAG0AYQBpAG4AVABvAG8AbABCAGEAcgEAAAAA/////wAAAAAAAAAA
+ToolBarsMovable=Disabled
+
+[Recent Files]
+File1[$e]=$HOME/Pictures/bkup_edouard_20240404/photos/IMG_6075.JPG
+File10[$e]=$HOME/workspace/Gimp/tp.png
+File2[$e]=$HOME/Pictures/bkup_edouard_20240404/photos/IMG_5908.JPG
+File3[$e]=$HOME/Pictures/2024-03-20-112047_hyprshot.png
+File4[$e]=$HOME/Pictures/2024-04-18T10:23:26,632049804+02:00.png
+File5[$e]=$HOME/Pictures/2024-04-18T10:23:57,341602221+02:00.png
+File6[$e]=$HOME/Pictures/2024-04-18T10:24:27,005308383+02:00.png
+File7[$e]=$HOME/Pictures/bg.png
+File8[$e]=$HOME/Documents/tampon.png
+File9[$e]=$HOME/mnt/DCIM/116APPLE/IMG_6820.HEIC
+Name1[$e]=IMG_6075.JPG
+Name10[$e]=tp.png
+Name2[$e]=IMG_5908.JPG
+Name3[$e]=2024-03-20-112047_hyprshot.png
+Name4[$e]=2024-04-18T10:23:26,632049804+02:00.png
+Name5[$e]=2024-04-18T10:23:57,341602221+02:00.png
+Name6[$e]=2024-04-18T10:24:27,005308383+02:00.png
+Name7[$e]=bg.png
+Name8[$e]=tampon.png
+Name9[$e]=IMG_6820.HEIC
+
+[SideBar]
+InformationSplitterSizes=212,255

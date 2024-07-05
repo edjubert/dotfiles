@@ -1,0 +1,131 @@
+{
+	"layer": "top",
+  "margin-top": 4,
+  "margin-bottom": 4,
+  "exclusive": true,
+  "passthrough": false,
+  "gtk-layer-shell": true,
+	"modules-left": ["hyprland/workspaces", "hyprland/window"],
+	"modules-center": ["clock", "custom/notification"],
+	"modules-right": [
+    "bluetooth",
+    "custom/separator",
+    "network",
+    "custom/separator",
+    "backlight-slider",
+    "backlight",
+    "custom/separator",
+    "pulseaudio/slider",
+    "pulseaudio",
+    "custom/separator",
+    "battery"
+  ],
+	"mpd": {
+		"tooltip": false,
+		"format": "{stateIcon} {artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})",
+		"format-disconnected": "ﳌ",
+		"format-stopped": "󰓛 ",
+    "state-icons": {
+        "playing": "󰐊 ",
+        "paused": "󰏤 "
+    }
+	},
+	"pulseaudio": {
+		"tooltip": false,
+		"scroll-step": 5,
+		"format": "{icon} {volume}%",
+    "format-bluetooth": "󰂯 {icon} {volume}%",
+    "format-muted": "<span foreground='grey'>󰖁  {volume}%</span>",
+		"format-icons": {
+      "headphones": "󰋋 ",
+			"default": [" ", " ", " "]
+		},
+    "on-click": "pamixer -t",
+    "on-click-right": "pavucontrol"
+	},
+  "pulseaudio/slider": {
+    "min": 0,
+    "max": 100,
+    "orientation": "horizontal"
+  },
+	"network": {
+		"tooltip": false,
+    "format-disconnected": "Not connected",
+		"format-wifi": "  {essid}",
+		"format-ethernet": "󰈀  {ipaddr}",
+		"on-click": "nm-connection-editor"
+	},
+  "battery": {
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15,
+    },
+    "format": "{icon} {capacity}%",
+    "format-icons": ["󰂎 ", "󰁺 ", "󰁻 ", "󰁼 ", "󰁽 ", "󰁾 ", "󰁿 ", "󰂀 ", "󰂁 ", "󰂂 ", "󰁹 "],
+    "on-click": "tuxedo-control-center"
+  },
+  "custom/separator": {
+    "format": "|",
+    "interval": "once",
+    "tooltip": false
+  },
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "persistent-workspaces": {
+      "*": 5
+    },
+    "format-icons": {
+      "10": "1",
+      "11": "2",
+      "12": "3",
+      "13": "4",
+      "14": "5",
+      "15": "6",
+      "16": "7",
+      "17": "8",
+      "18": "9"
+    }
+  },
+  "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": [" ", " "],
+    "device": "intel_backlight"
+  },
+  "backlight/slider": {
+    "min": 0,
+    "max": 100,
+    "orientation": "horizontal",
+    "device": "intel_backlight"
+  },
+  "bluetooth": {
+    "format": "󰂯",
+    "format-disabled":"<span foreground='grey'>󰂲</span>",
+    "format-connected": "󰂯 {device_alias}",
+    "format-connected-battery": "󰂯 {device_alias} {device_battery_percentage}%",
+    "tooltip-format": "{controller_alias}\n\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\n\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_battery_percentage}%",
+    "on-click": "blueberry"
+  },
+  "custom/notification": {
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "󰂚<span foreground='red'><sup> </sup></span>",
+      "none": "<span foreground='grey'>󰂚 </span>",
+      "dnd-notification": "󰂛<span foreground='red'><sup> </sup></span>",
+      "dnd-none": "<span foreground='grey'>󰂛 </span>",
+      "inhibited-notification": "󱏧<span foreground='red'><sup> </sup></span>",
+      "inhibited-none": "<span foreground='grey'>󱏧 </span>",
+      "dnd-inhibited-notification": "󱏧<span foreground='red'><sup> </sup></span>",
+      "dnd-inhibited-none": "<span foreground='grey'>󱏧 </span>"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  }
+}

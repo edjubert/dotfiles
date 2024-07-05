@@ -1,5 +1,0 @@
-#!/bin/bash -e
-echo "Hello crontab" >> /home/edjubert/crontab_test.txt
-DATE=`date +%s`
-timeshift --create --comments "Boot snapshot $DATE"
-exit 0

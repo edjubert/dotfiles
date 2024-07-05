@@ -1,6 +1,0 @@
-#!/bin/bash
-
-cp ~/.config/gtk-3.0/light.ini ~/.config/gtk-3.0/settings.ini
-cp ~/.config/xfce4/terminal/themes/isooth/terminalrc ~/.config/xfce4/terminal/terminalrc 
-feh --bg-fill /home/edjubert/backgrounds/light_background.png
-# feh --bg-fill /home/edjubert/backgrounds/Lune/0003_DSC05361-Modifier.jpg
