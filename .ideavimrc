@@ -1,0 +1,84 @@
+let mapleader = " "
+set clipboard=unnamedplus
+set scrolloff=5
+set incsearch
+set ignorecase
+set smartcase
+
+map Q q:
+map ; :
+map <leader>w <ESC>:w<CR>
+map <leader>q <ESC>:q<sR>
+map <leader>x <ESC>:x<CR>
+
+set highlightedank
+set commentary
+set easymotion
+set surround
+set quickscope
+set ideamarks
+
+map <leader>e
+map fw :action KJumpAction.Word0<cr>
+
+map gh <Action>(ShowErrorDescription)
+map <leader>n <Action>(GotoNextError)
+map <leader>N <Action>(GotoPreviousError)
+map \r <Action>(ReformatCode)
+map <leader>d <Action>(Run)
+map <leader>D <Action>(Debug)
+map gl <Action>(QuickJavaDoc)
+map gj <Action>(QuickImplementation)
+map <leader>st <Action>(GotoFile)
+map <leader>sf <Action>(FindInPath)
+map <leader>b <Action>(Switcher)
+map <leader>h <Action>(HideActiveWindow)
+map <leader>f <Action>(SelectInProjectView)
+
+"
+" VIM COLEMAK
+"
+" Up/down/left/right {{{
+    nnoremap h h|xnoremap h h|onoremap h h|
+    nnoremap n j|xnoremap n j|onoremap n j|
+    nnoremap e k|xnoremap e k|onoremap e k|
+    nnoremap i l|xnoremap i l|onoremap i l|
+" }}}
+
+" Words forward/backward {{{
+    " j/J = back word/WORD
+    " l/L = end of word/WORD
+    nnoremap j b|xnoremap j b|onoremap j b|
+    nnoremap J B|xnoremap J B|onoremap J B|
+    nnoremap l e|xnoremap l e|onoremap l e|
+    nnoremap L E|xnoremap L E|onoremap L E|
+" }}}
+
+" insert/Replace/append (T) {{{
+    nnoremap m i|
+    nnoremap M I|
+" }}}
+
+" Search {{{
+    nnoremap k n|xnoremap k n|onoremap k n|
+    nnoremap K N|xnoremap K N|onoremap K N|
+" }}}
+
+" inneR text objects {{{
+    " E.g. dip (delete inner paragraph) is now drp
+    onoremap r i
+" }}}
+
+nnoremap <C-K> <C-O>
+nnoremap <C-M> <C-I>
+
+" Window handling {{{
+    nnoremap <C-H> <C-W>h|xnoremap <C-H> <C-W>h|
+    nnoremap <C-N> <C-W>j|xnoremap <C-N> <C-W>j|
+    nnoremap <C-E> <C-W>k|xnoremap <C-E> <C-W>k|
+    nnoremap <C-I> <C-W>l|xnoremap <C-I> <C-W>l|
+    nnoremap <C-W> <C-W>w|xnoremap <C-W> <C-W>w|
+" }}}
+
+nnoremap ci ci
+nnoremap vi vi
