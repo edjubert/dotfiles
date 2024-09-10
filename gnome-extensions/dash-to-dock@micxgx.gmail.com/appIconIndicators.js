@@ -26,6 +26,7 @@ const RunningIndicatorStyle = Object.freeze({
     CILIORA: 6,
     METRO: 7,
     BINARY: 8,
+    DOT: 9,
 });
 
 const MAX_WINDOWS_CLASSES = 4;
@@ -88,8 +89,13 @@ export class AppIconIndicator {
         case RunningIndicatorStyle.METRO:
             runningIndicator = new RunningIndicatorMetro(source);
             break;
+
         case RunningIndicatorStyle.BINARY:
             runningIndicator = new RunningIndicatorBinary(source);
+            break;
+
+        case RunningIndicatorStyle.DOT:
+            runningIndicator = new RunningIndicatorDot(source);
             break;
 
         default:
@@ -673,6 +679,35 @@ class RunningIndicatorBinary extends RunningIndicatorDots {
     }
 }
 
+class RunningIndicatorDot extends RunningIndicatorDots {
+    _computeStyle() {
+        super._computeStyle();
+
+        this._radius = Math.max(this._width / 26, this._borderWidth / 2);
+    }
+
+    _drawIndicator(cr) {
+        if (!this._source.running)
+            return;
+
+        cr.setLineWidth(this._borderWidth);
+        Utils.cairoSetSourceColor(cr, this._borderColor);
+
+        // draw from the bottom case:
+        cr.translate(
+            (this._width - 2 * this._radius) / 2,
+            this._height - this._padding);
+        cr.newSubPath();
+        cr.arc(this._radius,
+            -this._radius - this._borderWidth / 2,
+            this._radius, 0, 2 * Math.PI);
+
+        cr.strokePreserve();
+        Utils.cairoSetSourceColor(cr, this._bodyColor);
+        cr.fill();
+    }
+}
+
 /*
  * Unity like notification and progress indicators
  */
@@ -705,22 +740,10 @@ export class UnityIndicator extends IndicatorBase {
         },
     };
 
+    static notificationBadgeSignals = Symbol('notification-badge-signals');
+
     constructor(source) {
         super(source);
-
-        this._notificationBadgeLabel = new St.Label();
-        this._notificationBadgeBin = new St.Bin({
-            child: this._notificationBadgeLabel,
-            x_align: Clutter.ActorAlign.END,
-            y_align: Clutter.ActorAlign.START,
-            x_expand: true, y_expand: true,
-        });
-        this._notificationBadgeLabel.add_style_class_name('notification-badge');
-        this._notificationBadgeLabel.clutter_text.ellipsize = Pango.EllipsizeMode.MIDDLE;
-        this._notificationBadgeBin.hide();
-
-        this._source._iconContainer.add_child(this._notificationBadgeBin);
-        this.updateNotificationBadgeStyle();
 
         const {remoteModel, notificationsMonitor} = Docking.DockManager.getDefault();
         const remoteEntry = remoteModel.lookupById(this._source.app.id);
@@ -748,14 +771,6 @@ export class UnityIndicator extends IndicatorBase {
             'changed',
             () => this._updateNotificationsCount(),
         ], [
-            St.ThemeContext.get_for_stage(global.stage),
-            'changed',
-            () => this.updateNotificationBadgeStyle(),
-        ], [
-            this._source._iconContainer,
-            'notify::size',
-            () => this.updateNotificationBadgeStyle(),
-        ], [
             this._source,
             'style-changed',
             () => this._updateIconStyle(),
@@ -769,7 +784,7 @@ export class UnityIndicator extends IndicatorBase {
     }
 
     destroy() {
-        this._notificationBadgeBin.destroy();
+        this._notificationBadgeBin?.destroy();
         this._notificationBadgeBin = null;
         this._hideProgressOverlay();
         this.setUrgent(false);
@@ -779,7 +794,7 @@ export class UnityIndicator extends IndicatorBase {
         super.destroy();
     }
 
-    updateNotificationBadgeStyle() {
+    _updateNotificationBadgeStyle() {
         const themeContext = St.ThemeContext.get_for_stage(global.stage);
         const fontDesc = themeContext.get_font();
         const defaultFontSize = fontDesc.get_size() / 1024;
@@ -804,7 +819,7 @@ export class UnityIndicator extends IndicatorBase {
         fontSize = Math.round(sizeMultiplier * fontSize);
         const leftMargin = Math.round(sizeMultiplier * 3);
 
-        this._notificationBadgeLabel.set_style(
+        this._notificationBadgeBin.child.set_style(
             `font-size: ${fontSize}px;` +
             `margin-left: ${leftMargin}px`
         );
@@ -848,13 +863,52 @@ export class UnityIndicator extends IndicatorBase {
         this.setNotificationCount(remoteCount + notificationsCount);
     }
 
+    _updateNotificationsBadge(text) {
+        if (this._notificationBadgeBin) {
+            this._notificationBadgeBin.child.text = text;
+            return;
+        }
+
+        this._notificationBadgeBin = new St.Bin({
+            child: new St.Label({
+                styleClass: 'notification-badge',
+                text,
+            }),
+            xAlign: Clutter.ActorAlign.END,
+            yAlign: Clutter.ActorAlign.START,
+            xExpand: true,
+            yExpand: true,
+        });
+        this._notificationBadgeBin.child.clutterText.ellipsize =
+            Pango.EllipsizeMode.MIDDLE;
+
+        this._source._iconContainer.add_child(this._notificationBadgeBin);
+        this._updateNotificationBadgeStyle();
+
+        const themeContext = St.ThemeContext.get_for_stage(global.stage);
+        this._signalsHandler.addWithLabel(UnityIndicator.notificationBadgeSignals, [
+            themeContext,
+            'changed',
+            () => this._updateNotificationBadgeStyle(),
+        ], [
+            themeContext,
+            'notify::scale-factor',
+            () => this._updateNotificationBadgeStyle(),
+        ], [
+            this._source._iconContainer,
+            'notify::size',
+            () => this._updateNotificationBadgeStyle(),
+        ]);
+    }
+
     setNotificationCount(count) {
         if (count > 0) {
             const text = this._notificationBadgeCountToText(count);
-            this._notificationBadgeLabel.set_text(text);
-            this._notificationBadgeBin.show();
-        } else {
-            this._notificationBadgeBin.hide();
+            this._updateNotificationsBadge(text);
+        } else if (this._notificationBadgeBin) {
+            this._signalsHandler.removeWithLabel(UnityIndicator.notificationBadgeSignals);
+            this._notificationBadgeBin.destroy();
+            this._notificationBadgeBin = null;
         }
     }
 
@@ -915,14 +969,17 @@ export class UnityIndicator extends IndicatorBase {
         return output;
     }
 
-    _readElementData(node, elementName, defaultValues) {
-        const defaultLineWidth = defaultValues.lineWidth ?? 1.0;
-        const [hasValue, lineWidth] = node.lookup_double(`${elementName}-line-width`, false);
+    _readThemeDoubleValue(node, elementName, defaultValue) {
+        const [hasValue, value] = node.lookup_double(elementName, false);
+        return hasValue ? value : defaultValue;
+    }
 
+    _readElementData(node, elementName, defaultValues) {
         return {
             background: this._readGradientData(node, `${elementName}-background`, defaultValues.background),
             border: this._readGradientData(node, `${elementName}-border`, defaultValues.border),
-            lineWidth: hasValue ? lineWidth : defaultLineWidth,
+            lineWidth: this._readThemeDoubleValue(node, `${elementName}-line-width`,
+                defaultValues.lineWidth ?? 1.0),
         };
     }
 
@@ -959,24 +1016,25 @@ export class UnityIndicator extends IndicatorBase {
         let x = Math.floor((surfaceWidth - iconSize) / 2);
         let y = Math.floor((surfaceHeight - iconSize) / 2);
 
-        const [hasTopOffset, topOffset] = node.lookup_double(
-            '-progress-bar-top-offset', false);
-        if (hasTopOffset)
-            y = topOffset;
+        const readThemeValue = element =>
+            this._readThemeDoubleValue(node, `-progress-bar-${element}`);
+
+        y = readThemeValue('top-offset') ?? y;
 
         const baseLineWidth = Math.floor(Number(scaleFactor));
-        const padding = Math.floor(iconSize * 0.05);
-        let width = iconSize - 2.0 * padding;
-        let height = Math.floor(Math.min(18.0 * scaleFactor, 0.20 * iconSize));
-        x += padding;
+        const horizontalPadding = iconSize *
+            Utils.clampDouble(readThemeValue('horizontal-padding') ?? 0.05);
+        const verticalPadding = iconSize *
+            Utils.clampDouble(readThemeValue('vertical-padding') ?? 0.05);
+        const heightFactor =
+            Utils.clampDouble(readThemeValue('height-factor') ?? 0.20);
 
-        const valignParameters = node.lookup_double(
-            '-progress-bar-valign', false);
-        const [hasValign] = valignParameters;
-        let [, valign] = valignParameters;
-        if (!hasValign)
-            valign = 1.0;
-        y += (iconSize - height - padding) * valign;
+        let width = iconSize - 2.0 * horizontalPadding;
+        let height = Math.floor(Math.min(18.0 * scaleFactor, heightFactor * iconSize));
+        x += horizontalPadding;
+
+        const valign = Utils.clampDouble(readThemeValue('valign') ?? 1);
+        y += (iconSize - height - verticalPadding) * valign;
 
         const progressBarTrack = this._readElementData(node,
             '-progress-bar-track',
@@ -1049,12 +1107,8 @@ export class UnityIndicator extends IndicatorBase {
     }
 
     _updateIconStyle() {
-        const opacityLookup =
-            this._source.get_theme_node().lookup_double('opacity', true);
-        const [hasOpacity] = opacityLookup;
-        let [, opacity] = opacityLookup;
-        if (!hasOpacity)
-            opacity = this._source.updating ? 0.5 : 1;
+        const opacity = this._readThemeDoubleValue(this._source.get_theme_node(),
+            'opacity') ?? (this._source.updating ? 0.5 : 1);
         this._source.icon.set_opacity(255 * opacity);
     }
 }

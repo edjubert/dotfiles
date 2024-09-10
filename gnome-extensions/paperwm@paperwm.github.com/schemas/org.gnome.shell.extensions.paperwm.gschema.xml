@@ -594,7 +594,7 @@
 
     <key type="d" name="window-switcher-preview-scale">
       <default>0.15</default>
-      <summary>Scale of window switch previewse.  Scale is percent of actual window size</summary>
+      <summary>Scale of window switch previews.  Scale is percent of actual window size</summary>
     </key>
 
     <key type="b" name="only-scratch-in-overview">
@@ -730,7 +730,7 @@
 
     <key type="i" name="drag-drift-speed">
         <default>2</default>
-        <summary>Drift speed (px/ms) when mouse is at edge of montior when dragging windows</summary>
+        <summary>Drift speed (px/ms) when mouse is at edge of monitor when dragging windows</summary>
     </key>
 
     <key type="d" name="overview-max-window-scale">
