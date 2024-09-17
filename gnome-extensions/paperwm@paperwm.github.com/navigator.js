@@ -72,7 +72,7 @@ class ActionDispatcher {
         console.debug("#dispatch", "created");
         this.signals = new Utils.Signals();
         this.actor = Tiling.spaces.spaceContainer;
-        this.actor.set_flags(Clutter.ActorFlags.REACTIVE);
+        this.actor.reactive = true;
         this.navigator = getNavigator();
 
         if (grab) {
@@ -279,7 +279,7 @@ class ActionDispatcher {
             console.debug("Failed to release grab: ", e);
         }
 
-        this.actor.unset_flags(Clutter.ActorFlags.REACTIVE);
+        this.actor.reactive = false;
         this.signals.destroy();
         this.signals = null;
         // We have already destroyed the navigator

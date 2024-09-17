@@ -177,7 +177,7 @@ export class StackOverlay {
         });
 
         // Uncomment to debug the overlays
-        // overlay.background_color = Clutter.color_from_string('green')[1];
+        // overlay.background_color = Utils.color_from_string('green')[1];
         // overlay.opacity = 100;
 
         this.monitor = monitor;

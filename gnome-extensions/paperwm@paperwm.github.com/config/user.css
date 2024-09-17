@@ -33,11 +33,23 @@ DEFAULT STYLES ARE PROVIDED BELOW FOR REFERENCE:
     background-color: transparent;
 }
 
+.open-position-icon {
+    icon-size: 22px;
+    padding: 0;
+    background-color: transparent;
+}
+
 .focus-button-tooltip {
     background-color: rgba(0, 0, 0, 0.8);
     padding: 8px;
     border-radius: 8px;
     font-weight: 600;
+}
+
+.take-window-hint {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 8px;
+    border-radius: 8px;
 }
 
 .workspace-icon-button {
@@ -53,6 +65,11 @@ DEFAULT STYLES ARE PROVIDED BELOW FOR REFERENCE:
 
 .paperwm-minimap-selection {
     border-radius: 8px;
+}
+
+.paperwm-clone-shade {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 7px 7px 0px 0px;
 }
 
 .paperwm-window-position-bar-backdrop {

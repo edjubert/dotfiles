@@ -105,6 +105,21 @@ export function setBackgroundImage(actor, resource_path) {
     actor.content_repeat = Clutter.ContentRepeat.BOTH;
 }
 
+/**
+ * Backwards compatible function.  Attempts to use Cogl.Color with a fallback
+ * to Clutter.Color.
+ * @param {String} colorString
+ */
+export function color_from_string(colorString) {
+    try {
+        // Gnome 47+ merged Clutter.Color into Cogl.Color
+        return Cogl.Color.from_string(colorString);
+    } catch (error) {
+        // fallback for Gnome 45, 46
+        return Clutter.Color.from_string(colorString);
+    }
+}
+
 
 // // Debug and development utils
 
@@ -156,7 +171,7 @@ export function toggleCloneMarks() {
         if (metaWindow.clone) {
             metaWindow.clone.opacity = 190;
             metaWindow.clone.__oldOpacity = 190;
-            metaWindow.clone.background_color = Clutter.color_from_string("red")[1];
+            metaWindow.clone.background_color = color_from_string("red")[1];
         }
     }
     function unmarkCloneOf(metaWindow) {

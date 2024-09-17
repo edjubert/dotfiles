@@ -6,7 +6,7 @@ import GObject from 'gi://GObject';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as AltTab from 'resource:///org/gnome/shell/ui/altTab.js';
 
-import { Settings, Keybindings, Tiling, Scratch } from './imports.js';
+import { Settings, Keybindings, Tiling, Scratch, Utils } from './imports.js';
 import { Easer } from './utils.js';
 
 let switcherSettings;
@@ -66,7 +66,7 @@ export const LiveAltTab = GObject.registerClass(
             let fog = new Clutter.Actor({
                 x: workArea.x, y: workArea.y,
                 width: workArea.width, height: workArea.height,
-                opacity: 0, background_color: Clutter.color_from_string("black")[1],
+                opacity: 0, background_color: Utils.color_from_string("black")[1],
             });
 
             // this.blur = new Clutter.BlurEffect();
