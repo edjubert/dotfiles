@@ -3,3 +3,4 @@
 -Dtoolbox.notification.token=ca531ed9-28c2-4618-bbc7-770cfe59222f
 -Dtoolbox.notification.portFile=/home/edjubert/.cache/JetBrains/Toolbox/ports/0936f1ed-6f9d-4e54-9ce5-b165cb8a792f.port
 -Deditor.distraction.free.mode=true
+-Dawt.toolkit.name=WLToolkit
