@@ -1,0 +1,36 @@
+#titlebar { display: none; }
+/*.urlbar-input-box { text-align: center; }*/
+
+#nav-bar { margin: 0; border-radius: 10px 10px 0 0; }
+/*#urlbar:not([focused]) #urlbar-background { opacity: 0 !important; }*/
+
+* {
+    font-family: "SF Pro";
+}
+
+.browserContainer browser {
+    border-radius: 10px !important;
+    margin: 0.5vh 0.5vh 0.5vh 0.5vh;
+}
+
+/* Hide the top.
+ * Beautiful but does not appear when focused
+ */
+
+/*#navigator-toolbox {*/
+/*    max-height: 1vh;*/
+/**/
+/*    & * {*/
+/*        opacity: 0;*/
+/*    }*/
+/*}*/
+/**/
+/*#navigator-toolbox:hover {*/
+/*    max-height: 100vh;*/
+/*    height: auto;*/
+/**/
+/*    & * {*/
+/*        opacity: 1;*/
+/*    }*/
+/*}*/
+
