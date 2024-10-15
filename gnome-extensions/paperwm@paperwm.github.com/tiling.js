@@ -2694,6 +2694,15 @@ export const Spaces = class Spaces extends Map {
         this.forEach(s => s.setSpaceTopbarElementsVisible(true, { force: true }));
     }
 
+    switchSpace(fromSpace, toSpace, animate = false) {
+        const fromId = fromSpace?.index;
+        const toId = toSpace?.index;
+        if (!fromSpace || !toSpace) {
+            return;
+        }
+        spaces.switchWorkspace(null, fromId, toId, animate);
+    }
+
     switchWorkspace(wm, fromIndex, toIndex, animate = false) {
         /**
          * disable swipetrackers on workspace switch to avoid gesture confusion
@@ -3978,10 +3987,6 @@ export function insertWindow(metaWindow, options = {}) {
         return;
     }
 
-    const actor = metaWindow.get_compositor_private();
-    const space = spaces.spaceOfWindow(metaWindow);
-    const active = space.selectedWindow;
-
     const connectSizeChanged = tiled => {
         if (tiled) {
             animateWindow(metaWindow);
@@ -3992,6 +3997,9 @@ export function insertWindow(metaWindow, options = {}) {
         delete metaWindow.unmapped;
     };
 
+    const actor = metaWindow.get_compositor_private();
+
+    let overwriteSpace;
     if (!existing) {
         /**
          * Note: Can't trust global.display.focus_window to determine currently focused window.
@@ -4015,12 +4023,24 @@ export function insertWindow(metaWindow, options = {}) {
                 console.debug("#winprops", `Move ${metaWindow?.title} to scratch`);
                 addToScratch = true;
             }
-            if (winprop.focus) {
-                Main.activateWindow(metaWindow);
-            }
 
             // pass winprop properties to metaWindow
             metaWindow.preferredWidth = winprop.preferredWidth;
+
+            overwriteSpace = winprop.spaceIndex;
+            if (overwriteSpace !== undefined) {
+                if (typeof overwriteSpace !== "number") {
+                    console.error("#winprops", `${overwriteSpace} is not a valid index. Ignoring.`);
+                    overwriteSpace = undefined;
+                }
+                // save temporary as metaWindow property
+                metaWindow.overwriteSpace = overwriteSpace;
+            }
+
+            if (winprop.focus) {
+                console.debug("#winprops", `setting ${metaWindow?.title} to focusOnOpen`);
+                metaWindow.focusOnOpen = true;
+            }
         }
 
         if (addToScratch) {
@@ -4060,6 +4080,32 @@ export function insertWindow(metaWindow, options = {}) {
         Scratch.makeScratch(metaWindow);
         return;
     }
+
+    const space = spaces.spaceOfWindow(metaWindow);
+
+    if (overwriteSpace !== undefined) {
+        const newspace = spaces.spaceOfIndex(overwriteSpace);
+        if (!newspace) {
+            Main.notify(
+                `PaperWM [winprop]: cannot open window on workspace ${overwriteSpace} (index)`,
+                `"${metaWindow?.title}" cannot be opened on workspace with index ${overwriteSpace} 
+(workspace not found). Opening on current workspace instead.`
+            );
+            console.warn("#winprops", `overwriteSpace with index ${overwriteSpace} does not exist. \
+Opening "${metaWindow?.title}" on current space.`);
+        }
+        else {
+            console.debug("#winprops", `inserting window into space ${newspace.name}`);
+            metaWindow.change_workspace(newspace.workspace);
+            metaWindow.foreach_transient(t => {
+                space.addFloating(t);
+            });
+            connectSizeChanged(true);
+            insertWindow(metaWindow, { existing: true });
+            return;
+        }
+    }
+    const active = space.selectedWindow;
 
     if (!add_filter(metaWindow)) {
         connectSizeChanged();
@@ -4164,6 +4210,18 @@ export function insertWindow(metaWindow, options = {}) {
 
     space.layout();
     animateWindow(metaWindow);
+    if (metaWindow.overwriteSpace !== undefined) {
+        delete metaWindow.overwriteSpace;
+        if (!metaWindow.focusOnOpen) {
+            return;
+        }
+        else {
+            delete metaWindow.focusOnOpen;
+            console.debug("#winprops", "focusing space of inserted window");
+            spaces.spaceOfWindow(metaWindow)?.activateWithFocus(metaWindow, false, true);
+        }
+    }
+
     if (metaWindow === display.focus_window) {
         focus_handler(metaWindow);
     } else if (space === spaces.activeSpace) {

@@ -72,7 +72,7 @@ export function registerOverrideProp(obj, name, override, warn = true) {
     // check if prop exists
     const exists = obj?.[name];
     if (!exists && warn) {
-        console.log(`#PaperWM: attempt to override prop for '${name}' failed: is null or undefined`);
+        console.warn(`#PaperWM: attempt to override prop for '${name}' failed: is null or undefined`);
     }
 
     let saved = getSavedProp(obj, name) ?? obj[name];
@@ -94,7 +94,7 @@ export function registerOverridePrototype(obj, name, override) {
     // check if method for prototype exists
     const exists = obj?.prototype?.[name];
     if (!exists) {
-        console.log(`#PaperWM: attempt to override prototype for '${name}' failed: is null or undefined`);
+        console.warn(`#PaperWM: attempt to override prototype for '${name}' failed: is null or undefined`);
     }
 
     registerOverrideProp(obj.prototype, name, override);

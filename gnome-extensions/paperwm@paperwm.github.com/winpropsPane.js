@@ -32,12 +32,17 @@ export const WinpropsPane = GObject.registerClass({
 
         this._expandedRow = null;
         this.rows = [];
+        this.workspaces = [];
     }
 
     addWinprops(winprops) {
         winprops.forEach(winprop => {
             this._listbox.insert(this._createRow(winprop), -1);
         });
+    }
+
+    setWorkspaces(workspaces) {
+        this.workspaces = workspaces;
     }
 
     _removeRow(row) {
@@ -61,7 +66,7 @@ export const WinpropsPane = GObject.registerClass({
 
     _createRow(winprop) {
         let wp = winprop ?? { wm_class: '' };
-        const row = new WinpropsRow({ winprop: wp });
+        const row = new WinpropsRow({ winprop: wp, workspaces: this.workspaces });
         this.rows.push(row);
         row.connect('notify::expanded', row => this._onRowExpanded(row));
         row.connect('row-deleted', row => this._removeRow(row));
@@ -101,6 +106,8 @@ export const WinpropsRow = GObject.registerClass({
         'title',
         'scratchLayer',
         'preferredWidth',
+        'space',
+        'focus',
         'deleteButton',
     ],
     Properties: {
@@ -109,6 +116,12 @@ export const WinpropsRow = GObject.registerClass({
             'winprop',
             'Winprop',
             GObject.ParamFlags.READWRITE | GObject.ParamFlags.CONSTRUCT_ONLY
+        ),
+        workspaces: GObject.ParamSpec.jsobject(
+            'workspaces',
+            'workspaces',
+            'Workspaces',
+            GObject.ParamFlags.READWRITE
         ),
         expanded: GObject.ParamSpec.boolean(
             'expanded',
@@ -191,6 +204,29 @@ export const WinpropsRow = GObject.registerClass({
             }
         });
 
+        this._space.append_text("CURRENT");
+        for (const [i, name] of this.workspaces.entries()) {
+            // Combo box entries in normal workspace index order
+            this._space.append_text(`${i}: ${name}`);
+        }
+        // index 0 is CURRENT, so add 1
+        this._space.set_active((this.winprop.spaceIndex ?? -1) + 1);
+        this._space.connect('changed', () => {
+            let value = this._space.get_active() - 1;
+            if (value < 0) {
+                value = undefined;
+            }
+            this.winprop.spaceIndex = value;
+            this.emit('changed');
+        });
+
+        this._focus.set_active(this.winprop.focus ?? true);
+        this._focus.connect('state-set', () => {
+            let isActive = this._focus.get_active();
+            this.winprop.focus = isActive;
+            this.emit('changed');
+        });
+
         this._updateState();
     }
 
@@ -262,15 +298,16 @@ export const WinpropsRow = GObject.registerClass({
     }
 
     _setAccelLabel() {
-        let isScratch = this.winprop.scratch_layer ?? false;
-        let isPreferredWidth = this.winprop.preferredWidth || false;
-
-        if (isScratch) {
+        if (this.winprop.scratch_layer ?? false) {
             return 'scratch layer';
         }
-        else if (isPreferredWidth) {
+        else if (this.winprop.preferredWidth ?? false) {
             return 'preferred width';
-        } else {
+        }
+        else if (this.winprop.spaceIndex !== undefined) {
+            return 'workspace';
+        }
+        else {
             return 'no setting';
         }
     }

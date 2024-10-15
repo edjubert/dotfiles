@@ -7,7 +7,9 @@ import { ExtensionPreferences } from 'resource:///org/gnome/Shell/Extensions/js/
 
 import * as Settings from './settings.js';
 import { WorkspaceSettings } from './workspace.js';
+// eslint-disable-next-line no-unused-vars
 import * as KeybindingsPane from './prefsKeybinding.js';
+// eslint-disable-next-line no-unused-vars
 import * as WinpropsPane from './winpropsPane.js';
 
 const _ = s => s;
@@ -35,7 +37,7 @@ export default class PaperWMPrefs extends ExtensionPreferences {
             tempFile.delete(null);
         } catch (e) { }
 
-        let selectedTab = selectedWorkspace !== null ? 1 : 0;
+        const selectedTab = selectedWorkspace !== null ? 1 : 0;
         window.set_size_request(626, 700);
         new SettingsWidget(
             this,
@@ -153,12 +155,12 @@ class SettingsWidget {
         intValueChanged('bottom_margin_spinner', 'vertical-margin-bottom');
 
         // processing function for cycle values
-        let cycleProcessor = (elementName, settingName, resetElementName) => {
-            let element = this.builder.get_object(elementName);
-            let steps = this._settings.get_value(settingName).deep_unpack();
+        const cycleProcessor = (elementName, settingName, resetElementName) => {
+            const element = this.builder.get_object(elementName);
+            const steps = this._settings.get_value(settingName).deep_unpack();
 
             // need to check if current values are ratio or pixel ==> assume if all <=1 is ratio
-            let isRatio = steps.every(v => v <= 1);
+            const isRatio = steps.every(v => v <= 1);
             let value;
             if (isRatio) {
                 value = steps.map(v => `${(v * 100.0).toString()}%`).toString();
@@ -170,9 +172,9 @@ class SettingsWidget {
             element.connect('changed', () => {
                 // process values
                 // check if values are percent or pixel
-                let value = element.get_text();
-                let isPercent = value.split(';').map(v => v.trim()).every(v => /^.*%$/.test(v));
-                let isPixels = value.split(';').map(v => v.trim()).every(v => /^.*px$/.test(v));
+                const value = element.get_text();
+                const isPercent = value.split(';').map(v => v.trim()).every(v => /^.*%$/.test(v));
+                const isPixels = value.split(';').map(v => v.trim()).every(v => /^.*px$/.test(v));
                 if (isPercent && isPixels) {
                     console.error("cycle width/height values cannot mix percentage and pixel values");
                     element.add_css_class('error');
@@ -185,7 +187,7 @@ class SettingsWidget {
                 }
 
                 // now process element value into internal array
-                let varr = value
+                const varr = value
                     .split(';')
                     .map(v => v.trim())
                     .map(v => v.replaceAll(/[^\d.]/g, '')) // strip everything but digits and period
@@ -212,23 +214,23 @@ class SettingsWidget {
         cycleProcessor('cycle_widths_entry', 'cycle-width-steps', 'cycle_widths_reset_button');
         cycleProcessor('cycle_heights_entry', 'cycle-height-steps', 'cycle_heights_reset_button');
 
-        let vSens = this.builder.get_object('vertical-sensitivity');
-        let hSens = this.builder.get_object('horizontal-sensitivity');
-        let [sx, sy] = this._settings.get_value('swipe-sensitivity').deep_unpack();
+        const vSens = this.builder.get_object('vertical-sensitivity');
+        const hSens = this.builder.get_object('horizontal-sensitivity');
+        const [sx, sy] = this._settings.get_value('swipe-sensitivity').deep_unpack();
         hSens.set_value(sx);
         vSens.set_value(sy);
-        let sensChanged = () => {
+        const sensChanged = () => {
             this._settings.set_value('swipe-sensitivity', new GLib.Variant('ad', [hSens.get_value(), vSens.get_value()]));
         };
         vSens.connect('value-changed', sensChanged);
         hSens.connect('value-changed', sensChanged);
 
-        let vFric = this.builder.get_object('vertical-friction');
-        let hFric = this.builder.get_object('horizontal-friction');
-        let [fx, fy] = this._settings.get_value('swipe-friction').deep_unpack();
+        const vFric = this.builder.get_object('vertical-friction');
+        const hFric = this.builder.get_object('horizontal-friction');
+        const [fx, fy] = this._settings.get_value('swipe-friction').deep_unpack();
         hFric.set_value(fx);
         vFric.set_value(fy);
-        let fricChanged = () => {
+        const fricChanged = () => {
             this._settings.set_value('swipe-friction', new GLib.Variant('ad', [hFric.get_value(), vFric.get_value()]));
         };
         vFric.connect('value-changed', fricChanged);
@@ -347,28 +349,32 @@ class SettingsWidget {
         //       stack at construction time.. (!)
         //       Ensure the initially selected workspace is added to the stack
         //       first as a workaround.
-        let wsIndices = this.range(nWorkspaces);
-        let wsSettingsByIndex = wsIndices.map(i => this.workspaceSettings.getWorkspaceSettings(i)[1]);
-        let wsIndicesSelectedFirst =
+        const wsIndices = this.range(nWorkspaces);
+        const wsSettingsByIndex = wsIndices.map(i => this.workspaceSettings.getWorkspaceSettings(i)[1]);
+        const wsIndicesSelectedFirst =
             this.swapArrayElements(wsIndices.slice(), 0, selectedWorkspace);
 
         for (let i of wsIndicesSelectedFirst) {
-            let view = this.createWorkspacePage(wsSettingsByIndex[i], i);
+            const view = this.createWorkspacePage(wsSettingsByIndex[i], i);
             workspaceStack.add_named(view, i.toString());
         }
 
+        const workspaces = [];
         for (let i of wsIndices) {
             // Combo box entries in normal workspace index order
-            let name = this.getWorkspaceName(wsSettingsByIndex[i], i);
+            const name = this.getWorkspaceName(wsSettingsByIndex[i], i);
             workspaceCombo.append_text(name);
+            workspaces.push(name);
         }
+
+        this.builder.get_object('winpropsPane').setWorkspaces(workspaces);
 
         this.builder.get_object('workspace_reset_button').connect('clicked', () => {
             this._updatingName = true;
             wmSettings.set_strv('workspace-names', []);
 
-            let settings = i => wsSettingsByIndex[i];
-            let name = (s, i) => this.getWorkspaceName(s, i);
+            const settings = i => wsSettingsByIndex[i];
+            const name = (s, i) => this.getWorkspaceName(s, i);
             workspaceCombo.remove_all();
             for (let i of wsIndices) {
                 settings(i).reset('name');
@@ -377,8 +383,8 @@ class SettingsWidget {
 
             // update pages
             for (let j of wsIndicesSelectedFirst) {
-                let view = workspaceStack.get_child_by_name(j.toString());
-                let nameEntry = view.get_first_child().get_last_child();
+                const view = workspaceStack.get_child_by_name(j.toString());
+                const nameEntry = view.get_first_child().get_last_child();
                 nameEntry.set_text(name(settings(j), j));
             }
             this._updatingName = false;
@@ -390,21 +396,21 @@ class SettingsWidget {
             if (this._updatingName)
                 return;
 
-            let active = workspaceCombo.get_active();
+            const active = workspaceCombo.get_active();
             workspaceStack.set_visible_child_name(active.toString());
         });
 
         workspaceCombo.set_active(selectedWorkspace);
 
         // Keybindings
-        let keybindingsPane = this.builder.get_object('keybindings_pane');
+        const keybindingsPane = this.builder.get_object('keybindings_pane');
         keybindingsPane.init(extension);
 
         // Winprops
-        let winprops = this._settings.get_value('winprops').deep_unpack()
+        const winprops = this._settings.get_value('winprops').deep_unpack()
             .map(p => JSON.parse(p));
         // sort a little nicer
-        let valueFn = wp => {
+        const valueFn = wp => {
             if (wp.wm_class) {
                 return wp.wm_class;
             }
@@ -414,15 +420,15 @@ class SettingsWidget {
             return '';
         };
         winprops.sort((a, b) => {
-            let aa = valueFn(a).replaceAll(/[/]/g, '');
-            let bb = valueFn(b).replaceAll(/[/]/g, '');
+            const aa = valueFn(a).replaceAll(/[/]/g, '');
+            const bb = valueFn(b).replaceAll(/[/]/g, '');
             return aa.localeCompare(bb);
         });
-        let winpropsPane = this.builder.get_object('winpropsPane');
+        const winpropsPane = this.builder.get_object('winpropsPane');
         winpropsPane.addWinprops(winprops);
         winpropsPane.connect('changed', () => {
             // update gsettings with changes
-            let rows = winpropsPane.rows
+            const rows = winpropsPane.rows
                 .filter(r => r.checkHasWmClassOrTitle())
                 .map(r => JSON.stringify(r.winprop));
 
@@ -584,31 +590,31 @@ class SettingsWidget {
     }
 
     range(n) {
-        let r = [];
+        const r = [];
         for (let i = 0; i < n; i++)
             r.push(i);
         return r;
     }
 
     swapArrayElements(array, i, j) {
-        let iVal = array[i];
+        const iVal = array[i];
         array[i] = array[j];
         array[j] = iVal;
         return array;
     }
 
     createWorkspacePage(settings, index) {
-        let list = new Gtk.Box({
+        const list = new Gtk.Box({
             orientation: Gtk.Orientation.VERTICAL,
             focusable: false,
         });
-        let nameEntry = new Gtk.Entry();
-        let colorButton = new Gtk.ColorButton();
+        const nameEntry = new Gtk.Entry();
+        const colorButton = new Gtk.ColorButton();
 
         // Background
 
-        let backgroundBox = new Gtk.Box({ spacing: 16 });
-        let background = this.createFileChooserButton(
+        const backgroundBox = new Gtk.Box({ spacing: 16 });
+        const background = this.createFileChooserButton(
             settings,
             'background',
             'image-x-generic',
@@ -622,7 +628,7 @@ class SettingsWidget {
                 transient_for: this.window.get_root(),
             }
         );
-        let clearBackground = new Gtk.Button({
+        const clearBackground = new Gtk.Button({
             icon_name: 'edit-clear-symbolic',
             tooltip_text: 'Clear workspace background',
             sensitive: settings.get_string('background') !== '',
@@ -630,24 +636,24 @@ class SettingsWidget {
         backgroundBox.append(background);
         backgroundBox.append(clearBackground);
 
-        let hideTopBarSwitch = new Gtk.Switch({ active: !settings.get_boolean('show-top-bar') });
-        let hidePositionBarSwitch = new Gtk.Switch({ active: !settings.get_boolean('show-position-bar') });
+        const hideTopBarSwitch = new Gtk.Switch({ active: !settings.get_boolean('show-top-bar') });
+        const hidePositionBarSwitch = new Gtk.Switch({ active: !settings.get_boolean('show-position-bar') });
 
-        let directoryBox = new Gtk.Box({ spacing: 16 });
-        let directoryChooser = this.createFileChooserButton(
+        const directoryBox = new Gtk.Box({ spacing: 16 });
+        const directoryChooser = this.createFileChooserButton(
             settings,
             'directory',
             'folder',
             'folder-open-symbolic',
             {
                 action: Gtk.FileChooserAction.SELECT_FOLDER,
-                title: 'Select workspace background',
+                title: 'Select workspace directory',
                 select_multiple: false,
                 modal: true,
                 transient_for: this.window.get_root(),
             }
         );
-        let clearDirectory = new Gtk.Button({
+        const clearDirectory = new Gtk.Button({
             icon_name: 'edit-clear-symbolic',
             tooltip_text: 'Clear workspace directory',
             sensitive: settings.get_string('directory') !== '',
@@ -662,9 +668,9 @@ class SettingsWidget {
         list.append(this.createRow('Hide Window Position Bar', hidePositionBarSwitch));
         list.append(this.createRow('Directory', directoryBox));
 
-        let rgba = new Gdk.RGBA();
+        const rgba = new Gdk.RGBA();
         let color = settings.get_string('color');
-        let palette = this._settings.get_strv('workspace-colors');
+        const palette = this._settings.get_strv('workspace-colors');
         if (color === '')
             color = palette[index % palette.length];
 
@@ -673,7 +679,7 @@ class SettingsWidget {
 
         nameEntry.set_text(this.getWorkspaceName(settings, index));
 
-        let workspace_combo = this.builder.get_object('workspace_combo_text');
+        const workspace_combo = this.builder.get_object('workspace_combo_text');
 
         nameEntry.connect('changed', () => {
             if (this._updatingName) {
@@ -739,13 +745,13 @@ class SettingsWidget {
     }
 
     createRow(text, widget) {
-        let margin = 12;
-        let box = new Gtk.Box({
+        const margin = 12;
+        const box = new Gtk.Box({
             margin_start: margin, margin_end: margin,
             margin_top: margin / 2, margin_bottom: margin / 2,
             orientation: Gtk.Orientation.HORIZONTAL,
         });
-        let label = new Gtk.Label({
+        const label = new Gtk.Label({
             label: text, hexpand: true, xalign: 0,
         });
 

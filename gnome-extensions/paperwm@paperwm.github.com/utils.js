@@ -363,7 +363,7 @@ export function printActorTree(node, fmt = mkFmt(), options = {}, state = null) 
         }
     }
     if (!collapse) {
-        console.log(Lib.indent(state.level, fmt(node, state.actorPrefix)));
+        console.debug(Lib.indent(state.level, fmt(node, state.actorPrefix)));
         state.actorPrefix = "";
         state.level += 1;
     }
