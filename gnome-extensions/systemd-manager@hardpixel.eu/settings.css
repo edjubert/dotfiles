@@ -1,9 +1,0 @@
-.card box.frame {
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
-}
-
-treeview header button:first-child {
-  border-left: 0px;
-}

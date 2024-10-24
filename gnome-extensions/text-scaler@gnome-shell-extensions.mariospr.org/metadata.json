@@ -5,7 +5,8 @@
   "name": "Text Scaler",
   "shell-version": [
     "45",
-    "46"
+    "46",
+    "47"
   ],
   "url": "https://github.com/mariospr/text-scaler-gnome-shell-extension",
   "uuid": "text-scaler@gnome-shell-extensions.mariospr.org",
