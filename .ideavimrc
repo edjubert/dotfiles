@@ -11,7 +11,7 @@ map <leader>w <ESC>:w<CR>
 map <leader>q <ESC>:q<sR>
 map <leader>x <ESC>:x<CR>
 
-set highlightedank
+set highlightedyank
 set commentary
 set easymotion
 set surround
