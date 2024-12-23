@@ -11,6 +11,10 @@ map <leader>w <ESC>:w<CR>
 map <leader>q <ESC>:q<sR>
 map <leader>x <ESC>:x<CR>
 
+map <Leader>pf <action>(com.mituuz.fuzzier.Fuzzier)
+map <Leader>mf <action>(com.mituuz.fuzzier.FuzzyMover)
+map <Leader>gf <action>(com.mituuz.fuzzier.FuzzierVCS)
+
 set highlightedyank
 set commentary
 set easymotion
