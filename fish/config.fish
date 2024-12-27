@@ -17,6 +17,10 @@ set -gx CONNECTIN $HOME/workspace/axens/connectin
 
 set -x OP_BIOMETRIC_UNLOCK_ENABLED true
 
+set -U autovenv_enable yes
+set -U autovenv_announce yes
+set -U autovenv_dir '.venv'
+
 fzf_configure_bindings --directory=\cf --processes=\cp --git_log=\cl --git_status=\cs
 
 set fish_greeting
